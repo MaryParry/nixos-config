@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -98,7 +98,7 @@
     jetbrains.idea
     jetbrains.pycharm
 
-    
+
     # Messaging
     telegram-desktop
     discord
@@ -124,10 +124,15 @@
     fastfetch
     gemini-cli
     btop
-    grim #screenshots i thinkkk
-    slurp #screenshots i thinkkk
+    upower
+    duf 
+    cowsay
+    
+    #ew
+    flatpak
 
-
+    #Music & entertainment
+    spotify
 
     ];
   };
@@ -148,6 +153,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    inputs.zen-browser.packages.${system}.default
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
@@ -164,7 +170,7 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
+    services.upower.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
