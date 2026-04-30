@@ -82,6 +82,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.saponela = {
     isNormalUser = true;
@@ -93,6 +95,9 @@
     vscode
     jdk21_headless
     git
+    jetbrains.idea
+    jetbrains.pycharm
+
     
     # Messaging
     telegram-desktop
@@ -119,6 +124,10 @@
     fastfetch
     gemini-cli
     btop
+    grim #screenshots i thinkkk
+    slurp #screenshots i thinkkk
+
+
 
     ];
   };
