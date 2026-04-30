@@ -48,7 +48,11 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  services.displayManager.defaultSession = "hyprland";
+
+  programs.hyprland.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -83,37 +87,39 @@
     isNormalUser = true;
     description = "saponela";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
     packages = with pkgs; [
-   # jetbrains.idea #intellij idea
-
+    # Development
     vscode
-    jdk21_headless #java dev kit
-    telegram-desktop #telegram
-    hyprland
-    xwayland
-    wl-clipboard
-    xdg-desktop-portal-hyprland
-
-    kitty
-    rofi
+    jdk21_headless
+    git
+    
+    # Messaging
+    telegram-desktop
+    discord
+    
+    # Wayland / Hyprland Essentials
+    vicinae
+    hyprpaper
     waybar
     dunst
-
+    libnotify
+    networkmanagerapplet
+    polkit_gnome
+    wl-clipboard
     grim
     slurp
     swappy
-
-    kitty #meow
-    fish # meow ^_^
-
-    #AI stuff
-    gemini-cli
-
     
+    # Terminal & Shell
+    kitty
+    fish
+    
+    # Tools
     fastfetch
-    #Jetbrains stuff
-    ##jetbrains.idea
-    ##jetbrains.pycharm
+    gemini-cli
+    btop
+
     ];
   };
 
@@ -121,7 +127,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Install firefox.
+  
   programs.firefox.enable = true;
+
+  programs.fish.enable = true;
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
