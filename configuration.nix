@@ -4,6 +4,12 @@
 
 { config, pkgs, inputs, ... }:
 
+let
+  pkgs-stable = import inputs.nixpkgs-stable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -130,11 +136,10 @@
 
     #ew
     flatpak
-    lutris
 
     #Music & entertainment
     spotify
-    steam2
+    steam
 
     #Yarrrrr
     qbittorrent
@@ -145,8 +150,8 @@
   
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
-  nix.settings.trusted-public-keys = ["nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="];
+  #nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
+  #nix.settings.trusted-public-keys = ["nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="];
   # Install firefox.
   
   programs.firefox.enable = true;
@@ -161,14 +166,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     inputs.zen-browser.packages.${system}.default
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-   (lutris.override {
-      extraLibraries =  pkgs: [
-        # List library dependencies here
-      ];
-    })
-
+    pkgs-stable.lutris
+    pkgs-stable.wineWowPackages.stable
+    bibata-cursors
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -184,6 +184,8 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
     services.upower.enable = true;
+    services.blueman.enable = true;
+    services.flatpak.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
