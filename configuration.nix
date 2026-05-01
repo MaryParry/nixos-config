@@ -134,6 +134,7 @@
 
     #Music & entertainment
     spotify
+    steam2
 
     #Yarrrrr
     qbittorrent
@@ -162,6 +163,12 @@
     inputs.zen-browser.packages.${system}.default
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+   (lutris.override {
+      extraLibraries =  pkgs: [
+        # List library dependencies here
+      ];
+    })
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
