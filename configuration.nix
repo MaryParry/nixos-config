@@ -97,7 +97,7 @@
     git
     jetbrains.idea
     jetbrains.pycharm
-
+    python3
 
     # Messaging
     telegram-desktop
@@ -107,7 +107,6 @@
     vicinae
     hyprpaper
     waybar
-    dunst
     libnotify
     networkmanagerapplet
     polkit_gnome
@@ -115,6 +114,7 @@
     grim
     slurp
     swappy
+    nautilus #impostor
     
     # Terminal & Shell
     kitty
@@ -127,19 +127,25 @@
     upower
     duf 
     cowsay
-    
+
     #ew
     flatpak
+    lutris
 
     #Music & entertainment
     spotify
 
+    #Yarrrrr
+    qbittorrent
+
     ];
   };
 
+  
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+  nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
+  nix.settings.trusted-public-keys = ["nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="];
   # Install firefox.
   
   programs.firefox.enable = true;
