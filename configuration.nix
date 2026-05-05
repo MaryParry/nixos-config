@@ -103,7 +103,7 @@ in
     git
     jetbrains.idea
     jetbrains.pycharm
-    python3
+    gh
 
     # Messaging
     telegram-desktop
@@ -121,7 +121,8 @@ in
     slurp
     swappy
     nautilus #impostor
-    
+     brightnessctl
+
     # Terminal & Shell
     kitty
     fish
@@ -133,9 +134,13 @@ in
     upower
     duf 
     cowsay
+    obsidian
+    anki
 
     #ew
     flatpak
+    gnome-remote-desktop
+    libreoffice
 
     #Music & entertainment
     spotify
@@ -150,8 +155,8 @@ in
   
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  #nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
-  #nix.settings.trusted-public-keys = ["nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="];
+  nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
+  nix.settings.trusted-public-keys = ["nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="];
   # Install firefox.
   
   programs.firefox.enable = true;
@@ -169,6 +174,12 @@ in
     pkgs-stable.lutris
     pkgs-stable.wineWowPackages.stable
     bibata-cursors
+    
+    (python3.withPackages (python-pkgs: with python-pkgs; [
+      pandas
+      numpy
+    #  python313Packages.tkinter
+      ]))
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
