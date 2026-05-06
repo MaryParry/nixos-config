@@ -23,7 +23,7 @@
 };
   outputs = { self, nixpkgs, spicetify-nix, noctalia, ... }@inputs:
   {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.tetri = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
 
       modules = [

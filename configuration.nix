@@ -21,7 +21,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-c8724694-43ff-4c8d-9f30-c09fd2e85503".device = "/dev/disk/by-uuid/c8724694-43ff-4c8d-9f30-c09fd2e85503";
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "tetri"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -121,7 +121,9 @@ in
     slurp
     swappy
     nautilus #impostor
-     brightnessctl
+    brightnessctl
+    playerctl
+    
 
     # Terminal & Shell
     kitty
@@ -143,7 +145,8 @@ in
     libreoffice
 
     #Music & entertainment
-    spotify
+    #spotify installed via flatpak for spicetify wrapper
+    #stremio not buildable >:(
     steam
 
     #Yarrrrr
@@ -175,11 +178,14 @@ in
     pkgs-stable.wineWowPackages.stable
     bibata-cursors
     
-    (python3.withPackages (python-pkgs: with python-pkgs; [
+    (python313.withPackages (ps: with ps; [
       pandas
       numpy
-    #  python313Packages.tkinter
-      ]))
+      matplotlib
+      tkinter
+      pyinstaller
+      selenium
+    ]))
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
