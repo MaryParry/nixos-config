@@ -123,6 +123,7 @@ in
     nautilus #impostor
     brightnessctl
     playerctl
+    hyprlock
     
 
     # Terminal & Shell
@@ -165,6 +166,21 @@ in
   programs.firefox.enable = true;
 
   programs.fish.enable = true;
+
+  programs.spicetify =
+   let
+     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+   in
+   {
+     enable = true;
+     enabledExtensions = with spicePkgs.extensions; [
+       adblock
+       hidePodcasts
+       shuffle # shuffle+ (special characters are replaced with -)
+     ];
+     theme = spicePkgs.themes.catppuccin;
+     colorScheme = "mocha";
+   };
 
 
   # Allow unfree packages
