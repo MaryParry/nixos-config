@@ -1,0 +1,9 @@
+{
+  "screens": [
+    {
+      "name": "eDP-1",
+      "light": "/home/saponela/Pictures/wall/Alternative Star Wars-2 [1920x1080].png",
+      "dark": "/home/saponela/Pictures/wall/Alternative Star Wars-2 [1920x1080].png"
+    }
+  ]
+}

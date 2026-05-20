@@ -51,7 +51,7 @@ in
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  services.tailscale.enable = true;
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
@@ -85,6 +85,21 @@ in
     #media-session.enable = true;
   };
 
+systemd.services."user-suspend@" = {
+  description = "User Suspend Actions";
+
+  wantedBy = [ "sleep.target" ];
+  before = [ "sleep.target" ];
+
+  serviceConfig = {
+    User = "%i";
+    Type = "oneshot";
+    PAMName = "login";
+
+    ExecStart = "${pkgs.hyprlock}/bin/hyprlock";
+    ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
+  };
+};
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -96,67 +111,8 @@ in
     description = "saponela";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
-    packages = with pkgs; [
-    # Development
-    vscode
-    jdk21_headless
-    git
-    jetbrains.idea
-    jetbrains.pycharm
-    gh
-
-    # Messaging
-    telegram-desktop
-    discord
-    
-    # Wayland / Hyprland Essentials
-    vicinae
-    hyprpaper
-    waybar
-    libnotify
-    networkmanagerapplet
-    polkit_gnome
-    wl-clipboard
-    grim
-    slurp
-    swappy
-    nautilus #impostor
-    brightnessctl
-    playerctl
-    hyprlock
-    
-
-    # Terminal & Shell
-    kitty
-    fish
-    
-    # Tools
-    fastfetch
-    gemini-cli
-    btop
-    upower
-    duf 
-    cowsay
-    obsidian
-    anki
-
-    #ew
-    flatpak
-    gnome-remote-desktop
-    libreoffice
-
-    #Music & entertainment
-    #spotify installed via flatpak for spicetify wrapper
-    #stremio not buildable >:(
-    steam
-
-    #Yarrrrr
-    qbittorrent
-
-    ];
   };
 
-  
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
@@ -201,6 +157,8 @@ in
       tkinter
       pyinstaller
       selenium
+      playwright
+      networkx
     ]))
   ];
 

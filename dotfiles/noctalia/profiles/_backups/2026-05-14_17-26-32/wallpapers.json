@@ -1,0 +1,9 @@
+{
+  "screens": [
+    {
+      "name": "eDP-1",
+      "light": "/home/saponela/Pictures/wall/wall.jpg",
+      "dark": "/home/saponela/Pictures/wall/wall.jpg"
+    }
+  ]
+}

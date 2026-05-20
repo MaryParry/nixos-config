@@ -21,7 +21,7 @@
     };
   };
 };
-  outputs = { self, nixpkgs, spicetify-nix, noctalia, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, spicetify-nix, noctalia, ... }@inputs:
   {
     nixosConfigurations.tetri = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
@@ -30,6 +30,14 @@
         ./configuration.nix
         ./noctalia.nix
         spicetify-nix.nixosModules.default
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "hm-backup";
+          home-manager.users.saponela = import ./home.nix;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+        }
       ];
     };
   };
