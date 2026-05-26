@@ -123,6 +123,19 @@ systemd.services."user-suspend@" = {
 
   programs.fish.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+    # Add more libraries here as you encounter missing .so errors
+  ];
+
   programs.spicetify =
    let
      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
@@ -158,6 +171,8 @@ systemd.services."user-suspend@" = {
       pyinstaller
       selenium
       playwright
+      greenlet
+      pytest-playwright
       networkx
     ]))
   ];
