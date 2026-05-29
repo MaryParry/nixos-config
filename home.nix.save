@@ -12,11 +12,6 @@
   # release notes for a list of state version changes in each release.
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
-  imports = [
-    inputs.lazyvim.homeManagerModules.default
-    ./lazyvim.nix
-  ];
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -106,6 +101,11 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
+ {
+   imports = [ lazyvim.homeManagerModules.default ];
+   programs.lazyvim.enable = true;
+ }
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

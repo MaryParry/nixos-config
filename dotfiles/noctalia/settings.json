@@ -294,7 +294,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Cream",
+        "predefinedScheme": "Occult Umbral",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -411,7 +411,7 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "autoStartAuth": false,
-        "avatarImage": "/home/saponela/.config/hypr/Hyprlock-Dots/.config/hyprlock/wallpapers/me.jpg",
+        "avatarImage": "/home/saponela/.config/noctalia/assets/me.jpg",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
         "clockStyle": "digital",
@@ -449,7 +449,7 @@
         },
         "language": "",
         "lockOnSuspend": true,
-        "lockScreenAnimations": true,
+        "lockScreenAnimations": false,
         "lockScreenBlur": 0.56,
         "lockScreenCountdownDuration": 10000,
         "lockScreenMonitors": [
@@ -708,7 +708,7 @@
                 "id": "discord"
             }
         ],
-        "enableUserTheming": false
+        "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,

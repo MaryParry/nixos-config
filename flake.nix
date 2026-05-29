@@ -5,6 +5,11 @@
   nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
+  home-manager = {
+    url = "github:nix-community/home-manager";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   spicetify-nix = {
     url = "github:Gerg-L/spicetify-nix";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -20,8 +25,14 @@
       nixpkgs.follows = "nixpkgs";
     };
   };
+  lazyvim = {
+    url ="github:pfassina/lazyvim-nix";
+  };
+
 };
-  outputs = { self, nixpkgs, home-manager, spicetify-nix, noctalia, ... }@inputs:
+
+
+  outputs = { self, nixpkgs, home-manager, spicetify-nix, noctalia, lazyvim, ... }@inputs:
   {
     nixosConfigurations.tetri = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };

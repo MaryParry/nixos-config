@@ -66,6 +66,23 @@ in
     variant = "";
   };
 
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = [ "*" ];
+        settings = {
+          main = {
+            pageup = "home";
+            pagedown = "end";
+            home = "pageup";
+            end = "pagedown";
+          };
+        };
+      };
+    };
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -85,31 +102,16 @@ in
     #media-session.enable = true;
   };
 
-systemd.services."user-suspend@" = {
-  description = "User Suspend Actions";
-
-  wantedBy = [ "sleep.target" ];
-  before = [ "sleep.target" ];
-
-  serviceConfig = {
-    User = "%i";
-    Type = "oneshot";
-    PAMName = "login";
-
-    ExecStart = "${pkgs.hyprlock}/bin/hyprlock";
-    ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
-  };
-};
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-
+   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.saponela = {
     isNormalUser = true;
     description = "saponela";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.fish;
   };
 
@@ -186,6 +188,9 @@ systemd.services."user-suspend@" = {
   # };
 
   # List services that you want to enable:
+
+  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitchExternalPower = "suspend";
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

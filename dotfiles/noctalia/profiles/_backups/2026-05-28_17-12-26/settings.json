@@ -121,7 +121,7 @@
                     "useCustomFont": false
                 },
                 {
-                    "compactMode": false,
+                    "compactMode": true,
                     "diskPath": "/",
                     "iconColor": "none",
                     "id": "SystemMonitor",
@@ -136,7 +136,7 @@
                     "showLoadAverage": false,
                     "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
-                    "showNetworkStats": false,
+                    "showNetworkStats": true,
                     "showSwapUsage": false,
                     "textColor": "none",
                     "useMonospaceFont": true,
@@ -164,7 +164,7 @@
                     "showAlbumArt": true,
                     "showArtistFirst": true,
                     "showProgressRing": true,
-                    "showVisualizer": false,
+                    "showVisualizer": true,
                     "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
@@ -227,12 +227,29 @@
                     "textColor": "none"
                 },
                 {
+                    "defaultSettings": {
+                        "iconColor": "none"
+                    },
                     "id": "plugin:plugin-manager"
                 },
                 {
+                    "defaultSettings": {
+                        "backupCount": 5,
+                        "backupEnabled": true,
+                        "icon": "wand",
+                        "iconColor": "primary",
+                        "includeWallpapers": true,
+                        "lastAppliedProfile": "",
+                        "profilesDir": ""
+                    },
                     "id": "plugin:shell-profiles"
                 },
                 {
+                    "defaultSettings": {
+                        "density": "comfortable",
+                        "maxHistorySize": 100,
+                        "showImagePreviews": true
+                    },
                     "id": "plugin:clipboard"
                 },
                 {
@@ -277,7 +294,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Cream Autumn",
+        "predefinedScheme": "Occult Umbral",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -691,7 +708,7 @@
                 "id": "discord"
             }
         ],
-        "enableUserTheming": false
+        "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,
