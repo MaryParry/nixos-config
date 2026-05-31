@@ -77,6 +77,8 @@ in
             pagedown = "end";
             home = "pageup";
             end = "pagedown";
+            esc = "capslock";
+            capslock = "esc";
           };
         };
       };
@@ -194,6 +196,9 @@ in
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+    services.ollama = {
+      enable = true;
+    };
     services.upower.enable = true;
     services.blueman.enable = true;
     services.flatpak.enable = true;

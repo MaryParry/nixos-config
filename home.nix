@@ -28,6 +28,7 @@
     jetbrains.pycharm
     gh
     docker
+    ollama
 
     # Messaging
     telegram-desktop
@@ -65,7 +66,8 @@
     obs-studio
     jp2a
     keymapper #i hate copilot i hate copilot 
-	
+    moonlight-qt
+
     # Misc
     flatpak
     gnome-remote-desktop

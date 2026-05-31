@@ -294,7 +294,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Rosey AMOLED",
+        "predefinedScheme": "Hexa34C",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -379,7 +379,7 @@
         "deadOpacity": 0.6,
         "displayMode": "auto_hide",
         "dockType": "attached",
-        "enabled": false,
+        "enabled": true,
         "floatingRatio": 1,
         "groupApps": false,
         "groupClickAction": "cycle",
@@ -503,7 +503,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "",
+        "name": "Tbilisi",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
@@ -537,7 +537,7 @@
         "disableWallpaper": true
     },
     "notifications": {
-        "backgroundOpacity": 0.9,
+        "backgroundOpacity": 1,
         "clearDismissed": true,
         "criticalUrgencyDuration": 15,
         "density": "default",
@@ -550,7 +550,7 @@
         "lowUrgencyDuration": 3,
         "monitors": [
         ],
-        "normalUrgencyDuration": 6,
+        "normalUrgencyDuration": 8,
         "overlayLayer": true,
         "respectExpireTimeout": false,
         "saveToHistory": {

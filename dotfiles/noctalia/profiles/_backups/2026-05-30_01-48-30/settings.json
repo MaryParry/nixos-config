@@ -90,7 +90,7 @@
                     "hideUnoccupied": false,
                     "iconScale": 0.8,
                     "id": "Workspace",
-                    "labelMode": "none",
+                    "labelMode": "index",
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
                     "showApplications": false,
@@ -121,7 +121,7 @@
                     "useCustomFont": false
                 },
                 {
-                    "compactMode": true,
+                    "compactMode": false,
                     "diskPath": "/",
                     "iconColor": "none",
                     "id": "SystemMonitor",
@@ -136,7 +136,7 @@
                     "showLoadAverage": false,
                     "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
-                    "showNetworkStats": true,
+                    "showNetworkStats": false,
                     "showSwapUsage": false,
                     "textColor": "none",
                     "useMonospaceFont": true,
@@ -164,7 +164,7 @@
                     "showAlbumArt": true,
                     "showArtistFirst": true,
                     "showProgressRing": true,
-                    "showVisualizer": true,
+                    "showVisualizer": false,
                     "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
@@ -183,6 +183,12 @@
                     ]
                 },
                 {
+                    "displayMode": "onhover",
+                    "iconColor": "none",
+                    "id": "Bluetooth",
+                    "textColor": "none"
+                },
+                {
                     "hideWhenZero": false,
                     "hideWhenZeroUnread": false,
                     "iconColor": "none",
@@ -192,18 +198,12 @@
                 },
                 {
                     "deviceNativePath": "__default__",
-                    "displayMode": "icon-always",
+                    "displayMode": "graphic",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": true
-                },
-                {
-                    "displayMode": "onhover",
-                    "iconColor": "none",
-                    "id": "Bluetooth",
-                    "textColor": "none"
+                    "showPowerProfiles": false
                 },
                 {
                     "displayMode": "onhover",
@@ -227,29 +227,12 @@
                     "textColor": "none"
                 },
                 {
-                    "defaultSettings": {
-                        "iconColor": "none"
-                    },
                     "id": "plugin:plugin-manager"
                 },
                 {
-                    "defaultSettings": {
-                        "backupCount": 5,
-                        "backupEnabled": true,
-                        "icon": "wand",
-                        "iconColor": "primary",
-                        "includeWallpapers": true,
-                        "lastAppliedProfile": "",
-                        "profilesDir": ""
-                    },
                     "id": "plugin:shell-profiles"
                 },
                 {
-                    "defaultSettings": {
-                        "density": "comfortable",
-                        "maxHistorySize": 100,
-                        "showImagePreviews": true
-                    },
                     "id": "plugin:clipboard"
                 },
                 {
@@ -294,7 +277,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Occult Umbral",
+        "predefinedScheme": "Everdeer",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -681,7 +664,7 @@
         "activeTemplates": [
             {
                 "enabled": true,
-                "id": "btop"
+                "id": "hyprland"
             },
             {
                 "enabled": true,
@@ -689,32 +672,16 @@
             },
             {
                 "enabled": true,
-                "id": "telegram"
-            },
-            {
-                "enabled": true,
-                "id": "hyprland"
-            },
-            {
-                "enabled": true,
-                "id": "zenBrowser"
-            },
-            {
-                "enabled": true,
                 "id": "spicetify"
-            },
-            {
-                "enabled": true,
-                "id": "discord"
             }
         ],
-        "enableUserTheming": true
+        "enableUserTheming": false
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Sans Serif",
+        "fontDefault": "SF Pro Display",
         "fontDefaultScale": 1,
-        "fontFixed": "monospace",
+        "fontFixed": "JetBrainsMonoNL NFP Light",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
