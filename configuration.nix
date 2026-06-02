@@ -99,7 +99,7 @@ in
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # use the example sesseon manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
@@ -207,6 +207,23 @@ in
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+networking.firewall.allowedTCPPorts = [
+  47984
+  47989
+  47990
+  48010
+];
+
+networking.firewall.allowedUDPPorts = [
+  47998
+  47999
+  48000
+  48002
+  48010
+];
+
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
