@@ -43,15 +43,15 @@
       # Animation Template: Customize mini.animate
       "mini-animate" = ''
         return {
-          "echasnovski/mini.animate",
+          "mini-nvim/mini.animate",
           opts = function(_, opts)
             local animate = require("mini.animate")
             return vim.tbl_deep_extend("force", opts or {}, {
               resize = {
-                timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
+                timing = animate.gen_timing.linear({ duration = 25, unit = "total" }),
               },
               scroll = {
-                timing = animate.gen_timing.linear({ duration = 100, unit = "total" }),
+                timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
               }
             })
           end,

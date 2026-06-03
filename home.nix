@@ -74,7 +74,8 @@
     flatpak
     gnome-remote-desktop
     libreoffice
-    
+    virtualbox
+    vagrant 
     # Music & entertainment
     steam
     qbittorrent

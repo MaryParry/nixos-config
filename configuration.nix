@@ -87,7 +87,7 @@ in
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
+  virtualisation.virtualbox.host.enable = true;
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
