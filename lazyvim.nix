@@ -30,8 +30,9 @@
       # Theme Template: Moonfly
       colorscheme = ''
         return {
-        { "matsuuu/pinkmare", name = "pinkmare", priority = 1000 },
-        {
+          { "morhetz/gruvbox", name = "gruvbox", priority = 1000 },
+          { "matsuuu/pinkmare", name = "pinkmare", priority = 1000 },
+          {
             "LazyVim/LazyVim",
             opts = {
               colorscheme = "pinkmare",
@@ -48,10 +49,10 @@
             local animate = require("mini.animate")
             return vim.tbl_deep_extend("force", opts or {}, {
               resize = {
-                timing = animate.gen_timing.linear({ duration = 25, unit = "total" }),
+                timing = animate.gen_timing.linear({ duration = 10, unit = "total" }),
               },
               scroll = {
-                timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
+                timing = animate.gen_timing.linear({ duration = 20, unit = "total" }),
               }
             })
           end,
@@ -84,29 +85,30 @@
         vim.api.nvim_create_autocmd("ColorScheme", {
           pattern = "*",
           callback = function()
-            local bg_groups = {
-              "Normal",
-              "NormalNC",
-              "SignColumn",
-              "MsgArea",
-              "EndOfBuffer",
-            }
-            for _, group in ipairs(bg_groups) do
-              vim.api.nvim_set_hl(0, group, { bg = "#000000" })
-            end
+             local bg_groups = {
+               "Normal",
+               "NormalNC",
+               "SignColumn",
+               "MsgArea",
+               "EndOfBuffer",
+             }
+             for _, group in ipairs(bg_groups) do
+               vim.api.nvim_set_hl(0, group, { bg = "#000000" })
+             end
 
-            -- Completion Ghost Text visibility
-            local ghost_groups = {
-              "CmpGhostText",
-              "BlinkCmpGhostText",
-              "CopilotSuggestion",
-            }
-            for _, group in ipairs(ghost_groups) do
-              vim.api.nvim_set_hl(0, group, { fg = "#666666", italic = true })
+             -- Visibility overrides for ghost text and inlay hints
+             local visibility_groups = {
+               "CmpGhostText",
+               "BlinkCmpGhostText",
+               "CopilotSuggestion",
+               "LspInlayHint",
+             }
+             for _, group in ipairs(visibility_groups) do
+               vim.api.nvim_set_hl(0, group, { fg = "#bbbbbb", italic = true })
             end
           end,
         })
       '';
     };
-  };
+   };
 }
