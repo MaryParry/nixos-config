@@ -6,7 +6,7 @@
 
 let
   pkgs-stable = import inputs.nixpkgs-stable {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 in
@@ -49,11 +49,22 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Enable graphics support and 32-bit support (required for Steam/Wine)
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # For VA-API (video acceleration)
+      intel-vaapi-driver # Formerly vaapiIntel
+      libvdpau-va-gl
+    ];
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.tailscale.enable = true;
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
   services.displayManager.defaultSession = "hyprland";
@@ -142,7 +153,7 @@ in
 
   programs.spicetify =
    let
-     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
    in
    {
      enable = true;
@@ -151,8 +162,11 @@ in
        hidePodcasts
        shuffle # shuffle+ (special characters are replaced with -)
      ];
-     theme = spicePkgs.themes.catppuccin;
-     colorScheme = "mocha";
+     theme = {
+       name = "Comfy";
+       src = ./dotfiles/spicetify/Themes/Comfy;
+     };
+     colorScheme = "Comfy";
    };
 
 
@@ -162,9 +176,9 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    inputs.zen-browser.packages.${system}.default
-    pkgs-stable.lutris
-    pkgs-stable.wineWowPackages.stable
+   inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
+   pkgs-stable.lutris
+   pkgs-stable.wineWowPackages.stable
     bibata-cursors
     
     (python313.withPackages (ps: with ps; [
@@ -191,8 +205,12 @@ in
 
   # List services that you want to enable:
 
-  services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchExternalPower = "suspend";
+  services.logind.settings = {
+    Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
+    };
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

@@ -60,6 +60,7 @@
     # Tools
     fastfetch
     gemini-cli
+    antigravity
     upower
     duf 
     cowsay
@@ -70,6 +71,8 @@
     keymapper #i hate copilot i hate copilot 
     moonlight-qt
     sunshine
+    mangohud
+
     # Misc
     flatpak
     gnome-remote-desktop
@@ -90,6 +93,8 @@
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/hypr";
     ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/kitty";
     ".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/noctalia";
+    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/User/settings.json";
+    ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
 

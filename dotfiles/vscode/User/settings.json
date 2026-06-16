@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "NoctaliaTheme",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "terminal.integrated.commandsToSkipShell": [
+        "kilo-code.new.agentManagerOpen",
+        "kilo-code.new.agentManager.showTerminal"
+    ],
+    "workbench.iconTheme": "vscode-icons"
+}

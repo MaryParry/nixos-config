@@ -15,3 +15,10 @@
 #input_path = "/nix/store/7zdis7vizki1hdf2wm9qjarwm70dm0y5-noctalia-shell-2026-04-29_9f8dd48/share/noctalia-shell/Assets/Templates/noctalia.json"
 #output_path = "/home/saponela/.cache/noctalia/placeholder.json"
 
+[templates.vscode]
+input_path = "/nix/store/7zdis7vizki1hdf2wm9qjarwm70dm0y5-noctalia-shell-2026-04-29_9f8dd48/share/noctalia-shell/Assets/Templates/code.json"
+output_path = "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme/themes/noctalia-color-theme.json"
+
+[templates.spicetify]
+input_path = "/nix/store/7zdis7vizki1hdf2wm9qjarwm70dm0y5-noctalia-shell-2026-04-29_9f8dd48/share/noctalia-shell/Assets/Templates/spicetify.ini"
+output_path = "/etc/nixos/dotfiles/spicetify/Themes/Comfy/color.ini"

@@ -1,0 +1,22 @@
+{
+    "name": "noctalia-theme",
+    "displayName": "Noctalia Theme",
+    "description": "Noctalia generated color theme.",
+    "version": "0.0.1",
+    "publisher": "local",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "NoctaliaTheme",
+                "uiTheme": "vs-dark",
+                "path": "./themes/noctalia-color-theme.json"
+            }
+        ]
+    }
+}
