@@ -28,11 +28,13 @@
   lazyvim = {
     url ="github:pfassina/lazyvim-nix";
   };
-
+  antigravity-nix = {
+    url = "github:jacopone/antigravity-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 };
 
-
-  outputs = { self, nixpkgs, home-manager, spicetify-nix, noctalia, lazyvim, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, spicetify-nix, noctalia, lazyvim, antigravity-nix, ... }@inputs:
   {
     nixosConfigurations.tetri = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
@@ -42,6 +44,13 @@
         ./noctalia.nix
         spicetify-nix.nixosModules.default
         home-manager.nixosModules.home-manager
+        {
+          environment.systemPackages = [
+            antigravity-nix.packages.x86_64-linux.default # Base App
+            antigravity-nix.packages.x86_64-linux.google-antigravity-ide # IDE
+            antigravity-nix.packages.x86_64-linux.google-antigravity-cli # CLI
+          ];
+        }
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;

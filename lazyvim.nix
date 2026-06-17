@@ -79,6 +79,16 @@
           opts = {},
         }
       '';
+      "snacks.nvim" = ''
+        return {
+          "folke/snacks.nvim",
+          opts = {
+            words = {
+              enabled = false,
+            },
+          },
+        }
+      '';
     };
 
     extraPackages = with pkgs; [
@@ -100,6 +110,7 @@
         vim.opt.tabstop = 2
         vim.g.autoformat = true
         vim.opt.background = "dark"
+        vim.opt.hlsearch = false
 
         -- -- AMOLED Black background and visibility overrides
         -- vim.api.nvim_create_autocmd("ColorScheme", {
@@ -128,16 +139,6 @@
         --     end
         --   end,
         -- })
-
-
-        return {
-  "folke/snacks.nvim",
-  opts = {
-    words = {
-      enabled = true,
-    },
-  },
-}
       '';
     };
    };
