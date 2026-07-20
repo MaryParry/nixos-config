@@ -4,7 +4,7 @@
 
     extras = {
       # AI
-      ai.copilot.enable = true;
+      #  ai.copilot.enable = true;  
 
       # Languages
       lang.nix.enable = true;
@@ -23,6 +23,7 @@
       ui.mini-animate.enable = true; # Smooth animations
       editor.neo-tree.enable = true; # File explorer
       coding.mini-surround.enable = true; # Surround actions
+      coding.blink.enable = true; # Enable blink.cmp completion engine
     };
 
     # Custom Plugin Configurations (Templates)
@@ -37,7 +38,7 @@
           {
             "LazyVim/LazyVim",
             opts = {
-              colorscheme = "gruvbox",
+              colorscheme = "tokyonight",
             },
           },
         }
@@ -89,6 +90,39 @@
           },
         }
       '';
+      "nvim-lspconfig" = ''
+        return {
+          "neovim/nvim-lspconfig",
+          opts = {
+            inlay_hints = {
+              enabled = false,
+            },
+            servers = {
+              pyright = {
+                settings = {
+                  python = {
+                    analysis = {
+                      diagnosticMode = "openFilesOnly",
+                      typeCheckingMode = "basic",
+                    },
+                  },
+                },
+              },
+              basedpyright = {
+                settings = {
+                  basedpyright = {
+                    analysis = {
+                      diagnosticMode = "openFilesOnly",
+                      typeCheckingMode = "basic",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        }
+      '';
+
     };
 
     extraPackages = with pkgs; [
@@ -111,34 +145,55 @@
         vim.g.autoformat = true
         vim.opt.background = "dark"
         vim.opt.hlsearch = false
+        vim.g.ai_cmp = false
+        vim.opt.guifont = "SF Mono:h12"
 
-        -- -- AMOLED Black background and visibility overrides
-        -- vim.api.nvim_create_autocmd("ColorScheme", {
-        --   pattern = "*",
-        --   callback = function()
-        --      local bg_groups = {
-        --        "Normal",
-        --        "NormalNC",
-        --        "SignColumn",
-        --        "MsgArea",
-        --        "EndOfBuffer",
-        --      }
-        --      for _, group in ipairs(bg_groups) do
-        --        vim.api.nvim_set_hl(0, group, { bg = "#000000" })
-        --      end
-        --
-        --      -- Visibility overrides for ghost text and inlay hints
-        --      local visibility_groups = {
-        --        "CmpGhostText",
-        --        "BlinkCmpGhostText",
-        --        "CopilotSuggestion",
-        --        "LspInlayHint",
-        --      }
-        --      for _, group in ipairs(visibility_groups) do
-        --        vim.api.nvim_set_hl(0, group, { fg = "#bbbbbb", italic = true })
-        --     end
-        --   end,
-        -- })
+        -- Theme visibility overrides
+        vim.api.nvim_create_autocmd("ColorScheme", {
+          pattern = "*",
+          callback = function()
+
+             -- Visibility overrides for ghost text and inlay hints
+             local visibility_groups = {
+               "CmpGhostText",
+               "BlinkCmpGhostText",
+               "CopilotSuggestion",
+               "LspInlayHint",
+             }
+             for _, group in ipairs(visibility_groups) do
+               vim.api.nvim_set_hl(0, group, { fg = "#bbbbbb", italic = true })
+             end
+
+             -- Make split borders more visible (using Tokyonight purple)
+             local border_groups = {
+               "WinSeparator",
+               "VertSplit",
+             }
+             for _, group in ipairs(border_groups) do
+               vim.api.nvim_set_hl(0, group, { fg = "#bb9af7", bold = true })
+             end
+
+          end,
+        })
+      '';
+
+      keymaps = ''
+        -- Visual mode direct surround mappings (VS Code style)
+        local surround_mappings = {
+          ["("] = ")",
+          [")"] = ")",
+          ["["] = "]",
+          ["]"] = "]",
+          ["{"] = "}",
+          ["}"] = "}",
+          ['"'] = '"',
+          ["'"] = "'",
+          ["`"] = "`",
+        }
+
+        for lhs, rhs in pairs(surround_mappings) do
+          vim.keymap.set("x", lhs, "gsa" .. rhs, { remap = true, desc = "Surround with " .. lhs })
+        end
       '';
     };
    };

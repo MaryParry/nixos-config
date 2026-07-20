@@ -112,7 +112,6 @@ in
 
     # use the example sesseon manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -130,8 +129,14 @@ in
 
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.substituters = ["http://192.168.3.224:8080/nixos"];
-  nix.settings.trusted-public-keys = ["nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="];
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    # "http://192.168.3.224:8080/nixos"
+  ];
+  nix.settings.trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    # "nixos:GHyC7cZlnDApGlXe/KnG4oHSszdJ7Ew7ZXg9Gj/QyfA="
+  ];
   # Install firefox.
   
   programs.firefox.enable = true;
@@ -161,6 +166,15 @@ in
        adblock
        hidePodcasts
        shuffle # shuffle+ (special characters are replaced with -)
+       {
+         src = pkgs.fetchFromGitHub {
+           owner = "BitesizedLion";
+           repo = "AnonymizedRadios";
+           rev = "1c843dcb0a7b43da9932ee1cc9b3557f0a7f8ba6";
+           sha256 = "0nqnpvnhk7gqh12ln3ra1gpdny3z262w7n475fs0m72gg2hxbb8w";
+         };
+         name = "AnonymizedRadios.js";
+       }
      ];
      theme = {
        name = "Comfy";
@@ -173,6 +187,18 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      vimPlugins = prev.vimPlugins // {
+        blink-cmp = prev.vimPlugins.blink-cmp.overrideAttrs (oldAttrs: {
+          version = "v${oldAttrs.version}";
+          src = builtins.removeAttrs oldAttrs.src [ "rev" ];
+          __intentionallyOverridingVersion = true;
+        });
+      };
+    })
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -180,19 +206,6 @@ in
    pkgs-stable.lutris
    pkgs-stable.wineWowPackages.stable
     bibata-cursors
-    
-    (python313.withPackages (ps: with ps; [
-      pandas
-      numpy
-      matplotlib
-      tkinter
-      pyinstaller
-      selenium
-      playwright
-      greenlet
-      pytest-playwright
-      networkx
-    ]))
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -220,11 +233,12 @@ in
     services.upower.enable = true;
     services.blueman.enable = true;
     services.flatpak.enable = true;
+    services.logmein-hamachi.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
 networking.firewall.allowedTCPPorts = [
   47984

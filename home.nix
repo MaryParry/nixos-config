@@ -25,17 +25,18 @@
     jdk21_headless
     git
     jetbrains.idea
-    jetbrains.pycharm
     gh
     docker
+    pnpm
+    nodejs
     # ollama
-    codex
+    jetbrains.pycharm
 
   
     # Messaging
     telegram-desktop
     discord
-    
+    fluffychat
     # Wayland / Hyprland Essentials
     vicinae
     hyprpaper
@@ -48,14 +49,18 @@
     slurp
     swappy
     nautilus
+    ranger
     brightnessctl
     playerctl
     hypridle
+    hyprlandPlugins.hyprspace
     
     # Terminal & Shell
     kitty
     fish
     btop
+    bat
+    tmux
     
     # Tools
     fastfetch
@@ -71,23 +76,25 @@
     moonlight-qt
     sunshine
     mangohud
+    logmein-hamachi
+    pamixer
+    kdePackages.kdeconnect-kde
+    pulseaudio
+    paprefs
 
     # Misc
     flatpak
-    gnome-remote-desktop
     libreoffice
-    virtualbox
-    vagrant 
-    # Music & entertainment
+    # Music & Entertainment
     steam
     qbittorrent
     mpv
+    google-chrome
+    prismlauncher
+    heroic
     ];
 
 
-
-  ##### antigravity
-  #
 
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -100,6 +107,7 @@
     ".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/noctalia";
     ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/User/settings.json";
     ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme";
+    ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
 

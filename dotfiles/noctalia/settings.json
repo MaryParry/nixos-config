@@ -160,7 +160,7 @@
                     "id": "MediaMini",
                     "maxWidth": 145,
                     "panelShowAlbumArt": true,
-                    "scrollingMode": "hover",
+                    "scrollingMode": "always",
                     "showAlbumArt": true,
                     "showArtistFirst": true,
                     "showProgressRing": true,
@@ -200,10 +200,10 @@
                     "showPowerProfiles": true
                 },
                 {
-                    "displayMode": "onhover",
-                    "iconColor": "none",
+                    "displayMode": "alwaysShow",
+                    "iconColor": "secondary",
                     "id": "Bluetooth",
-                    "textColor": "none"
+                    "textColor": "primary"
                 },
                 {
                     "displayMode": "onhover",
@@ -290,11 +290,11 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
+        "generationMethod": "content",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Gruvbox",
+        "predefinedScheme": "Tokyo Night",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -503,7 +503,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "Tbilisi",
+        "name": "",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,
@@ -712,9 +712,9 @@
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Sans Serif",
+        "fontDefault": "SF Pro Display",
         "fontDefaultScale": 1,
-        "fontFixed": "monospace",
+        "fontFixed": "SF Mono",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,

@@ -16,7 +16,7 @@
   };
 
   noctalia = {
-    url = "github:noctalia-dev/noctalia-shell";
+    url = "github:noctalia-dev/noctalia-shell/9f8dd48c8df5ab1f7f87ddf9842627e1e5682186";
   };
 
   zen-browser = {

@@ -22,3 +22,9 @@ output_path = "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme/themes/nocta
 [templates.spicetify]
 input_path = "/nix/store/7zdis7vizki1hdf2wm9qjarwm70dm0y5-noctalia-shell-2026-04-29_9f8dd48/share/noctalia-shell/Assets/Templates/spicetify.ini"
 output_path = "/etc/nixos/dotfiles/spicetify/Themes/Comfy/color.ini"
+
+[templates.telegram]
+input_path = "/nix/store/7zdis7vizki1hdf2wm9qjarwm70dm0y5-noctalia-shell-2026-04-29_9f8dd48/share/noctalia-shell/Assets/Templates/telegram.tdesktop-theme"
+output_path = "/home/saponela/.cache/noctalia/telegram/colors.tdesktop-theme"
+post_hook = "mkdir -p /home/saponela/.config/telegram-desktop/themes && python3 -c \"import zipfile; z = zipfile.ZipFile('/home/saponela/.config/telegram-desktop/themes/noctalia.tdesktop-theme', 'w'); z.write('/home/saponela/.cache/noctalia/telegram/colors.tdesktop-theme', 'colors.tdesktop-theme'); z.close()\""
+

@@ -200,10 +200,10 @@
                     "showPowerProfiles": true
                 },
                 {
-                    "displayMode": "onhover",
-                    "iconColor": "none",
+                    "displayMode": "alwaysShow",
+                    "iconColor": "secondary",
                     "id": "Bluetooth",
-                    "textColor": "none"
+                    "textColor": "primary"
                 },
                 {
                     "displayMode": "onhover",
