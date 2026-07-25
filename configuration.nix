@@ -203,10 +203,26 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
    inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
-   pkgs-stable.lutris
+   (pkgs-stable.lutris.override {
+     extraPkgs = pkgs: with pkgs; [
+       pkgs-stable.wineWowPackages.stable
+       winetricks
+       gnutls
+       openldap
+       libvdpau
+       vulkan-loader
+     ];
+   })
    pkgs-stable.wineWowPackages.stable
-    bibata-cursors
+   bibata-cursors
+   vulkan-loader
+   vulkan-tools
   ];
+
+  environment.sessionVariables = {
+    WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+    WEBKIT_DISABLE_DMABUF_RENDERER = "1";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -236,7 +252,6 @@ in
     services.logmein-hamachi.enable = true;
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
@@ -248,6 +263,7 @@ networking.firewall.allowedTCPPorts = [
 ];
 
 networking.firewall.allowedUDPPorts = [
+  34197
   47998
   47999
   48000

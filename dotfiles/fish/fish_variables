@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:4300
-SETUVAR __fish_webconfig_theme_notification:set\x2dtheme\x2dv1\x2d\x2312
+SETUVAR __fish_webconfig_theme_notification:set\x2dtheme\x2dv1\x2d\x2313
 SETUVAR fish_greeting:
-SETUVAR fish_user_paths:/home/saponela/\x2espicetify
+SETUVAR fish_user_paths:/home/saponela/\x2elocal/bin\x1e/home/saponela/\x2espicetify

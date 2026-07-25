@@ -1,5 +1,17 @@
 { config, pkgs, inputs, ... }:
 
+let
+  hyprspacePatched = pkgs.hyprlandPlugins.hyprspace.overrideAttrs (old: {
+    postPatch = (old.postPatch or "") + ''
+      substituteInPlace src/main.cpp \
+        --replace-fail "if (Config::disableGestures) return;" "return;"
+      substituteInPlace src/Input.cpp \
+        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_distance")->getValue()' '300' \
+        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_min_speed_to_force")->getValue()' '30' \
+        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_cancel_ratio")->getValue()' '0.5'
+    '';
+  });
+in
 {
   home.username = "saponela";
   home.homeDirectory = "/home/saponela";
@@ -20,6 +32,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    hyprspacePatched
     # Development
     vscode
     jdk21_headless
@@ -53,7 +66,6 @@
     brightnessctl
     playerctl
     hypridle
-    hyprlandPlugins.hyprspace
     
     # Terminal & Shell
     kitty
@@ -92,6 +104,7 @@
     google-chrome
     prismlauncher
     heroic
+    protonup-qt
     ];
 
 

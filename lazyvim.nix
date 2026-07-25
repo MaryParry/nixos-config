@@ -4,7 +4,7 @@
 
     extras = {
       # AI
-      #  ai.copilot.enable = true;  
+      ai.copilot.enable = true;  
 
       # Languages
       lang.nix.enable = true;
@@ -35,10 +35,11 @@
           { "matsuuu/pinkmare", priority = 1000 },
           { "rockerBOO/boo-colorscheme-nvim", priority = 1000 },
           { "folke/tokyonight.nvim", priority = 1000 },
+          { "connorwyatt/themes.nvim", priority = 1000 },
           {
             "LazyVim/LazyVim",
             opts = {
-              colorscheme = "tokyonight",
+              colorscheme = "sakura-night", -- Options from connorwyatt/themes.nvim: sakura-night, sakura-midnight, sakura-dusk, sakura-afterglow, sakura-day, sakura-dawn, sakura-sky, flowers-night, rose-pineish-main, rose-pineish-moon, rose-pineish-dawn, etc.
             },
           },
         }
