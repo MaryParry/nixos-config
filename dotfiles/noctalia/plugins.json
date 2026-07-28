@@ -11,6 +11,9 @@
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
+        "kaomoji-provider": {
+            "enabled": false
+        },
         "plugin-manager": {
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
