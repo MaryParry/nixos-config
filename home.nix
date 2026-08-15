@@ -26,7 +26,9 @@ in
 
   imports = [
     inputs.lazyvim.homeManagerModules.default
+    inputs.plasma-manager.homeModules.plasma-manager
     ./lazyvim.nix
+    ./plasma.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -42,8 +44,12 @@ in
     docker
     pnpm
     nodejs
+    postman
     # ollama
     jetbrains.pycharm
+    gnupg
+    pinentry-tty
+
 
   
     # Messaging
@@ -93,10 +99,14 @@ in
     kdePackages.kdeconnect-kde
     pulseaudio
     paprefs
-
+    blender #vTraining
+    krita
+    reco
     # Misc
     flatpak
     libreoffice
+    webcamoid
+    
     # Music & Entertainment
     steam
     qbittorrent
@@ -120,6 +130,7 @@ in
     ".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/noctalia";
     ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/User/settings.json";
     ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme";
+    ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fastfetch";
     ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
@@ -141,6 +152,43 @@ in
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+  };
+
+  # Default Applications configuration
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = [ "org.kde.dolphin.desktop" ];
+      "text/html" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/http" = [ "zen-beta.desktop" ];
+      "x-scheme-handler/https" = [ "zen-beta.desktop" ];
+    };
+  };
+
+  xdg.desktopEntries = {
+    zen-beta = {
+      name = "Zen Browser";
+      genericName = "Web Browser";
+      exec = "zen-beta %u";
+      icon = "zen-browser";
+      categories = [ "Network" "WebBrowser" ];
+      mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https" ];
+    };
+    spotify = {
+      name = "Spotify";
+      genericName = "Music Player";
+      exec = "spotify %U";
+      icon = "/home/saponela/.local/share/icons/custom_spotify.png";
+      categories = [ "Audio" "Music" "Player" "AudioVideo" ];
+    };
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
   };
 
   # Let Home Manager install and manage itself.

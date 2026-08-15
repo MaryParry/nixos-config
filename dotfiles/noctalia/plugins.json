@@ -11,8 +11,13 @@
             "enabled": true,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
+        "color-scheme-creator": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
+        },
         "kaomoji-provider": {
-            "enabled": false
+            "enabled": false,
+            "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
         },
         "plugin-manager": {
             "enabled": true,

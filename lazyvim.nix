@@ -28,18 +28,24 @@
 
     # Custom Plugin Configurations (Templates)
     plugins = {
-      # Theme Template: Moonfly
+      # Default Colorscheme: sakura / pinkmare
       colorscheme = ''
         return {
-          { "morhetz/gruvbox", priority = 1000 },
-          { "matsuuu/pinkmare", priority = 1000 },
-          { "rockerBOO/boo-colorscheme-nvim", priority = 1000 },
-          { "folke/tokyonight.nvim", priority = 1000 },
-          { "connorwyatt/themes.nvim", priority = 1000 },
+          {
+            "matsuuu/pinkmare",
+            lazy = false,
+            priority = 1000,
+            config = function() end,
+          },
+          {
+            "connorwyatt/themes.nvim",
+            lazy = false,
+            priority = 1000,
+          },
           {
             "LazyVim/LazyVim",
             opts = {
-              colorscheme = "sakura-night", -- Options from connorwyatt/themes.nvim: sakura-night, sakura-midnight, sakura-dusk, sakura-afterglow, sakura-day, sakura-dawn, sakura-sky, flowers-night, rose-pineish-main, rose-pineish-moon, rose-pineish-dawn, etc.
+               colorscheme = "sakura-night", -- Options: pinkmare, sakura, sakura-night, sakura-midnight, sakura-dusk, sakura-afterglow, sakura-day, sakura-dawn, sakura-sky
             },
           },
         }
@@ -141,6 +147,7 @@
 
     config = {
       options = ''
+        vim.opt.termguicolors = true
         vim.opt.shiftwidth = 2
         vim.opt.tabstop = 2
         vim.g.autoformat = true

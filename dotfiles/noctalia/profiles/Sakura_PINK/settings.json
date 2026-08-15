@@ -411,11 +411,11 @@
         "animationDisabled": false,
         "animationSpeed": 1,
         "autoStartAuth": false,
-        "avatarImage": "/home/saponela/.config/noctalia/assets/me.jpg",
+        "avatarImage": "/home/saponela/.config/noctalia/assets/me_1.jpg",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
-        "clockStyle": "digital",
-        "compactLockScreen": true,
+        "clockStyle": "analog",
+        "compactLockScreen": false,
         "dimmerOpacity": 0.2,
         "enableBlurBehind": true,
         "enableLockScreenCountdown": true,
@@ -450,12 +450,12 @@
         "language": "",
         "lockOnSuspend": true,
         "lockScreenAnimations": true,
-        "lockScreenBlur": 0.56,
+        "lockScreenBlur": 0.14,
         "lockScreenCountdownDuration": 10000,
         "lockScreenMonitors": [
             "eDP-1"
         ],
-        "lockScreenTint": 0.33,
+        "lockScreenTint": 0.16,
         "passwordChars": true,
         "radiusRatio": 1,
         "reverseScroll": false,
@@ -521,7 +521,7 @@
         "bluetoothRssiPollingEnabled": false,
         "disableDiscoverability": false,
         "networkPanelView": "wifi",
-        "wifiDetailsViewMode": "list"
+        "wifiDetailsViewMode": "grid"
     },
     "nightLight": {
         "autoSchedule": true,
@@ -744,7 +744,7 @@
         "randomIntervalSec": 300,
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
-        "skipStartupTransition": false,
+        "skipStartupTransition": true,
         "solidColor": "#1a1a2e",
         "sortOrder": "name",
         "transitionDuration": 1500,

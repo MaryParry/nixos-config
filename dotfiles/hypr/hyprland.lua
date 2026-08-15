@@ -193,10 +193,11 @@ hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + M", hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exit())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + M", hl.dsp.exec_raw("movetoworkspacesilent special:minimized"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 
 -- Move focus with mainMod + arrow keys / hjkl

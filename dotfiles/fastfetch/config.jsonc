@@ -1,0 +1,126 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "source": "nixos_small",
+    "padding": {
+      "top": 1,
+      "right": 3
+    }
+  },
+  "display": {
+    "separator": " 󰅂 ",
+    "color": {
+      "keys": "bright_cyan",
+      "title": "bright_yellow",
+      "output": "white",
+      "separator": "bright_black"
+    },
+    "key": {
+      "width": 14
+    }
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "{#96}╭─────────────────── {#93}SYSTEM SUMMARY{#96} ───────────────────╮{#}"
+    },
+    {
+      "type": "title",
+      "key": "  {#93} User{#}",
+      "format": "{user-name}{#90}@{host-name}{#}"
+    },
+    {
+      "type": "os",
+      "key": "  {#93} OS{#}",
+      "format": "{name} {version-id} ({codename})"
+    },
+    {
+      "type": "kernel",
+      "key": "  {#93} Kernel{#}"
+    },
+    {
+      "type": "uptime",
+      "key": "  {#93}󰅐 Uptime{#}"
+    },
+    {
+      "type": "packages",
+      "key": "  {#93}󰏖 Packages{#}"
+    },
+    {
+      "type": "custom",
+      "format": "{#96}├─────────────────── {#95}DESKTOP & SHELL{#96} ──────────────────┤{#}"
+    },
+    {
+      "type": "de",
+      "key": "  {#95}󰇄 Desktop{#}"
+    },
+    {
+      "type": "wm",
+      "key": "  {#95} WM{#}"
+    },
+    {
+      "type": "theme",
+      "key": "  {#95}󰉼 Theme{#}"
+    },
+    {
+      "type": "icons",
+      "key": "  {#95}󰀻 Icons{#}"
+    },
+    {
+      "type": "terminal",
+      "key": "  {#95} Terminal{#}"
+    },
+    {
+      "type": "shell",
+      "key": "  {#95} Shell{#}"
+    },
+    {
+      "type": "custom",
+      "format": "{#96}├─────────────────── {#92}HARDWARE & SPECS{#96} ─────────────────┤{#}"
+    },
+    {
+      "type": "host",
+      "key": "  {#92}󰌢 Host{#}"
+    },
+    {
+      "type": "cpu",
+      "key": "  {#92}󰍛 CPU{#}"
+    },
+    {
+      "type": "gpu",
+      "key": "  {#92}󰍛 GPU{#}"
+    },
+    {
+      "type": "memory",
+      "key": "  {#92} Memory{#}"
+    },
+    {
+      "type": "disk",
+      "key": "  {#92}󰉉 Disk{#}",
+      "folders": "/"
+    },
+    {
+      "type": "battery",
+      "key": "  {#92}󰁹 Battery{#}"
+    },
+    {
+      "type": "localip",
+      "key": "  {#92}󰩟 Network{#}",
+      "showIpv4": true,
+      "compact": true
+    },
+    {
+      "type": "custom",
+      "format": "{#96}├──────────────────────────────────────────────────────┤{#}"
+    },
+    {
+      "type": "colors",
+      "key": "  {#97} Palette{#}",
+      "symbol": "circle"
+    },
+    {
+      "type": "custom",
+      "format": "{#96}╰──────────────────────────────────────────────────────╯{#}"
+    }
+  ]
+}

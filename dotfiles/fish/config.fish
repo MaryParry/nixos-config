@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 set -U fish_greeting ""
+set -gx TMPDIR /home/saponela/.cache/tmp
 fish_add_path /home/saponela/.spicetify
 fish_add_path /home/saponela/.local/bin
 

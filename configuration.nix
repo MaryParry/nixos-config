@@ -16,9 +16,11 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
+  # Bootloader & tmp settings.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.tmp.cleanOnBoot = true;
+  boot.tmp.useTmpfs = false;
 
   boot.initrd.luks.devices."luks-c8724694-43ff-4c8d-9f30-c09fd2e85503".device = "/dev/disk/by-uuid/c8724694-43ff-4c8d-9f30-c09fd2e85503";
   networking.hostName = "tetri"; # Define your hostname.
@@ -63,18 +65,18 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.tailscale.enable = true;
-  # Enable the GNOME Desktop Environment.
+  # Display Manager & Desktop Environments
   services.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
   services.displayManager.defaultSession = "hyprland";
 
+  # Enable Hyprland & KDE Plasma 6
   programs.hyprland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
+  # Configure keymap in X11 & Wayland
   services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+    layout = "us,ge";
+    options = "grp:alt_shift_toggle,grp:win_space_toggle";
   };
 
   services.keyd = {
@@ -162,6 +164,9 @@ in
    in
    {
      enable = true;
+     enabledCustomApps = with spicePkgs.apps; [
+       marketplace
+     ];
      enabledExtensions = with spicePkgs.extensions; [
        adblock
        hidePodcasts
@@ -176,11 +181,7 @@ in
          name = "AnonymizedRadios.js";
        }
      ];
-     theme = {
-       name = "Comfy";
-       src = ./dotfiles/spicetify/Themes/Comfy;
-     };
-     colorScheme = "Comfy";
+     theme = spicePkgs.themes.retroBlur // { name = "marketplace"; };
    };
 
 
@@ -203,9 +204,9 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
    inputs.zen-browser.packages.${stdenv.hostPlatform.system}.default
-   (pkgs-stable.lutris.override {
+   (lutris.override {
      extraPkgs = pkgs: with pkgs; [
-       pkgs-stable.wineWowPackages.stable
+       wineWow64Packages.stable
        winetricks
        gnutls
        openldap
@@ -213,15 +214,30 @@ in
        vulkan-loader
      ];
    })
-   pkgs-stable.wineWowPackages.stable
+   wineWow64Packages.stable
    bibata-cursors
    vulkan-loader
    vulkan-tools
+
+   # KDE Plasma 6 Packages & Utilities
+   kdePackages.dolphin
+   kdePackages.spectacle
+   kdePackages.konsole
+   kdePackages.kate
+   kdePackages.kcalc
+   kdePackages.gwenview
+   kdePackages.ark
+   kdePackages.plasma-systemmonitor
+   kdePackages.kdegraphics-thumbnailers
+   kdePackages.ffmpegthumbs
+   kdePackages.qtstyleplugin-kvantum
+   kdePackages.qt6ct
   ];
 
   environment.sessionVariables = {
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
     WEBKIT_DISABLE_DMABUF_RENDERER = "1";
+    TMPDIR = "/home/saponela/.cache/tmp";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
