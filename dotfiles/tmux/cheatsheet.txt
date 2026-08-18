@@ -1,0 +1,29 @@
+[1;38;2;230;166;200m  🌸 TMUX QUICK CHEAT SHEET 🌸[0m
+
+[1;38;2;175;162;216m  PREFIX KEY:[0m  [1;38;2;230;166;200mCtrl + a[0m  (or [38;2;200;185;202mCtrl + b[0m)
+
+[1;38;2;175;162;216m  SPLITTING PANES:[0m
+    [1;38;2;230;166;200mCtrl + a  |[0m      Split pane Horizontally (side-by-side)
+    [1;38;2;230;166;200mCtrl + a  -[0m      Split pane Vertically (top-bottom)
+    [1;38;2;230;166;200mCtrl + a  z[0m      Toggle Zoom (fullscreen focused pane)
+    [1;38;2;230;166;200mAlt + Arrows[0m     Navigate between panes ([3mNo prefix needed![0m)
+    [1;38;2;230;166;200mCtrl + a  h/j/k/l[0m Switch panes (Vim direction keys)
+
+[1;38;2;175;162;216m  WINDOWS (TABS):[0m
+    [1;38;2;230;166;200mCtrl + a  c[0m      Create new Window
+    [1;38;2;230;166;200mShift + Left/Right[0m Previous / Next Window ([3mNo prefix needed![0m)
+    [1;38;2;230;166;200mAlt + 1..9[0m       Jump directly to Window 1 to 9 ([3mNo prefix needed![0m)
+    [1;38;2;230;166;200mCtrl + a  ,[0m      Rename current Window
+
+[1;38;2;175;162;216m  SESSIONS & MANAGEMENT:[0m
+    [1;38;2;230;166;200mCtrl + a  d[0m      Detach from session (leaves apps running)
+    [1;38;2;230;166;200mCtrl + a  r[0m      Reload tmux configuration
+    [1;38;2;230;166;200mCtrl + a  ?[0m  or  [1;38;2;230;166;200mF1[0m  Toggle this Cheat Sheet popup!
+
+[1;38;2;175;162;216m  COPY MODE & MOUSE:[0m
+    [1;38;2;230;166;200mMouse Click[0m      Focus pane / Select window tab
+    [1;38;2;230;166;200mMouse Drag[0m       Resize pane borders / Select text
+    [1;38;2;230;166;200mScroll Wheel[0m     Scroll back through history
+    [1;38;2;230;166;200mCtrl + a  [[0m      Enter Copy Mode ([1;38;2;230;166;200mv[0m = select, [1;38;2;230;166;200my[0m = copy)
+
+[2mPress 'q' or 'Esc' to close this popup window.[0m

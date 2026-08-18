@@ -132,6 +132,7 @@ in
     ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme";
     ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fastfetch";
     ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
+    ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/cheatsheet.txt";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
 

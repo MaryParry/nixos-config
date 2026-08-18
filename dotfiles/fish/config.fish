@@ -9,4 +9,7 @@ fish_add_path /home/saponela/.local/bin
 
 alias stremio="flatpak run com.stremio.Stremio"
 alias factorio="/home/saponela/.local/bin/factorio"
+alias tmux-help="less -R ~/.config/tmux/cheatsheet.txt"
+alias tmux-keys="less -R ~/.config/tmux/cheatsheet.txt"
+
 

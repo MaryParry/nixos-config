@@ -25,7 +25,7 @@ hl.monitor({
     position = "0x0",
     scale    = 1,
     mirror   = "eDP-1",
-})
+}) -- for tv screen
 
 -- hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
 -- hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
@@ -72,8 +72,8 @@ hl.env("XCURSOR_SIZE", "24")
 
 hl.config({
     general = {
-        gaps_in  = 4,
-        gaps_out = 10,
+        gaps_in  = 1,
+        gaps_out = 3,
         border_size = 2,
         col = {
             active_border   = { colors = {"rgba(b0b0b0b0)", "rgba(c3dee0c3)"}, angle = 45 },
