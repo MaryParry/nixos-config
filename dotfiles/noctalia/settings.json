@@ -42,12 +42,12 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0.78,
+        "backgroundOpacity": 1,
         "barType": "simple",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
-        "contentPadding": 2,
-        "density": "default",
+        "contentPadding": 0,
+        "density": "comfortable",
         "displayMode": "always_visible",
         "enableExclusionZoneInset": true,
         "fontScale": 1,
@@ -60,22 +60,24 @@
         "middleClickCommand": "",
         "middleClickFollowMouse": false,
         "monitors": [
+            "eDP-1",
+            "HDMI-A-1"
         ],
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
         "outerCorners": false,
-        "position": "top",
+        "position": "left",
         "reverseScroll": false,
         "rightClickAction": "controlCenter",
         "rightClickCommand": "",
         "rightClickFollowMouse": true,
         "screenOverrides": [
         ],
-        "showCapsule": true,
+        "showCapsule": false,
         "showOnWorkspaceSwitch": true,
         "showOutline": false,
         "useSeparateOpacity": true,
-        "widgetSpacing": 6,
+        "widgetSpacing": 2,
         "widgets": {
             "center": [
                 {
@@ -93,7 +95,7 @@
                     "labelMode": "none",
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
-                    "showApplications": false,
+                    "showApplications": true,
                     "showApplicationsHover": false,
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
@@ -102,13 +104,14 @@
             ],
             "left": [
                 {
-                    "clockColor": "none",
-                    "customFont": "SF Pro Display",
-                    "formatHorizontal": "HH:mm ddd, MMM dd",
-                    "formatVertical": "HH mm - dd MM",
-                    "id": "Clock",
-                    "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": true
+                    "colorizeDistroLogo": false,
+                    "colorizeSystemIcon": "primary",
+                    "colorizeSystemText": "none",
+                    "customIconPath": "",
+                    "enableColorization": true,
+                    "icon": "noctalia",
+                    "id": "ControlCenter",
+                    "useDistroLogo": true
                 },
                 {
                     "compactMode": true,
@@ -144,20 +147,13 @@
                     "useFixedWidth": false
                 },
                 {
-                    "compactMode": false,
-                    "hideMode": "hidden",
-                    "hideWhenIdle": false,
-                    "id": "MediaMini",
-                    "maxWidth": 145,
-                    "panelShowAlbumArt": true,
-                    "scrollingMode": "always",
-                    "showAlbumArt": true,
-                    "showArtistFirst": true,
-                    "showProgressRing": true,
-                    "showVisualizer": true,
-                    "textColor": "none",
-                    "useFixedWidth": false,
-                    "visualizerType": "linear"
+                    "deviceNativePath": "__default__",
+                    "displayMode": "icon-always",
+                    "hideIfIdle": false,
+                    "hideIfNotDetected": true,
+                    "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": true
                 }
             ],
             "right": [
@@ -186,15 +182,6 @@
                     "textColor": "none"
                 },
                 {
-                    "deviceNativePath": "__default__",
-                    "displayMode": "icon-always",
-                    "hideIfIdle": false,
-                    "hideIfNotDetected": true,
-                    "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": true
-                },
-                {
                     "displayMode": "alwaysShow",
                     "iconColor": "secondary",
                     "id": "Bluetooth",
@@ -205,20 +192,6 @@
                     "iconColor": "none",
                     "id": "Volume",
                     "middleClickCommand": "pwvucontrol || pavucontrol",
-                    "textColor": "none"
-                },
-                {
-                    "applyToAllMonitors": false,
-                    "displayMode": "onhover",
-                    "iconColor": "none",
-                    "id": "Brightness",
-                    "textColor": "none"
-                },
-                {
-                    "displayMode": "forceOpen",
-                    "iconColor": "none",
-                    "id": "KeyboardLayout",
-                    "showIcon": true,
                     "textColor": "none"
                 },
                 {
@@ -248,14 +221,20 @@
                     "id": "plugin:clipboard"
                 },
                 {
-                    "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "primary",
-                    "colorizeSystemText": "none",
-                    "customIconPath": "",
-                    "enableColorization": true,
-                    "icon": "noctalia",
-                    "id": "ControlCenter",
-                    "useDistroLogo": true
+                    "displayMode": "forceOpen",
+                    "iconColor": "none",
+                    "id": "KeyboardLayout",
+                    "showIcon": true,
+                    "textColor": "none"
+                },
+                {
+                    "clockColor": "none",
+                    "customFont": "SF Pro Display",
+                    "formatHorizontal": "HH:mm ddd, MMM dd",
+                    "formatVertical": "HH:mm",
+                    "id": "Clock",
+                    "tooltipFormat": "HH:mm ddd, MMM dd",
+                    "useCustomFont": true
                 }
             ]
         }
@@ -289,10 +268,10 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Mizuki-Akiyama",
+        "predefinedScheme": "Oxide",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -498,7 +477,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "Tbilisi",
+        "name": "",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,

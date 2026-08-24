@@ -28,46 +28,128 @@
 
     # Custom Plugin Configurations (Templates)
     plugins = {
-      # Default Colorscheme: sakura / pinkmare
+      # Curated Theme Bundle & Themery Live-Preview Theme Switcher
       colorscheme = ''
         return {
+          -- 1. User Favorites & Primary Themes
+          { "matsuuu/pinkmare", lazy = false, priority = 1000 },
+          { "connorwyatt/themes.nvim", lazy = true },
           {
-            "matsuuu/pinkmare",
-            lazy = false,
-            priority = 1000,
-            config = function() end,
+            "catppuccin/nvim",
+            name = "catppuccin",
+            lazy = true,
+            opts = {
+              integrations = {
+                indent_blankline = { enabled = false },
+                ibl = { enabled = true },
+              },
+            },
           },
+          { "rose-pine/neovim", name = "rose-pine", lazy = true },
+          { "scottmckendry/cyberdream.nvim", lazy = true },
+
+          -- 2. Modern Aesthetic & Popular Community Neovim Themes (Lazy-loaded)
+          { "folke/tokyonight.nvim", lazy = true },
+          { "rebelot/kanagawa.nvim", lazy = true },
+          { "EdenEast/nightfox.nvim", lazy = true },
+          { "nyoom-engineering/oxocarbon.nvim", lazy = true, build = false },
+          { "craftzdog/solarized-osaka.nvim", lazy = true },
+          { "sainnhe/sonokai", lazy = true },
+          { "sainnhe/gruvbox-material", lazy = true },
+          { "sainnhe/everforest", lazy = true },
+          { "olivercederborg/poimandres.nvim", lazy = true },
+          { "maxmx03/dracula.nvim", lazy = true },
+          { "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 },
+          { "navarasu/onedark.nvim", lazy = true },
+          { "shaunsingh/nord.nvim", lazy = true },
+          { "projekt0n/github-nvim-theme", lazy = true },
+          { "marko-cerovac/material.nvim", lazy = true },
+          { "uloco/bluloco.nvim", lazy = true },
+          { "slugbyte/lackluster.nvim", lazy = true },
+          { "ribru17/bamboo.nvim", lazy = true },
+          { "tiagovla/tokyodark.nvim", lazy = true },
+          { "AlexvZyl/nordic.nvim", lazy = true },
+          { "Shatur/neovim-ayu", lazy = true },
+          { "kvrohit/mellow.nvim", lazy = true },
+          { "savq/melange-nvim", lazy = true },
+          { "vague2k/vague.nvim", lazy = true },
+
+          -- 3. Themery plugin for persistent theme saving and live preview
           {
-            "connorwyatt/themes.nvim",
+            "zaldih/themery.nvim",
             lazy = false,
             priority = 1000,
+            cmd = "Themery",
+            keys = {
+              { "<leader>th", "<cmd>Themery<cr>", desc = "Theme Browser (Themery)" },
+              { "<leader>ut", "<cmd>Themery<cr>", desc = "Theme Browser (Themery)" },
+            },
+            opts = {
+              livePreview = true,
+              themes = {
+                { name = "Gruvbox (Default)", colorscheme = "gruvbox" },
+                { name = "Pinkmare (Favorite)", colorscheme = "pinkmare" },
+                { name = "Catppuccin Mocha", colorscheme = "catppuccin-mocha" },
+                { name = "Catppuccin Macchiato", colorscheme = "catppuccin-macchiato" },
+                { name = "Catppuccin Frappe", colorscheme = "catppuccin-frappe" },
+                { name = "Rosé Pine", colorscheme = "rose-pine" },
+                { name = "Rosé Pine Moon", colorscheme = "rose-pine-moon" },
+                { name = "Cyberdream (Neon)", colorscheme = "cyberdream" },
+                { name = "Tokyo Night", colorscheme = "tokyonight-night" },
+                { name = "Tokyo Night Storm", colorscheme = "tokyonight-storm" },
+                { name = "Tokyo Night Moon", colorscheme = "tokyonight-moon" },
+                { name = "Kanagawa Wave", colorscheme = "kanagawa-wave" },
+                { name = "Kanagawa Dragon", colorscheme = "kanagawa-dragon" },
+                { name = "Sakura Night", colorscheme = "sakura-night" },
+                { name = "Sakura Dusk", colorscheme = "sakura-dusk" },
+                { name = "Nightfox", colorscheme = "nightfox" },
+                { name = "Duskfox", colorscheme = "duskfox" },
+                { name = "Nordfox", colorscheme = "nordfox" },
+                { name = "Terafox", colorscheme = "terafox" },
+                { name = "Carbonfox", colorscheme = "carbonfox" },
+                { name = "Oxocarbon", colorscheme = "oxocarbon" },
+                { name = "Solarized Osaka", colorscheme = "solarized-osaka" },
+                { name = "Sonokai", colorscheme = "sonokai" },
+                { name = "Gruvbox Material", colorscheme = "gruvbox-material" },
+                { name = "Everforest", colorscheme = "everforest" },
+                { name = "Poimandres", colorscheme = "poimandres" },
+                { name = "Dracula", colorscheme = "dracula" },
+                { name = "OneDark", colorscheme = "onedark" },
+                { name = "Nord", colorscheme = "nord" },
+                { name = "Nordic", colorscheme = "nordic" },
+                { name = "GitHub Dark", colorscheme = "github_dark" },
+                { name = "GitHub Dark Dimmed", colorscheme = "github_dark_dimmed" },
+                { name = "Material", colorscheme = "material" },
+                { name = "Bluloco Dark", colorscheme = "bluloco-dark" },
+                { name = "Lackluster", colorscheme = "lackluster" },
+                { name = "Bamboo", colorscheme = "bamboo" },
+                { name = "TokyoDark", colorscheme = "tokyodark" },
+                { name = "Ayu Dark", colorscheme = "ayu-dark" },
+                { name = "Ayu Mirage", colorscheme = "ayu-mirage" },
+                { name = "Mellow", colorscheme = "mellow" },
+                { name = "Melange", colorscheme = "melange" },
+                { name = "Vague", colorscheme = "vague" },
+              },
+            },
+          },
+
+          -- 4. Lazy.nvim options & Default theme fallback
+          {
+            "folke/lazy.nvim",
+            opts = {
+              rocks = {
+                enabled = false,
+              },
+            },
           },
           {
             "LazyVim/LazyVim",
             opts = {
-               colorscheme = "sakura-night", -- Options: pinkmare, sakura, sakura-night, sakura-midnight, sakura-dusk, sakura-afterglow, sakura-day, sakura-dawn, sakura-sky
+               colorscheme = "gruvbox",
             },
           },
         }
       '';
-
-      # Animation Template: Customize mini.animate
-      # # "mini-animate" = ''
-      #   return {
-      #     "mini-nvim/mini.animate",
-      #     opts = function(_, opts)
-      #       local animate = require("mini.animate")
-      #       return vim.tbl_deep_extend("force", opts or {}, {
-      #         resize = {
-      #           timing = animate.gen_timing.linear({ duration = 10, unit = "total" }),
-      #         },
-      #         scroll = {
-      #           timing = animate.gen_timing.linear({ duration = 20, unit = "total" }),
-      #         }
-      #       })
-      #     end,
-      #   }
-      # '';
 
       "neoscroll.nvim" = ''
         return {
@@ -202,7 +284,7 @@
         for lhs, rhs in pairs(surround_mappings) do
           vim.keymap.set("x", lhs, "gsa" .. rhs, { remap = true, desc = "Surround with " .. lhs })
         end
-      '';
+     '';
     };
-   };
+  };
 }

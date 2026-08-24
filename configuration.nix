@@ -69,9 +69,8 @@ in
   services.displayManager.gdm.enable = true;
   services.displayManager.defaultSession = "hyprland";
 
-  # Enable Hyprland & KDE Plasma 6
+  # Enable Hyprland 
   programs.hyprland.enable = true;
-  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11 & Wayland
   services.xserver.xkb = {
@@ -218,20 +217,6 @@ in
    bibata-cursors
    vulkan-loader
    vulkan-tools
-
-   # KDE Plasma 6 Packages & Utilities
-   kdePackages.dolphin
-   kdePackages.spectacle
-   kdePackages.konsole
-   kdePackages.kate
-   kdePackages.kcalc
-   kdePackages.gwenview
-   kdePackages.ark
-   kdePackages.plasma-systemmonitor
-   kdePackages.kdegraphics-thumbnailers
-   kdePackages.ffmpegthumbs
-   kdePackages.qtstyleplugin-kvantum
-   kdePackages.qt6ct
   ];
 
   environment.sessionVariables = {

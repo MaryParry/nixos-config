@@ -26,9 +26,7 @@ in
 
   imports = [
     inputs.lazyvim.homeManagerModules.default
-    inputs.plasma-manager.homeModules.plasma-manager
     ./lazyvim.nix
-    ./plasma.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your
@@ -96,7 +94,6 @@ in
     mangohud
     logmein-hamachi
     pamixer
-    kdePackages.kdeconnect-kde
     pulseaudio
     paprefs
     blender #vTraining
@@ -159,7 +156,6 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = [ "org.kde.dolphin.desktop" ];
       "text/html" = [ "zen-beta.desktop" ];
       "x-scheme-handler/http" = [ "zen-beta.desktop" ];
       "x-scheme-handler/https" = [ "zen-beta.desktop" ];

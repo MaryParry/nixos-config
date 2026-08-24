@@ -42,12 +42,12 @@
     "bar": {
         "autoHideDelay": 500,
         "autoShowDelay": 150,
-        "backgroundOpacity": 0.78,
+        "backgroundOpacity": 1,
         "barType": "simple",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
-        "contentPadding": 2,
-        "density": "default",
+        "contentPadding": 0,
+        "density": "comfortable",
         "displayMode": "always_visible",
         "enableExclusionZoneInset": true,
         "fontScale": 1,
@@ -63,19 +63,19 @@
         ],
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
-        "outerCorners": true,
-        "position": "top",
+        "outerCorners": false,
+        "position": "left",
         "reverseScroll": false,
         "rightClickAction": "controlCenter",
         "rightClickCommand": "",
         "rightClickFollowMouse": true,
         "screenOverrides": [
         ],
-        "showCapsule": true,
+        "showCapsule": false,
         "showOnWorkspaceSwitch": true,
         "showOutline": false,
         "useSeparateOpacity": true,
-        "widgetSpacing": 6,
+        "widgetSpacing": 2,
         "widgets": {
             "center": [
                 {
@@ -93,7 +93,7 @@
                     "labelMode": "none",
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
-                    "showApplications": false,
+                    "showApplications": true,
                     "showApplicationsHover": false,
                     "showBadge": true,
                     "showLabelsOnlyWhenOccupied": true,
@@ -102,23 +102,14 @@
             ],
             "left": [
                 {
-                    "colorizeSystemIcon": "none",
+                    "colorizeDistroLogo": false,
+                    "colorizeSystemIcon": "primary",
                     "colorizeSystemText": "none",
                     "customIconPath": "",
-                    "enableColorization": false,
-                    "icon": "rocket",
-                    "iconColor": "none",
-                    "id": "Launcher",
-                    "useDistroLogo": false
-                },
-                {
-                    "clockColor": "none",
-                    "customFont": "",
-                    "formatHorizontal": "HH:mm ddd, MMM dd",
-                    "formatVertical": "HH mm - dd MM",
-                    "id": "Clock",
-                    "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false
+                    "enableColorization": true,
+                    "icon": "noctalia",
+                    "id": "ControlCenter",
+                    "useDistroLogo": true
                 },
                 {
                     "compactMode": true,
@@ -154,20 +145,13 @@
                     "useFixedWidth": false
                 },
                 {
-                    "compactMode": false,
-                    "hideMode": "hidden",
-                    "hideWhenIdle": false,
-                    "id": "MediaMini",
-                    "maxWidth": 145,
-                    "panelShowAlbumArt": true,
-                    "scrollingMode": "hover",
-                    "showAlbumArt": true,
-                    "showArtistFirst": true,
-                    "showProgressRing": true,
-                    "showVisualizer": true,
-                    "textColor": "none",
-                    "useFixedWidth": false,
-                    "visualizerType": "linear"
+                    "deviceNativePath": "__default__",
+                    "displayMode": "icon-always",
+                    "hideIfIdle": false,
+                    "hideIfNotDetected": true,
+                    "id": "Battery",
+                    "showNoctaliaPerformance": false,
+                    "showPowerProfiles": true
                 }
             ],
             "right": [
@@ -191,13 +175,9 @@
                     "unreadBadgeColor": "primary"
                 },
                 {
-                    "deviceNativePath": "__default__",
-                    "displayMode": "icon-always",
-                    "hideIfIdle": false,
-                    "hideIfNotDetected": true,
-                    "id": "Battery",
-                    "showNoctaliaPerformance": false,
-                    "showPowerProfiles": true
+                    "iconColor": "none",
+                    "id": "KeepAwake",
+                    "textColor": "none"
                 },
                 {
                     "displayMode": "alwaysShow",
@@ -210,20 +190,6 @@
                     "iconColor": "none",
                     "id": "Volume",
                     "middleClickCommand": "pwvucontrol || pavucontrol",
-                    "textColor": "none"
-                },
-                {
-                    "applyToAllMonitors": false,
-                    "displayMode": "onhover",
-                    "iconColor": "none",
-                    "id": "Brightness",
-                    "textColor": "none"
-                },
-                {
-                    "displayMode": "forceOpen",
-                    "iconColor": "none",
-                    "id": "KeyboardLayout",
-                    "showIcon": true,
                     "textColor": "none"
                 },
                 {
@@ -253,14 +219,20 @@
                     "id": "plugin:clipboard"
                 },
                 {
-                    "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "primary",
-                    "colorizeSystemText": "none",
-                    "customIconPath": "",
-                    "enableColorization": true,
-                    "icon": "noctalia",
-                    "id": "ControlCenter",
-                    "useDistroLogo": true
+                    "displayMode": "forceOpen",
+                    "iconColor": "none",
+                    "id": "KeyboardLayout",
+                    "showIcon": true,
+                    "textColor": "none"
+                },
+                {
+                    "clockColor": "none",
+                    "customFont": "SF Pro Display",
+                    "formatHorizontal": "HH:mm ddd, MMM dd",
+                    "formatVertical": "HH:mm",
+                    "id": "Clock",
+                    "tooltipFormat": "HH:mm ddd, MMM dd",
+                    "useCustomFont": true
                 }
             ]
         }
@@ -290,11 +262,11 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
+        "generationMethod": "content",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Cream Autumn",
+        "predefinedScheme": "Oxide",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -414,8 +386,8 @@
         "avatarImage": "/home/saponela/.config/noctalia/assets/me.jpg",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
-        "clockStyle": "digital",
-        "compactLockScreen": true,
+        "clockStyle": "analog",
+        "compactLockScreen": false,
         "dimmerOpacity": 0.2,
         "enableBlurBehind": true,
         "enableLockScreenCountdown": true,
@@ -447,15 +419,15 @@
                 "Up"
             ]
         },
-        "language": "de",
+        "language": "",
         "lockOnSuspend": true,
-        "lockScreenAnimations": false,
-        "lockScreenBlur": 0.56,
+        "lockScreenAnimations": true,
+        "lockScreenBlur": 0.14,
         "lockScreenCountdownDuration": 10000,
         "lockScreenMonitors": [
             "eDP-1"
         ],
-        "lockScreenTint": 0.33,
+        "lockScreenTint": 0.16,
         "passwordChars": true,
         "radiusRatio": 1,
         "reverseScroll": false,
@@ -521,7 +493,7 @@
         "bluetoothRssiPollingEnabled": false,
         "disableDiscoverability": false,
         "networkPanelView": "wifi",
-        "wifiDetailsViewMode": "grid"
+        "wifiDetailsViewMode": "list"
     },
     "nightLight": {
         "autoSchedule": true,
@@ -689,10 +661,6 @@
             },
             {
                 "enabled": true,
-                "id": "telegram"
-            },
-            {
-                "enabled": true,
                 "id": "hyprland"
             },
             {
@@ -709,16 +677,16 @@
             },
             {
                 "enabled": true,
-                "id": "code"
+                "id": "vicinae"
             }
         ],
         "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "Sans Serif",
+        "fontDefault": "SF Pro Display",
         "fontDefaultScale": 1,
-        "fontFixed": "monospace",
+        "fontFixed": "SF Mono",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
@@ -748,7 +716,7 @@
         "randomIntervalSec": 300,
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
-        "skipStartupTransition": false,
+        "skipStartupTransition": true,
         "solidColor": "#1a1a2e",
         "sortOrder": "name",
         "transitionDuration": 1500,

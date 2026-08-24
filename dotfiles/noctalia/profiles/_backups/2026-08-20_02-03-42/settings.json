@@ -63,7 +63,7 @@
         ],
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
-        "outerCorners": true,
+        "outerCorners": false,
         "position": "top",
         "reverseScroll": false,
         "rightClickAction": "controlCenter",
@@ -90,7 +90,7 @@
                     "hideUnoccupied": false,
                     "iconScale": 0.8,
                     "id": "Workspace",
-                    "labelMode": "index",
+                    "labelMode": "none",
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
                     "showApplications": false,
@@ -102,26 +102,16 @@
             ],
             "left": [
                 {
-                    "colorizeSystemIcon": "none",
-                    "colorizeSystemText": "none",
-                    "customIconPath": "",
-                    "enableColorization": false,
-                    "icon": "rocket",
-                    "iconColor": "none",
-                    "id": "Launcher",
-                    "useDistroLogo": false
-                },
-                {
                     "clockColor": "none",
-                    "customFont": "",
+                    "customFont": "SF Pro Display",
                     "formatHorizontal": "HH:mm ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
                     "id": "Clock",
                     "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false
+                    "useCustomFont": true
                 },
                 {
-                    "compactMode": false,
+                    "compactMode": true,
                     "diskPath": "/",
                     "iconColor": "none",
                     "id": "SystemMonitor",
@@ -136,7 +126,7 @@
                     "showLoadAverage": false,
                     "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
-                    "showNetworkStats": false,
+                    "showNetworkStats": true,
                     "showSwapUsage": false,
                     "textColor": "none",
                     "useMonospaceFont": true,
@@ -160,11 +150,11 @@
                     "id": "MediaMini",
                     "maxWidth": 145,
                     "panelShowAlbumArt": true,
-                    "scrollingMode": "hover",
+                    "scrollingMode": "always",
                     "showAlbumArt": true,
                     "showArtistFirst": true,
                     "showProgressRing": true,
-                    "showVisualizer": false,
+                    "showVisualizer": true,
                     "textColor": "none",
                     "useFixedWidth": false,
                     "visualizerType": "linear"
@@ -183,12 +173,6 @@
                     ]
                 },
                 {
-                    "displayMode": "onhover",
-                    "iconColor": "none",
-                    "id": "Bluetooth",
-                    "textColor": "none"
-                },
-                {
                     "hideWhenZero": false,
                     "hideWhenZeroUnread": false,
                     "iconColor": "none",
@@ -197,13 +181,24 @@
                     "unreadBadgeColor": "primary"
                 },
                 {
+                    "iconColor": "none",
+                    "id": "KeepAwake",
+                    "textColor": "none"
+                },
+                {
                     "deviceNativePath": "__default__",
-                    "displayMode": "graphic",
+                    "displayMode": "icon-always",
                     "hideIfIdle": false,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
+                    "showPowerProfiles": true
+                },
+                {
+                    "displayMode": "alwaysShow",
+                    "iconColor": "secondary",
+                    "id": "Bluetooth",
+                    "textColor": "primary"
                 },
                 {
                     "displayMode": "onhover",
@@ -227,23 +222,40 @@
                     "textColor": "none"
                 },
                 {
+                    "defaultSettings": {
+                        "iconColor": "none"
+                    },
                     "id": "plugin:plugin-manager"
                 },
                 {
+                    "defaultSettings": {
+                        "backupCount": 5,
+                        "backupEnabled": true,
+                        "icon": "wand",
+                        "iconColor": "primary",
+                        "includeWallpapers": true,
+                        "lastAppliedProfile": "",
+                        "profilesDir": ""
+                    },
                     "id": "plugin:shell-profiles"
                 },
                 {
+                    "defaultSettings": {
+                        "density": "comfortable",
+                        "maxHistorySize": 100,
+                        "showImagePreviews": true
+                    },
                     "id": "plugin:clipboard"
                 },
                 {
                     "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "none",
+                    "colorizeSystemIcon": "primary",
                     "colorizeSystemText": "none",
                     "customIconPath": "",
-                    "enableColorization": false,
+                    "enableColorization": true,
                     "icon": "noctalia",
                     "id": "ControlCenter",
-                    "useDistroLogo": false
+                    "useDistroLogo": true
                 }
             ]
         }
@@ -273,11 +285,11 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
+        "generationMethod": "content",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Everdeer",
+        "predefinedScheme": "Mizuki-Akiyama",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -397,8 +409,8 @@
         "avatarImage": "/home/saponela/.config/noctalia/assets/me.jpg",
         "boxRadiusRatio": 1,
         "clockFormat": "hh\\nmm",
-        "clockStyle": "digital",
-        "compactLockScreen": true,
+        "clockStyle": "analog",
+        "compactLockScreen": false,
         "dimmerOpacity": 0.2,
         "enableBlurBehind": true,
         "enableLockScreenCountdown": true,
@@ -432,13 +444,13 @@
         },
         "language": "",
         "lockOnSuspend": true,
-        "lockScreenAnimations": false,
-        "lockScreenBlur": 0.56,
+        "lockScreenAnimations": true,
+        "lockScreenBlur": 0.14,
         "lockScreenCountdownDuration": 10000,
         "lockScreenMonitors": [
             "eDP-1"
         ],
-        "lockScreenTint": 0.33,
+        "lockScreenTint": 0.16,
         "passwordChars": true,
         "radiusRatio": 1,
         "reverseScroll": false,
@@ -497,7 +509,7 @@
         "weatherTaliaMascotAlways": false
     },
     "network": {
-        "bluetoothAutoConnect": false,
+        "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,
@@ -664,7 +676,7 @@
         "activeTemplates": [
             {
                 "enabled": true,
-                "id": "hyprland"
+                "id": "btop"
             },
             {
                 "enabled": true,
@@ -672,16 +684,32 @@
             },
             {
                 "enabled": true,
+                "id": "hyprland"
+            },
+            {
+                "enabled": true,
+                "id": "zenBrowser"
+            },
+            {
+                "enabled": true,
                 "id": "spicetify"
+            },
+            {
+                "enabled": true,
+                "id": "discord"
+            },
+            {
+                "enabled": true,
+                "id": "vicinae"
             }
         ],
-        "enableUserTheming": false
+        "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,
         "fontDefault": "SF Pro Display",
         "fontDefaultScale": 1,
-        "fontFixed": "JetBrainsMonoNL NFP Light",
+        "fontFixed": "SF Mono",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,
@@ -711,7 +739,7 @@
         "randomIntervalSec": 300,
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
-        "skipStartupTransition": false,
+        "skipStartupTransition": true,
         "solidColor": "#1a1a2e",
         "sortOrder": "name",
         "transitionDuration": 1500,

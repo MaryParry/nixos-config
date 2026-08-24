@@ -160,7 +160,7 @@
                     "id": "MediaMini",
                     "maxWidth": 145,
                     "panelShowAlbumArt": true,
-                    "scrollingMode": "always",
+                    "scrollingMode": "hover",
                     "showAlbumArt": true,
                     "showArtistFirst": true,
                     "showProgressRing": true,
@@ -201,9 +201,9 @@
                 },
                 {
                     "displayMode": "alwaysShow",
-                    "iconColor": "none",
+                    "iconColor": "secondary",
                     "id": "Bluetooth",
-                    "textColor": "none"
+                    "textColor": "primary"
                 },
                 {
                     "displayMode": "onhover",
@@ -290,11 +290,11 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "vibrant",
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Oxide",
+        "predefinedScheme": "Cream Autumn",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": false
@@ -447,7 +447,7 @@
                 "Up"
             ]
         },
-        "language": "",
+        "language": "de",
         "lockOnSuspend": true,
         "lockScreenAnimations": false,
         "lockScreenBlur": 0.56,
@@ -514,14 +514,14 @@
         "weatherTaliaMascotAlways": false
     },
     "network": {
-        "bluetoothAutoConnect": false,
+        "bluetoothAutoConnect": true,
         "bluetoothDetailsViewMode": "grid",
         "bluetoothHideUnnamedDevices": false,
         "bluetoothRssiPollIntervalMs": 60000,
         "bluetoothRssiPollingEnabled": false,
         "disableDiscoverability": false,
         "networkPanelView": "wifi",
-        "wifiDetailsViewMode": "list"
+        "wifiDetailsViewMode": "grid"
     },
     "nightLight": {
         "autoSchedule": true,
@@ -706,15 +706,19 @@
             {
                 "enabled": true,
                 "id": "discord"
+            },
+            {
+                "enabled": true,
+                "id": "code"
             }
         ],
         "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,
-        "fontDefault": "SF Pro Display",
+        "fontDefault": "Sans Serif",
         "fontDefaultScale": 1,
-        "fontFixed": "SF Mono",
+        "fontFixed": "monospace",
         "fontFixedScale": 1,
         "panelBackgroundOpacity": 0.93,
         "panelsAttachedToBar": true,

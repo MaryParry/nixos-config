@@ -12,24 +12,28 @@ hl.monitor({
     scale    = 1,
 })
 
--- hl.monitor({
---     output   = "HDMI-A-1",
---     mode     = "1920x1080@60",
---     position = "1920x0",
---     scale    = 1,
--- })
-
 hl.monitor({
     output   = "HDMI-A-1",
     mode     = "1920x1080@60",
-    position = "0x0",
+    position = "1920x0",
     scale    = 1,
-    mirror   = "eDP-1",
-}) -- for tv screen
+})
 
--- hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
--- hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
--- hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1" })
+-- Laptop display (eDP-1) workspaces
+hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
+hl.workspace_rule({ workspace = "2", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "3", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "4", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "5", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "10", monitor = "eDP-1" })
+
+-- HDMI monitor workspaces
+hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1", default = true })
+hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1" })
+
+
 
 
 ---------------------
@@ -72,9 +76,9 @@ hl.env("XCURSOR_SIZE", "24")
 
 hl.config({
     general = {
-        gaps_in  = 1,
-        gaps_out = 3,
-        border_size = 2,
+        gaps_in  = 0,
+        gaps_out = 0,
+        border_size = 1,
         col = {
             active_border   = { colors = {"rgba(b0b0b0b0)", "rgba(c3dee0c3)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
@@ -85,7 +89,7 @@ hl.config({
     },
 
     decoration = {
-        rounding         = 2,
+        rounding         = 0,
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
         blur = {
@@ -126,6 +130,10 @@ hl.config({
         touchpad = {
             natural_scroll = true,
         },
+    },
+
+    binds = {
+        scroll_event_delay = 250,
     },
 })
 
@@ -169,7 +177,7 @@ hl.animation({ leaf = "windowsOut", enabled = true, speed = 7, bezier = "menu_de
 hl.animation({ leaf = "border",     enabled = true, speed = 10, bezier = "menu_decel" })
 hl.animation({ leaf = "borderangle",enabled = true, speed = 8, bezier = "menu_decel" })
 hl.animation({ leaf = "fade",       enabled = true, speed = 7, bezier = "menu_decel" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "menu_decel" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "menu_decel", style = "slidevert" })
 
 
 ------------------
@@ -178,7 +186,7 @@ hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "menu_de
 
 hl.gesture({
     fingers = 3,
-    direction = "horizontal",
+    direction = "vertical",
     action = "workspace"
 })
 
@@ -231,11 +239,9 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down",  hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",    hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mainMod .. " + mouse_left",  hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mainMod .. " + mouse_right", hl.dsp.focus({ workspace = "e+1" }))
+-- Scroll through workspaces with mainMod + scroll
+hl.bind(mainMod .. " + mouse_down",  hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + mouse_up",    hl.dsp.focus({ workspace = "m-1" }))
 
 -- Audio control
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
@@ -282,7 +288,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "kitty-transparency",
     match = { class = "^(kitty)$" },
-    opacity = "0.85 0.75",
+    opacity = "0.70 0.65",
     no_blur = false,
 })
 
