@@ -4,7 +4,7 @@
 
     extras = {
       # AI
-      ai.copilot.enable = true;  
+      #      ai.copilot.enable = true;   ### Disabled cause copilot sucks, todo: implement a better local llm for nvim
 
       # Languages
       lang.nix.enable = true;
@@ -73,6 +73,10 @@
           { "kvrohit/mellow.nvim", lazy = true },
           { "savq/melange-nvim", lazy = true },
           { "vague2k/vague.nvim", lazy = true },
+          { "robertmeta/nofrils", lazy = true },
+          { "andreasvc/vim-256noir", lazy = true },
+          { "vim-scripts/true-monochrome", lazy = true },
+          { "ailrk/vim-monochrome-waifu", lazy = true },
 
           -- 3. Themery plugin for persistent theme saving and live preview
           {
@@ -129,6 +133,13 @@
                 { name = "Mellow", colorscheme = "mellow" },
                 { name = "Melange", colorscheme = "melange" },
                 { name = "Vague", colorscheme = "vague" },
+                { name = "Nofrils Dark", colorscheme = "nofrils-dark" },
+                { name = "Nofrils Light", colorscheme = "nofrils-light" },
+                { name = "Nofrils Sepia", colorscheme = "nofrils-sepia" },
+                { name = "Nofrils Acme", colorscheme = "nofrils-acme" },
+                { name = "256 Noir", colorscheme = "256_noir" },
+                { name = "True Monochrome", colorscheme = "true-monochrome" },
+                { name = "Monochrome Waifu", colorscheme = "vim-monochrome-waifu" },
               },
             },
           },

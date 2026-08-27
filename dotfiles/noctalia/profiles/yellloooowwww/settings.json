@@ -60,6 +60,8 @@
         "middleClickCommand": "",
         "middleClickFollowMouse": false,
         "monitors": [
+            "eDP-1",
+            "HDMI-A-1"
         ],
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
@@ -269,7 +271,7 @@
         "predefinedScheme": "Oxide",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [
@@ -475,7 +477,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "",
+        "name": "Tbilisi",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,

@@ -251,6 +251,22 @@ in
     services.blueman.enable = true;
     services.flatpak.enable = true;
     services.logmein-hamachi.enable = true;
+
+  # Laptop battery charge threshold configuration (80% limit)
+  boot.kernelModules = [ "msi-ec" ];
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+
+      START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+    };
+  };
+  systemd.tmpfiles.rules = [
+    "w- /sys/class/power_supply/BAT0/charge_control_end_threshold - - - - 80"
+    "w- /sys/class/power_supply/BAT1/charge_control_end_threshold - - - - 80"
+  ];
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # Or disable the firewall altogether.

@@ -288,8 +288,8 @@ hl.window_rule({
 hl.window_rule({
     name  = "kitty-transparency",
     match = { class = "^(kitty)$" },
-    opacity = "0.70 0.65",
-    no_blur = false,
+--    opacity = "0.70 0.65",
+ --   no_blur = false,
 })
 
 

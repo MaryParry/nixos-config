@@ -2,18 +2,18 @@
   "screens": [
     {
       "name": "HDMI-A-1",
-      "light": "/home/saponela/Pictures/wall/varketili_da_chiri.png",
-      "dark": "/home/saponela/Pictures/wall/varketili_da_chiri.png"
+      "light": "/home/saponela/Pictures/wall/mima.png",
+      "dark": "/home/saponela/Pictures/wall/mima.png"
     },
     {
       "name": "HEADLESS-2",
-      "light": "/home/saponela/Pictures/wall/varketili_da_chiri.png",
-      "dark": "/home/saponela/Pictures/wall/varketili_da_chiri.png"
+      "light": "/home/saponela/Pictures/wall/mima.png",
+      "dark": "/home/saponela/Pictures/wall/mima.png"
     },
     {
       "name": "eDP-1",
-      "light": "/home/saponela/Pictures/wall/varketili_da_chiri.png",
-      "dark": "/home/saponela/Pictures/wall/varketili_da_chiri.png"
+      "light": "/home/saponela/Pictures/wall/mima.png",
+      "dark": "/home/saponela/Pictures/wall/mima.png"
     }
   ]
 }

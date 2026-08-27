@@ -264,11 +264,11 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "content",
+        "generationMethod": "monochrome",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Oxide",
+        "predefinedScheme": "Mine",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": true
@@ -477,7 +477,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": false,
         "hideWeatherTimezone": false,
-        "name": "",
+        "name": "Tbilisi",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,

@@ -110,7 +110,6 @@ in
     mpv
     google-chrome
     prismlauncher
-    heroic
     protonup-qt
     ];
 
