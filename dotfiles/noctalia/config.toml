@@ -1,0 +1,45 @@
+[theme]
+mode = "dark"
+source = "community"
+community_palette = "Gruvbox Material Hard"
+
+[shell]
+font_family = "SF Pro Display"
+
+[bar.default]
+position = "left"
+thickness = 48
+margin_ends = 4
+margin_edge = 0
+radius_top_left = 0
+radius_bottom_left = 0
+radius_top_right = 12
+radius_bottom_right = 12
+widget_spacing = 4
+padding = 8
+background_opacity = 1.0
+
+start = [
+  "control-center",
+  "sysmon",
+  "active-window",
+  "battery"
+]
+
+center = [
+  "workspaces"
+]
+
+end = [
+  "tray",
+  "notifications",
+  "caffeine",
+  "bluetooth",
+  "volume",
+  "keyboard-layout",
+  "clock"
+]
+
+[widget.clock]
+format = "{:%H:%M}"
+vertical_format = "{:%H\n%M}"

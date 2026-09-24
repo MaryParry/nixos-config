@@ -19,6 +19,14 @@ hl.monitor({
     scale    = 1,
 })
 
+-- Fallback for unconfigured monitors (e.g. desktop PC displays)
+hl.monitor({
+    output   = "",
+    mode     = "preferred",
+    position = "auto",
+    scale    = 1,
+})
+
 -- Laptop display (eDP-1) workspaces
 hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
 hl.workspace_rule({ workspace = "2", monitor = "eDP-1" })
@@ -52,12 +60,16 @@ local menu        = "vicinae toggle"
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("kdeconnect-indicator")
     hl.exec_cmd("dunst")
     hl.exec_cmd("vicinae server")
-    hl.exec_cmd("noctalia-shell")
+    hl.exec_cmd("noctalia")
     hl.exec_cmd("bluetoothctl")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("bluetoothctl power on")
+    -- Set default audio device to laptop speakers/analog stereo
+    hl.exec_cmd("pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo")
+    hl.exec_cmd("pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo")
     -- hl.exec_cmd("hyprpm reload")
 end)
 
@@ -94,7 +106,7 @@ hl.config({
         inactive_opacity = 1.0,
         blur = {
             enabled   = true,
-            size      = 3,
+            size      = 2,
             passes    = 2,
             vibrancy  = 0.0696,
         },
@@ -247,6 +259,11 @@ hl.bind(mainMod .. " + mouse_up",    hl.dsp.focus({ workspace = "m-1" }))
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 2.0 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true })
+hl.bind("XF86AudioPlay",        hl.dsp.exec_cmd("playerctl play-pause"),                            { locked = true })
+hl.bind("XF86AudioPause",       hl.dsp.exec_cmd("playerctl play-pause"),                            { locked = true })
+hl.bind("XF86AudioNext",        hl.dsp.exec_cmd("playerctl next"),                                  { locked = true })
+hl.bind("XF86AudioPrev",        hl.dsp.exec_cmd("playerctl previous"),                              { locked = true })
+hl.bind("XF86AudioStop",        hl.dsp.exec_cmd("playerctl stop"),                                  { locked = true })
 
 -- Screen brightness
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl s +5%"), { locked = true })
@@ -258,7 +275,6 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Lock on lid close / mod+L
 hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("loginctl lock-session"), { locked = true })
-hl.bind(mainMod .. " + L",       hl.dsp.exec_cmd("loginctl lock-session"))
 
 
 ----------------------
@@ -288,9 +304,23 @@ hl.window_rule({
 hl.window_rule({
     name  = "kitty-transparency",
     match = { class = "^(kitty)$" },
---    opacity = "0.70 0.65",
- --   no_blur = false,
+    opacity = "0.85 0.75",
+    no_blur = false,
 })
+
+hl.window_rule({
+    name  = "firefox-workspace",
+    match = { class = "^([Ff]irefox.*)$" },
+    workspace = "5 silent",
+})
+
+hl.window_rule({
+    name  = "playwright-float",
+    match = { class = "^(firefox-default|firefox|chromium|google-chrome)$", title = "^(Nightly|Mozilla Firefox|.*Playwright.*)$" },
+    float = true,
+})
+
+
 
 
 -------------------------
@@ -350,3 +380,6 @@ local function load_noctalia_colors()
 end
 
 load_noctalia_colors()
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()

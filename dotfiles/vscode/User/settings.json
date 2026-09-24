@@ -1,11 +1,20 @@
 {
-    "workbench.colorTheme": "NoctaliaTheme",
+    "workbench.colorTheme": "Pink Cat Boo",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "terminal.integrated.commandsToSkipShell": [
         "kilo-code.new.agentManagerOpen",
-        "kilo-code.new.agentManager.showTerminal"
+        "kilo-code.new.agentManager.showTerminal",
+        "kilo-code.new.agentManager.previousTerminal",
+        "kilo-code.new.agentManager.nextTerminal"
     ],
     "workbench.iconTheme": "vscode-icons",
     "python.analysis.diagnosticMode": "openFilesOnly",
-    "pyright.analysis.diagnosticMode": "openFilesOnly"
+    "pyright.analysis.diagnosticMode": "openFilesOnly",
+    "vsicons.dontShowNewVersionMessage": true,
+    "kilo-code.new.agentWorkStyle": "unset",
+    "workbench.colorCustomizations": {
+        "statusBar.foreground": "#000000",
+        "statusBar.debuggingForeground": "#000000",
+        "statusBar.noFolderForeground": "#000000"
+    }
 }
