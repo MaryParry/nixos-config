@@ -5,41 +5,70 @@
 ---- MONITORS ----
 ------------------
 
-hl.monitor({
-    output   = "eDP-1",
-    mode     = "1920x1080@60",
-    position = "0x0",
-    scale    = 1,
-})
+local hostname_file = io.open("/etc/hostname", "r")
+local hostname = hostname_file and hostname_file:read("*l") or ""
+if hostname_file then hostname_file:close() end
+hostname = hostname:gsub("%s+", "")
 
-hl.monitor({
-    output   = "HDMI-A-1",
-    mode     = "1920x1080@60",
-    position = "1920x0",
-    scale    = 1,
-})
+if hostname == "tetri" then
+    -- Laptop display (eDP-1)
+    hl.monitor({
+        output   = "eDP-1",
+        mode     = "1920x1080@60",
+        position = "0x0",
+        scale    = 1,
+    })
 
--- Fallback for unconfigured monitors (e.g. desktop PC displays)
-hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
-    scale    = 1,
-})
+    hl.monitor({
+        output   = "HDMI-A-1",
+        mode     = "1920x1080@60",
+        position = "1920x0",
+        scale    = 1,
+    })
 
--- Laptop display (eDP-1) workspaces
-hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
-hl.workspace_rule({ workspace = "2", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "3", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "4", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "5", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "10", monitor = "eDP-1" })
+    -- Fallback for unconfigured monitors
+    hl.monitor({
+        output   = "",
+        mode     = "preferred",
+        position = "auto",
+        scale    = 1,
+    })
 
--- HDMI monitor workspaces
-hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1", default = true })
-hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1" })
+    -- Laptop display (eDP-1) workspaces
+    hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
+    hl.workspace_rule({ workspace = "2", monitor = "eDP-1" })
+    hl.workspace_rule({ workspace = "3", monitor = "eDP-1" })
+    hl.workspace_rule({ workspace = "4", monitor = "eDP-1" })
+    hl.workspace_rule({ workspace = "5", monitor = "eDP-1" })
+    hl.workspace_rule({ workspace = "10", monitor = "eDP-1" })
+
+    -- HDMI monitor workspaces
+    hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1", default = true })
+    hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-1" })
+    hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-1" })
+    hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1" })
+else
+    -- Desktop PC display
+    hl.monitor({
+        output   = "HDMI-A-1",
+        mode     = "1920x1080@100",
+        position = "0x0",
+        scale    = 1,
+    })
+
+    -- Fallback for unconfigured monitors
+    hl.monitor({
+        output   = "",
+        mode     = "preferred",
+        position = "auto",
+        scale    = 1,
+    })
+
+    -- Assign workspaces to HDMI-A-1
+    for i = 1, 10 do
+        hl.workspace_rule({ workspace = tostring(i), monitor = "HDMI-A-1", default = (i == 1) })
+    end
+end
 
 
 

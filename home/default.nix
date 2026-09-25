@@ -144,6 +144,7 @@ in
     ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/custom_scripts";
     ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/rofi";
     ".config/walls".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/walls";
+    ".cache/tmp/.keep".text = "";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
 

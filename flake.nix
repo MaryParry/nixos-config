@@ -80,6 +80,8 @@
         };
 
         Alisferi = self.nixosConfigurations.alisferi;
+        asliferi = self.nixosConfigurations.alisferi;
+        Asliferi = self.nixosConfigurations.alisferi;
       };
     };
 }
