@@ -162,6 +162,12 @@ in
     vulkan-tools
   ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.iosevka-term
+    nerd-fonts.jetbrains-mono
+    roboto
+  ];
+
   environment.sessionVariables = {
     WEBKIT_DISABLE_COMPOSITING_MODE = "1";
     WEBKIT_DISABLE_DMABUF_RENDERER = "1";

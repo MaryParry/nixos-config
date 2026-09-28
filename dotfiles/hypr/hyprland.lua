@@ -88,9 +88,9 @@ hl.env("XCURSOR_SIZE", "24")
 
 hl.config({
     general = {
-        gaps_in  = 0,
-        gaps_out = 0,
-        border_size = 1,
+        gaps_in  = 2,
+        gaps_out = 2,
+        border_size = 2,
         col = {
             active_border   = { colors = {"rgba(b0b0b0b0)", "rgba(c3dee0c3)"}, angle = 45 },
             inactive_border = "rgba(595959aa)",
@@ -300,13 +300,13 @@ hl.window_rule({
     match = { class = ".*" },
     no_blur = true,
 })
-
-hl.window_rule({
-    name  = "kitty-transparency",
-    match = { class = "^(kitty)$" },
-    opacity = "0.85 0.75",
-    no_blur = false,
-})
+--
+-- hl.window_rule({
+--     name  = "kitty-transparency",
+--     match = { class = "^(kitty)$" },
+--     opacity = "0.85 0.75",
+--     no_blur = false,
+-- })
 
 hl.window_rule({
     name  = "firefox-workspace",

@@ -52,7 +52,7 @@ in
     jetbrains.pycharm
     gnupg
     pinentry-tty
-
+    gitui
 
   
     # Messaging

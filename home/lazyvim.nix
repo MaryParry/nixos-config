@@ -187,7 +187,190 @@
             words = {
               enabled = false,
             },
+            dashboard = {
+              enabled = true,
+              preset = {
+                header = [[
+        ╔═══════════════════════════════════════════════════════════════════════════════════╗
+        ║  ██████╗   ██████╗   ██╗  ███╗   ███╗  ███╗   ███╗    ██╗   ██╗  ██╗  ███╗   ███╗ ║
+        ║ ██╔════╝   ██╔══██╗  ██║  ████╗ ████║  ████╗ ████║    ██║   ██║  ██║  ████╗ ████║ ║
+        ║ ██║  ███╗  ██████╔╝  ██║  ██╔████╔██║  ██╔████╔██║    ██║   ██║  ██║  ██╔████╔██║ ║
+        ║ ██║   ██║  ██╔══██╗  ██║  ██║╚██╔╝██║  ██║╚██╔╝██║    ╚██╗ ██╔╝  ██║  ██║╚██╔╝██║ ║
+        ║ ╚██████╔╝  ██║  ██║  ██║  ██║ ╚═╝ ██║  ██║ ╚═╝ ██║     ╚████╔╝   ██║  ██║ ╚═╝ ██║ ║
+        ║  ╚═════╝   ╚═╝  ╚═╝  ╚═╝  ╚═╝     ╚═╝  ╚═╝     ╚═╝      ╚═══╝    ╚═╝  ╚═╝     ╚═╝ ║
+        ╚═══════════════════════════════════════════════════════════════════════════════════╝
+                ]],
+              },
+              formats = {
+                footer = { "%s", align = "center" },
+                header = { "%s", align = "center" },
+              },
+            },
+            indent = {
+              enabled = true,
+              animate = {
+                enabled = false,
+              },
+              scope = {
+                enabled = false,
+              },
+              indent = {
+                hl = {
+                  "SnacksIndent1",
+                  "SnacksIndent2",
+                  "SnacksIndent3",
+                  "SnacksIndent4",
+                  "SnacksIndent5",
+                  "SnacksIndent6",
+                  "SnacksIndent7",
+                },
+              },
+            },
+            picker = {
+              prompt = "> ",
+              ui_select = true,
+              formatters = {
+                file = {
+                  filename_first = true,
+                  truncate = 100,
+                },
+              },
+              layouts = {
+                default = {
+                  preview = false,
+                  layout = {
+                    box = "horizontal",
+                    width = 0.99,
+                    height = 0.99,
+                    {
+                      box = "vertical",
+                      border = "bold",
+                      title = "{source} {live}",
+                      title_pos = "center",
+                      { win = "input", height = 1, border = "bottom" },
+                      { win = "list", border = "none" },
+                    },
+                    { win = "preview", title = "{preview}", border = "bold", width = 0.5 },
+                  },
+                },
+              },
+            },
+            notifier = {
+              enabled = true,
+              timeout = 2000,
+              style = "compact",
+            },
           },
+        }
+      '';
+      "bufferline" = ''
+        return {
+          "akinsho/bufferline.nvim",
+          enabled = false,
+        }
+      '';
+      "lualine" = ''
+        local colors = {
+          gruvBlue = "#83a598",
+          gruvGreen = "#8ec07c",
+          gruvPink = "#d3869b",
+          gruvYellow = "#d8a657",
+          gruvRed = "#FF4A4A",
+          gruvWhite = "#fff4d2",
+          gruvBlack = "#1d1d1d",
+          gruvGray = "#393939",
+          gruvDark = "#292929",
+        }
+
+        local gruv_material = {
+          normal = {
+            a = { bg = colors.gruvDark, fg = colors.gruvWhite, gui = "bold" },
+            b = { bg = colors.gruvGray, fg = colors.gruvWhite, gui = "bold" },
+            c = { bg = colors.gruvBlue, fg = colors.gruvBlack, gui = "bold" },
+          },
+          insert = {
+            a = { bg = colors.gruvBlue, fg = colors.gruvBlack, gui = "bold" },
+            c = { bg = colors.gruvPink, fg = colors.gruvBlack, gui = "bold" },
+          },
+          visual = {
+            a = { bg = colors.gruvPink, fg = colors.gruvBlack, gui = "bold" },
+            c = { bg = colors.gruvDark, fg = colors.gruvWhite, gui = "bold" },
+          },
+          command = {
+            a = { bg = colors.gruvGreen, fg = colors.gruvBlack, gui = "bold" },
+            c = { bg = colors.gruvBlack, fg = colors.gruvWhite, gui = "bold" },
+          },
+          terminal = {
+            a = { bg = colors.gruvRed, fg = colors.gruvBlack, gui = "bold" },
+            c = { bg = colors.gruvBlack, fg = colors.gruvWhite, gui = "bold" },
+          },
+          replace = {
+            a = { bg = colors.gruvBlue, fg = colors.gruvBlack, gui = "bold" },
+            c = { bg = colors.gruvPink, fg = colors.gruvBlack, gui = "bold" },
+          },
+          inactive = {
+            a = { bg = colors.gruvGreen, fg = colors.gruvBlack, gui = "bold" },
+            c = { bg = colors.gruvBlack, fg = colors.gruvWhite, gui = "bold" },
+          },
+        }
+
+        return {
+          "nvim-lualine/lualine.nvim",
+          opts = {
+            options = {
+              theme = gruv_material,
+              component_separators = { left = "|", right = "|" },
+              section_separators = { left = "", right = "" },
+              disabled_filetypes = { "snacks_dashboard" },
+            },
+            sections = {
+              lualine_a = {
+                "mode",
+              },
+              lualine_b = {
+                "branch",
+                "diff",
+                "diagnostics",
+                {
+                  "buffers",
+                  buffers_color = {
+                    active = { bg = colors.gruvYellow, fg = colors.gruvBlack, gui = "bold" },
+                    inactive = { bg = colors.gruvGray, fg = colors.gruvWhite, gui = "italic" },
+                  },
+                  symbols = {
+                    modified = " ●",
+                    alternate_file = "",
+                    directory = "",
+                  },
+                  mode = 2,
+                },
+              },
+              lualine_c = {
+                {
+                  "filename",
+                  file_status = true,
+                  path = 3,
+                },
+              },
+              lualine_x = {
+                "filesize",
+              },
+              lualine_y = {
+                "searchcount",
+                "selectioncount",
+                "lsp_status",
+                "filetype",
+              },
+              lualine_z = {
+                "encoding",
+                "location",
+              },
+            },
+          },
+          config = function(_, opts)
+            require("lualine").setup(opts)
+            vim.opt.laststatus = 3
+          end,
         }
       '';
       "nvim-lspconfig" = ''
@@ -391,6 +574,16 @@
             "saghen/blink.cmp",
             optional = true,
             opts = function(_, opts)
+              opts.appearance = opts.appearance or {}
+              opts.appearance.nerd_font_variant = "mono"
+              opts.completion = opts.completion or {}
+              opts.completion.menu = opts.completion.menu or {}
+              opts.completion.menu.border = "bold"
+              opts.completion.menu.scrollbar = false
+              opts.completion.documentation = opts.completion.documentation or {}
+              opts.completion.documentation.window = opts.completion.documentation.window or {}
+              opts.completion.documentation.window.border = "bold"
+
               opts.sources = opts.sources or {}
               opts.sources.default = opts.sources.default or { "lsp", "path", "snippets", "buffer" }
               if not vim.tbl_contains(opts.sources.default, "minuet") then
@@ -446,12 +639,84 @@
         vim.opt.background = "dark"
         vim.opt.hlsearch = false
         vim.g.ai_cmp = false
-        vim.opt.guifont = "SF Mono:h12"
+        vim.opt.guifont = "IosevkaTerm Nerd Font Mono:h12"
 
-        -- Theme visibility overrides
+        -- Swaystation options & stylistics
+        vim.opt.winborder = "bold"
+        vim.opt.fillchars = { eob = " ", msgsep = "-" }
+        vim.opt.cmdheight = 0
+        vim.opt.pumheight = 10
+        vim.opt.conceallevel = 0
+        vim.opt.showtabline = 0
+        vim.opt.relativenumber = true
+        vim.opt.cursorline = true
+        vim.opt.signcolumn = "yes"
+        vim.opt.showmode = false
+        vim.opt.laststatus = 3
+
+        -- Swaystation LSP diagnostic stylistics
+        vim.diagnostic.config({
+          virtual_text = false,
+          underline = true,
+          update_in_insert = false,
+          severity_sort = true,
+          float = {
+            border = "bold",
+            source = true,
+          },
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = "󰅚",
+              [vim.diagnostic.severity.WARN] = "󰀪",
+              [vim.diagnostic.severity.INFO] = "󰋽",
+              [vim.diagnostic.severity.HINT] = "󰌶",
+            },
+            numhl = {
+              [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+              [vim.diagnostic.severity.WARN] = "WarningMsg",
+            },
+          },
+        })
+
+        -- Disable commenting next line on newline
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "*",
+          callback = function()
+            vim.opt_local.formatoptions:remove({ "r", "o" })
+          end,
+        })
+
+        -- Linebreak for markdown
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { "markdown" },
+          callback = function()
+            vim.opt.linebreak = true
+          end,
+        })
+
+        -- Hide cursor in SnacksDashboardOpened
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "SnacksDashboardOpened",
+          callback = function()
+            vim.cmd([[hi Cursor blend=100]])
+            vim.cmd("set guicursor+=a:Cursor/lCursor")
+          end,
+        })
+
+        -- Unhide cursor in SnacksDashboardClosed
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "SnacksDashboardClosed",
+          callback = function()
+            vim.cmd([[hi Cursor blend=0]])
+            vim.cmd("set guicursor+=a:Cursor/lCursor")
+          end,
+        })
+
+        -- Theme visibility overrides & Swaystation highlights
         vim.api.nvim_create_autocmd("ColorScheme", {
           pattern = "*",
           callback = function()
+             local hl = vim.api.nvim_set_hl
 
              -- Visibility overrides for ghost text and inlay hints
              local visibility_groups = {
@@ -462,26 +727,56 @@
                "MinuetVirtualText",
              }
              for _, group in ipairs(visibility_groups) do
-               vim.api.nvim_set_hl(0, group, { fg = "#bbbbbb", italic = true })
+               hl(0, group, { fg = "#bbbbbb", italic = true })
              end
 
-             -- Make split borders more visible (using Tokyonight purple)
+             -- Make split borders more visible with transparent bg (Swaystation style)
              local border_groups = {
                "WinSeparator",
                "VertSplit",
              }
              for _, group in ipairs(border_groups) do
-               vim.api.nvim_set_hl(0, group, { fg = "#bb9af7", bold = true })
+               hl(0, group, { fg = "#bb9af7", bg = "NONE", bold = true })
              end
+
+             -- Swaystation floating borders and popups
+             hl(0, "FloatBorder", { link = "Normal" })
+             hl(0, "LspInfoBorder", { link = "Normal" })
+             hl(0, "NormalFloat", { link = "Normal" })
+             hl(0, "Pmenu", { link = "Normal" })
+             hl(0, "PmenuSel", { link = "Search" })
+
+             -- Blink CMP menu styling
+             hl(0, "BlinkCmpMenu", { link = "Normal" })
+             hl(0, "BlinkCmpMenuBorder", { link = "Normal" })
+             hl(0, "BlinkCmpMenuSelection", { link = "Search" })
+             hl(0, "BlinkCmpLabelMatch", { link = "Search" })
+
+             -- Snacks dashboard highlights
+             hl(0, "SnacksDashboardHeader", { fg = "#d8a657" })
+             hl(0, "SnacksDashboardDesc", { fg = "#83a598" })
+             hl(0, "SnacksDashboardFooter", { fg = "#d8a657" })
+
+             -- Snacks indentline palette
+             hl(0, "SnacksIndent1", { fg = "#ea6962" })
+             hl(0, "SnacksIndent2", { fg = "#d8a657" })
+             hl(0, "SnacksIndent3", { fg = "#458588" })
+             hl(0, "SnacksIndent4", { fg = "#8ec07c" })
+             hl(0, "SnacksIndent5", { fg = "#d3869b" })
+             hl(0, "SnacksIndent6", { fg = "#e78a4e" })
+             hl(0, "SnacksIndent7", { fg = "#83a598" })
+
+             -- Snacks picker directory
+             hl(0, "SnacksPickerDir", { fg = "#928374" })
 
              -- Match EndOfBuffer and tree backgrounds with the active Normal background
              local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
              if normal and normal.bg then
                local bg = string.format("#%06x", normal.bg)
-               vim.api.nvim_set_hl(0, "EndOfBuffer", { fg = bg, bg = bg })
-               vim.api.nvim_set_hl(0, "NeoTreeNormal", { fg = normal.fg and string.format("#%06x", normal.fg) or nil, bg = bg })
-               vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { fg = normal.fg and string.format("#%06x", normal.fg) or nil, bg = bg })
-               vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { fg = bg, bg = bg })
+               hl(0, "EndOfBuffer", { fg = bg, bg = bg })
+               hl(0, "NeoTreeNormal", { fg = normal.fg and string.format("#%06x", normal.fg) or nil, bg = bg })
+               hl(0, "NeoTreeNormalNC", { fg = normal.fg and string.format("#%06x", normal.fg) or nil, bg = bg })
+               hl(0, "NeoTreeEndOfBuffer", { fg = bg, bg = bg })
              end
 
           end,
