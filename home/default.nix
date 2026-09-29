@@ -75,6 +75,10 @@ in
     brightnessctl
     playerctl
     hypridle
+    lm_sensors
+    rofi
+    wlsunset
+    pavucontrol
     
     # Terminal & Shell
     kitty
@@ -135,6 +139,11 @@ in
     ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
     ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/cheatsheet.txt";
     ".config/wireplumber".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/wireplumber";
+    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/waybar";
+    ".config/waybar_configs".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/waybar_configs";
+    ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/custom_scripts";
+    ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/rofi";
+    ".config/walls".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/walls";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
 
@@ -190,6 +199,20 @@ in
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
+    };
+  };
+
+  systemd.user.services.hypr-waybar-proxy = {
+    Unit = {
+      Description = "Waybar Hyprland IPC Proxy for Lua Config";
+    };
+    Service = {
+      ExecStart = "${pkgs.nodejs}/bin/node /etc/nixos/dotfiles/custom_scripts/hypr_waybar_proxy.js";
+      Restart = "always";
+      RestartSec = 1;
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
     };
   };
 

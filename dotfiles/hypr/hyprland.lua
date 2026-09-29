@@ -64,6 +64,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("dunst")
     hl.exec_cmd("vicinae server")
     hl.exec_cmd("noctalia")
+    hl.exec_cmd("~/.config/custom_scripts/launch_waybar.sh")
     hl.exec_cmd("bluetoothctl")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("bluetoothctl power on")
@@ -88,7 +89,7 @@ hl.env("XCURSOR_SIZE", "24")
 
 hl.config({
     general = {
-        gaps_in  = 2,
+        gaps_in  = 4,
         gaps_out = 2,
         border_size = 2,
         col = {
@@ -219,6 +220,7 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + M", hl.dsp.exec_raw("movetoworkspacesilent special:minimized"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.config/custom_scripts/waybarThemeSwitcher.sh"))
 
 -- Move focus with mainMod + arrow keys / hjkl
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))
@@ -300,13 +302,13 @@ hl.window_rule({
     match = { class = ".*" },
     no_blur = true,
 })
---
--- hl.window_rule({
---     name  = "kitty-transparency",
---     match = { class = "^(kitty)$" },
---     opacity = "0.85 0.75",
---     no_blur = false,
--- })
+
+ hl.window_rule({
+     name  = "kitty-transparency",
+     match = { class = "^(kitty)$" },
+     opacity = "1.0 0.95",
+     no_blur = false,
+ })
 
 hl.window_rule({
     name  = "firefox-workspace",
