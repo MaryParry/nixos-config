@@ -219,6 +219,21 @@ in
     };
   };
 
+  systemd.user.services.dunst = {
+    Unit = {
+      Description = "Dunst notification daemon";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.dunst}/bin/dunst";
+      Restart = "always";
+      RestartSec = 2;
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

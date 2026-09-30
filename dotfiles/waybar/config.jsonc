@@ -49,7 +49,7 @@
     "return-type": "json",
     "exec": "~/.config/waybar/scripts/notifications.sh",
     "on-click": "~/.config/waybar/scripts/notifications.sh toggle",
-    "on-click-right": "dunstctl history-pop",
+    "on-click-right": "~/.config/waybar/scripts/notifications.sh history",
     "interval": 3,
     "signal": 8,
     "tooltip": true
