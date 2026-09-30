@@ -63,6 +63,18 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    extraConfig.pipewire-pulse."99-block-minecraft-mic" = {
+      "pulse.rules" = [
+        {
+          matches = [
+            { "application.process.binary" = "java"; }
+          ];
+          actions = {
+            quirks = [ "block-record-stream" ];
+          };
+        }
+      ];
+    };
   };
 
   virtualisation.docker.enable = true;

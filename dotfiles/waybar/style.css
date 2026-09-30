@@ -1,8 +1,14 @@
 /* ===== COLORS ===== */
 @define-color bg #222222;
 @define-color fg #ebdbb2;
-@define-color black #000000;
-@define-color white-soft #fff4d2;
+
+@define-color blue #83a598;
+@define-color blue-dark #458588;
+
+@define-color pink #d3869b;
+
+@define-color green #8ec07c;
+@define-color green-dark #689d68;
 
 @define-color red #ea6962;
 @define-color red-dark #cc241d;
@@ -11,15 +17,7 @@
 @define-color yellow #f6c657;
 @define-color yellow-soft #d8a657;
 
-@define-color green #8ec07c;
-@define-color green-dark #689d68;
-
-@define-color blue #83a598;
-@define-color blue-dark #458588;
-
-@define-color pink #d3869b;
-@define-color pink-dark #b26286;
-
+@define-color white-soft #fff4d2;
 @define-color gray #555555;
 
 
@@ -35,6 +33,7 @@
   box-shadow: none;
 }
 
+/* the whole window */
 window#waybar {
   color: @fg;
   background: none;
@@ -50,8 +49,6 @@ window#waybar {
   background: @bg;
 }
 
-/* ===== COMMON PADDING ===== */
-#custom-launcher,
 #window,
 #disk,
 #cpu,
@@ -66,15 +63,13 @@ window#waybar {
 #battery.warning,
 #network,
 #clock {
-  padding-right: 6pt;
+  padding: 0 1.5pt;
 }
 
-/* ===== MODULES ===== */
 #custom-launcher {
-  color: @black;
-  border: 2pt solid @blue-dark;
-  background: @blue;
-  padding: 0pt 6pt;
+  color: @blue;
+  border: 2pt solid @blue;
+  padding: 0 6pt;
 }
 
 /* ===== WORKSPACES ===== */
@@ -92,34 +87,33 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  color: @bg;
-  background: @pink;
-  border-color: @pink-dark;
+  color: @pink;
+  border-color: @pink;
 }
 
 #workspaces button.active,
 #workspaces button.active:hover,
 #workspaces button.visible,
 #workspaces button.visible:hover {
-  color: @black;
-  border-color: @green-dark;
-  background: @green;
+  color: @green;
+  border-color: @green;
 }
 
 #workspaces button.urgent {
-  color: @bg;
-  border-color: @red-dark;
-  background: @red;
+  color: @red;
+  border-color: @red;
 }
 
-/* ===== INDIVIDUAL MODULE STYLES ===== */
+/* ===== MODULES ===== */
 #idle_inhibitor {
   border: 2pt solid @yellow-soft;
   margin-right: 3pt;
+  padding: 0 3pt;
 }
 
 #idle_inhibitor.activated {
   border-color: @yellow;
+  color: @yellow;
 }
 
 #window {
@@ -127,6 +121,7 @@ window#waybar {
 }
 
 #tray {
+  background: @bg;
   border: 2pt solid @orange;
   padding: 0 6pt;
 }
@@ -191,6 +186,7 @@ window#waybar {
 
 #mode,
 #submap {
+  background: @bg;
   color: @blue;
   border: 2pt solid @blue;
   padding: 0 7.5pt;
