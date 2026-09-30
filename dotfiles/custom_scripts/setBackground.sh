@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 
 set_background() {
-  local wall_name
-  wall_name="$(<"$HOME/.cache/wall.txt")"
-  pkill swaybg
-  if [[ -z "$wall_name" ]]; then
-    swaybg -i "$HOME/.config/walls/wall.png" -m fill  > /dev/null 2>&1 &
+  local wall_name=""
+  if [[ -f "$HOME/.cache/wall.txt" ]]; then
+    wall_name="$(<"$HOME/.cache/wall.txt")"
+  fi
+
+  pkill -x .swaybg-wrapped 2>/dev/null || true
+  pkill -x swaybg 2>/dev/null || true
+
+  if [[ -n "$wall_name" && -f "$wall_name" ]]; then
+    setsid -f swaybg -i "$wall_name" -m fill >/dev/null 2>&1
   else
-    swaybg -i "$wall_name" -m fill  > /dev/null 2>&1 &
+    local default_wall="$HOME/.config/walls/wall.png"
+    if [[ ! -f "$default_wall" ]]; then
+      default_wall="/etc/nixos/dotfiles/walls/wall.png"
+    fi
+    setsid -f swaybg -i "$default_wall" -m fill >/dev/null 2>&1
   fi
   exit 0
 }
 
-set_background 
+set_background

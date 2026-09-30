@@ -25,6 +25,8 @@
 @define-color red-critical #b22222;
 
 @define-color orange #e78a4e;
+@define-color yellow #f6c657;
+@define-color yellow-soft #d8a657;
 
 
 /* ===== GLOBAL ===== */
@@ -55,6 +57,7 @@ window#waybar {
 
 /* ===== COMMON MODULE STYLE ===== */
 #window,
+#idle_inhibitor,
 #disk,
 #cpu,
 #custom-cpu_temp,
@@ -72,6 +75,15 @@ window#waybar {
   color: @fg-soft;
   background-color: @bg-alt;
   padding-right: 4.5pt;
+}
+
+#idle_inhibitor {
+  margin-right: 3pt;
+  padding: 0 4.5pt;
+}
+
+#idle_inhibitor.activated {
+  border-color: @yellow;
 }
 
 /* ===== launcher ===== */

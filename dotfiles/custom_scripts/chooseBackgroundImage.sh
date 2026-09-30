@@ -1,37 +1,46 @@
 #!/usr/bin/env bash
 
-backgrounds_directory="$HOME/Pictures/backgrounds"
+# Directories to search for wallpapers
+wallpaper_dirs=()
+if [[ -d "$HOME/Pictures/wall" ]]; then
+  wallpaper_dirs+=("$HOME/Pictures/wall")
+fi
+if [[ -d "$HOME/Pictures" ]]; then
+  wallpaper_dirs+=("$HOME/Pictures")
+fi
+if [[ -d "$HOME/Pictures/backgrounds" ]]; then
+  wallpaper_dirs+=("$HOME/Pictures/backgrounds")
+fi
+if [[ ${#wallpaper_dirs[@]} -eq 0 ]]; then
+  wallpaper_dirs=("/etc/nixos/pics/wallpapers")
+fi
+
 theme="$HOME/.config/rofi/themes/wallpicker.rasi"
 cache_file="$HOME/.cache/wall.txt"
 
-
 show_wallpapers() {
-# - keep the current selection
-# - clear the filter after selecting
-printf '\0keep-selection\x1ftrue\n'
+  printf '\0keep-selection\x1ftrue\n'
 
-local file
-local name
+  local file
+  local name
 
-while IFS= read -r -d '' file; do
-  name="${file##*/}"
-
-  printf '%s\0icon\x1f%s\n' \
-    "$name" \
-    "$file"
-done < <(
-  find "$backgrounds_directory" \
-    -type f \
-    \( \
-    -iname "*.jpg" -o \
-    -iname "*.jpeg" -o \
-    -iname "*.png" -o \
-    -iname "*.gif" -o \
-    -iname "*.bmp" -o \
-    -iname "*.webp" \
-    \) \
-    -print0 |
-    sort -z
+  while IFS= read -r -d '' file; do
+    name="${file##*/}"
+    printf '%s\0icon\x1f%s\n' "$name" "$file"
+  done < <(
+    find -L "${wallpaper_dirs[@]}" \
+      -maxdepth 1 \
+      -type f \
+      \( \
+      -iname "*.jpg" -o \
+      -iname "*.jpeg" -o \
+      -iname "*.png" -o \
+      -iname "*.gif" -o \
+      -iname "*.bmp" -o \
+      -iname "*.webp" \
+      \) \
+      -print0 |
+      sort -z -u
   )
 }
 
@@ -41,7 +50,8 @@ set_wallpaper() {
 
   local wall_path
   wall_path="$(
-    find "$backgrounds_directory" \
+    find -L "${wallpaper_dirs[@]}" \
+      -maxdepth 1 \
       -type f \
       -name "$selected_wall" \
       -print -quit
@@ -49,14 +59,16 @@ set_wallpaper() {
 
   [[ -z "$wall_path" ]] && return
 
+  mkdir -p "$(dirname "$cache_file")"
   echo "$wall_path" > "$cache_file"
 
-  pkill swaybg
+  pkill -x .swaybg-wrapped 2>/dev/null || true
+  pkill -x swaybg 2>/dev/null || true
 
-  swaybg \
+  setsid -f swaybg \
     -i "$wall_path" \
     -m fill \
-    >/dev/null 2>&1 &
+    >/dev/null 2>&1
 }
 
 if [[ -n "$ROFI_RETV" ]]; then
@@ -73,7 +85,8 @@ if [[ -n "$ROFI_RETV" ]]; then
   exit 0
 fi
 
-if ! find "$backgrounds_directory" \
+if ! find -L "${wallpaper_dirs[@]}" \
+  -maxdepth 1 \
   -type f \
   \( \
   -iname "*.jpg" -o \
@@ -88,11 +101,10 @@ if ! find "$backgrounds_directory" \
 then
   notify-send \
     "Wallpaper Picker" \
-    "No wallpapers found."
+    "No wallpapers found in ${wallpaper_dirs[*]}"
 
   exit 1
 fi
-
 
 exec rofi \
   -show walls \

@@ -77,9 +77,10 @@ end
 ---- MY PROGRAMS ----
 ---------------------
 
+local home        = os.getenv("HOME") or "/home/saponela"
 local terminal    = "kitty"
 local fileManager = "nautilus"
-local menu        = "vicinae toggle"
+local menu        = "rofi -show drun -show-icons"
 
 
 -------------------
@@ -87,13 +88,11 @@ local menu        = "vicinae toggle"
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("hyprpaper")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("kdeconnect-indicator")
     hl.exec_cmd("dunst")
-    hl.exec_cmd("vicinae server")
-    hl.exec_cmd("noctalia")
-    hl.exec_cmd("~/.config/custom_scripts/launch_waybar.sh")
+    hl.exec_cmd(home .. "/.config/custom_scripts/setBackground.sh")
+    hl.exec_cmd(home .. "/.config/custom_scripts/launch_waybar.sh")
     hl.exec_cmd("bluetoothctl")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("bluetoothctl power on")
@@ -166,7 +165,7 @@ hl.config({
 
     input = {
         kb_layout    = "us,ge,de",
-        kb_options   = "grp:alt_shift_toggle",
+        kb_options   = "grp:alt_shift_toggle,caps:swapescape",
         follow_mouse = 1,
         sensitivity  = 0.2,
         touchpad = {
@@ -249,7 +248,9 @@ hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + M", hl.dsp.exec_raw("movetoworkspacesilent special:minimized"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.config/custom_scripts/waybarThemeSwitcher.sh"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(home .. "/.config/custom_scripts/waybarThemeSwitcher.sh"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(home .. "/.config/custom_scripts/chooseBackgroundImage.sh"))
+hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd("dunstctl set-paused toggle"))
 
 -- Move focus with mainMod + arrow keys / hjkl
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))

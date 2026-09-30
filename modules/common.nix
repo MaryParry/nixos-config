@@ -48,7 +48,7 @@ in
   # Configure keymap in X11 & Wayland
   services.xserver.xkb = {
     layout = "us,ge";
-    options = "grp:alt_shift_toggle,grp:win_space_toggle";
+    options = "grp:alt_shift_toggle,grp:win_space_toggle,caps:swapescape";
   };
 
   # Enable CUPS to print documents.
@@ -87,6 +87,9 @@ in
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  security.pam.services.swaylock = {};
+  security.pam.services.hyprlock = {};
 
   programs.fish.enable = true;
 

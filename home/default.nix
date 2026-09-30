@@ -58,9 +58,7 @@ in
     # Messaging
     telegram-desktop
     discord
-    fluffychat
     # Wayland / Hyprland Essentials
-    vicinae
     hyprpaper
     waybar
     libnotify
@@ -79,6 +77,10 @@ in
     rofi
     wlsunset
     pavucontrol
+    dunst
+    libnotify
+    swaybg
+    swaylock-effects
     
     # Terminal & Shell
     kitty
@@ -89,7 +91,6 @@ in
     
     # Tools
     fastfetch
-    gemini-cli
     upower
     duf 
     cowsay
@@ -107,7 +108,7 @@ in
     blender #vTraining
     krita
     reco # voice recorder 
-    openrgb-with-all-plugins
+    wiremix
     # Misc
     flatpak
     libreoffice
@@ -144,6 +145,7 @@ in
     ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/custom_scripts";
     ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/rofi";
     ".config/walls".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/walls";
+    ".config/dunst".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/dunst";
     ".cache/tmp/.keep".text = "";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };

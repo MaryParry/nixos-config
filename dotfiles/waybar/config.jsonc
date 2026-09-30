@@ -3,11 +3,12 @@
   "height": 20,
   "spacing": 4,
   "margin-top": 5,
-  "margin-right": 5,
   "margin-left": 5,
+  "margin-right": 5,
   "modules-left": [
     "custom/launcher",
     "hyprland/workspaces",
+    "idle_inhibitor",
     "hyprland/window",
     "tray",
     "hyprland/submap"
@@ -20,45 +21,53 @@
     "disk",
     "cpu",
     "custom/cpu_temp",
-    "backlight",
+    "battery",
     "custom/memory",
-    "pulseaudio",
-    "battery"
+    "backlight",
+    "pulseaudio"
   ],
   "custom/launcher": {
-    "format": "<span ></span>",
+    "format": "<span></span>",
     "on-click": "rofi -show drun -disable-history -show-icons -theme-str 'window { width: 22% ; location: northwest; margin: 10px 0 0 10px; } listview { lines: 20; }'",
     "on-click-right": "~/.config/custom_scripts/power.sh",
     "escape": true,
     "tooltip": false
   },
-  // Modules configuration
+  "idle_inhibitor": {
+    "format": "<span color='#202020' bgcolor='#d8a657' > {icon} </span>",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip": true,
+    "tooltip-format-activated": "Caffeinated (Awake)",
+    "tooltip-format-deactivated": "Idle Enabled (Normal)"
+  },
   "hyprland/workspaces": {
     "disable-scroll": true,
     "active-only": false,
     "all-outputs": true,
     "warp-on-scroll": false,
     "format": "{icon}",
-    "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    },
     "format-icons": {
-      "1": "<span>󰧨</span>",
-      "2": "<span>󰈹</span>",
-      "3": "<span></span>",
+      "1": "<span>󰈹</span>",
+      "2": "<span></span>",
+      "3": "<span></span>",
       "4": "<span></span>",
-      "5": "<span></span>",
+      "5": "<span>󰧨</span>",
       "6": "<span>󰭛</span>",
       "7": "<span>󱓷</span>",
       "8": "<span>󰴘</span>",
-      "9": "<span>󰟝</span>",
+      "9": "<span>󰚀</span>",
       "10": "<span>󰚀</span>"
+    },
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
   },
   "hyprland/window": {
     "format": "<span color='#202020' bgcolor='#d3869b' > 󰣆 </span> {class}",
     "separate-outputs": true,
-    "icon": false,
     "tooltip": false
   },
   "hyprland/submap": {
@@ -86,16 +95,7 @@
     "format": "{}",
     "tooltip": false
   },
-  "temperature": {
-    "tooltip": false,
-    "thermal-zone": 2,
-    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 70,
-    "format": "<span color='#202020' bgcolor='#d8a657' > 󰴈 </span> {temperatureC}°C",
-    "format-critical": "<span color='#202020' bgcolor='#cc241d' >  </span> {temperatureC}°C"
-  },
   "backlight": {
-    // "device": "acpi_video1",
     "format": "<span color='#202020' bgcolor='#f6c657' > 󰞏 </span> {percent}%",
     "tooltip": false,
     "on-click-right": "~/.config/custom_scripts/wlsunset.sh"
@@ -169,7 +169,6 @@
     }
   },
   "clock": {
-    // "timezone": "America/New_York",
     "format": "<span color='#202020' bgcolor='#8ec07c' >  </span> {:%a %d | %H:%M}",
     "tooltip": false,
     "interval": 1

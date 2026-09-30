@@ -2,6 +2,7 @@
 const net = require('net');
 const fs = require('fs');
 const path = require('path');
+const { spawn } = require('child_process');
 
 const runtimeDir = process.env.XDG_RUNTIME_DIR || `/run/user/${process.getuid()}`;
 const hyprDir = path.join(runtimeDir, 'hypr');
@@ -72,6 +73,53 @@ const server = net.createServer((client) => {
 server.listen(proxySock, () => {
   console.log('Waybar Hyprland IPC Proxy ready on', proxySock, 'forwarding to', realSig);
 });
+
+// Layout change notification listener on socket2
+let lastLayout = null;
+const connectLayoutEvents = () => {
+  const events = net.connect(realSock2);
+  let buffer = '';
+
+  events.on('data', (chunk) => {
+    buffer += chunk.toString();
+    const lines = buffer.split('\n');
+    buffer = lines.pop(); // keep last incomplete line
+
+    for (const line of lines) {
+      if (line.startsWith('activelayout>>')) {
+        const parts = line.slice('activelayout>>'.length).split(',');
+        if (parts.length >= 2) {
+          const kb = parts[0];
+          const layout = parts[1].trim();
+          // Skip consumer, mouse, system control sub-devices
+          if (kb.includes('consumer') || kb.includes('system') || kb.includes('mouse')) continue;
+          if (layout && layout !== lastLayout) {
+            lastLayout = layout;
+            try {
+              spawn('notify-send', [
+                '-a', 'Hyprland',
+                '-r', '2584',
+                '-t', '1500',
+                '-u', 'low',
+                'Keyboard Layout',
+                layout
+              ], { stdio: 'ignore' });
+            } catch (e) {}
+          }
+        }
+      }
+    }
+  });
+
+  events.on('error', () => {
+    setTimeout(connectLayoutEvents, 1000);
+  });
+  events.on('close', () => {
+    setTimeout(connectLayoutEvents, 1000);
+  });
+};
+
+connectLayoutEvents();
 
 const cleanup = () => {
   try { if (fs.existsSync(proxySock)) fs.unlinkSync(proxySock); } catch (e) {}

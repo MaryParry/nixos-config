@@ -113,6 +113,15 @@ window#waybar {
 }
 
 /* ===== INDIVIDUAL MODULE STYLES ===== */
+#idle_inhibitor {
+  border: 2pt solid @yellow-soft;
+  margin-right: 3pt;
+}
+
+#idle_inhibitor.activated {
+  border-color: @yellow;
+}
+
 #window {
   border: 2pt solid @pink;
 }

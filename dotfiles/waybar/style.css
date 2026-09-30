@@ -1,24 +1,24 @@
 /* ===== COLORS ===== */
 @define-color bg #222222;
 @define-color fg #ebdbb2;
-
-@define-color black #222222;
-
-@define-color blue #83a598;
-@define-color blue-dark #458588;
-
-@define-color pink #d3869b;
-
-@define-color green #8ec07c;
-@define-color green-dark #689d68;
+@define-color black #000000;
+@define-color white-soft #fff4d2;
 
 @define-color red #ea6962;
 @define-color red-dark #cc241d;
 
 @define-color orange #e78a4e;
-
 @define-color yellow #f6c657;
 @define-color yellow-soft #d8a657;
+
+@define-color green #8ec07c;
+@define-color green-dark #689d68;
+
+@define-color blue #83a598;
+@define-color blue-dark #458588;
+
+@define-color pink #d3869b;
+@define-color pink-dark #b26286;
 
 @define-color gray #555555;
 
@@ -35,12 +35,6 @@
   box-shadow: none;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-  padding: 0 3pt;
-}
-
 window#waybar {
   color: @fg;
   background: none;
@@ -49,10 +43,15 @@ window#waybar {
   font-weight: 900;
 }
 
-/* ===== COMMON MODULE STYLE ===== */
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 3pt;
+  background: @bg;
+}
+
+/* ===== COMMON PADDING ===== */
 #custom-launcher,
-#mode,
-#submap,
 #window,
 #disk,
 #cpu,
@@ -67,31 +66,25 @@ window#waybar {
 #battery.warning,
 #network,
 #clock {
-  color: @fg;
-  background: @bg;
-  border: 2.5pt solid @bg;
-  padding-right: 3pt;
+  padding-right: 6pt;
 }
 
-/* ===== launcher ===== */
+/* ===== MODULES ===== */
 #custom-launcher {
   color: @black;
+  border: 2pt solid @blue-dark;
   background: @blue;
-  padding: 0 6pt;
+  padding: 0pt 6pt;
 }
 
 /* ===== WORKSPACES ===== */
-#workspaces {
-  margin: 0;
-}
-
 #workspaces button {
-  color: @fg;
+  color: @white-soft;
   background: @bg;
-  border: 2.5pt solid @bg;
-  padding: 0 3.75pt;
+  border: 2pt solid @white-soft;
   margin-right: 3pt;
   min-width: 15pt;
+  padding: 0 3.75pt;
 }
 
 #workspaces button:last-child {
@@ -99,8 +92,9 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  color: @black;
+  color: @bg;
   background: @pink;
+  border-color: @pink-dark;
 }
 
 #workspaces button.active,
@@ -108,84 +102,96 @@ window#waybar {
 #workspaces button.visible,
 #workspaces button.visible:hover {
   color: @black;
+  border-color: @green-dark;
   background: @green;
 }
 
 #workspaces button.urgent {
-  color: @black;
+  color: @bg;
+  border-color: @red-dark;
   background: @red;
 }
 
-/* ===== MODULE COLORS ===== */
+/* ===== INDIVIDUAL MODULE STYLES ===== */
+#idle_inhibitor {
+  border: 2pt solid @yellow-soft;
+  margin-right: 3pt;
+}
+
+#idle_inhibitor.activated {
+  border-color: @yellow;
+}
+
 #window {
-  color: @pink;
+  border: 2pt solid @pink;
 }
 
 #tray {
+  border: 2pt solid @orange;
   padding: 0 6pt;
-  background: @bg;
 }
 
 #disk {
-  color: @red;
+  border: 2pt solid @red;
 }
 
 #cpu {
-  color: @orange;
+  border: 2pt solid @orange;
 }
 
 #custom-cpu_temp {
-  color: @yellow-soft;
+  border: 2pt solid @yellow-soft;
 }
 
 #custom-cpu_temp.critical {
   color: @red-dark;
+  border: 2pt solid @red-dark;
 }
 
 #custom-cpu_temp.unknown {
-  color: @gray;
+  border: 2pt solid @gray;
 }
 
 #backlight {
-  color: @yellow;
+  border: 2pt solid @yellow;
 }
 
 #custom-memory {
-  color: @blue-dark;
+  border: 2pt solid @blue-dark;
 }
 
 #pulseaudio {
-  color: @blue;
+  border: 2pt solid @blue;
 }
 
 #pulseaudio.muted {
+  border: 2pt solid @red;
   color: @red;
 }
 
 #battery {
-  color: @green-dark;
+  border: 2pt solid @green-dark;
 }
 
 #battery.critical {
-  color: @red-dark;
+  border: 2pt solid @red-dark;
 }
 
 #battery.warning {
-  color: @orange;
+  border: 2pt solid @orange;
 }
 
 #clock {
-  color: @green;
+  border: 2pt solid @green;
 }
 
 #network {
-  color: @pink;
+  border: 2pt solid @pink;
 }
 
-/* ===== MODE ===== */
-#submap,
-#mode {
-  color: @black;
-  background: @blue;
-  padding: 0 4.5pt;
+#mode,
+#submap {
+  color: @blue;
+  border: 2pt solid @blue;
+  padding: 0 7.5pt;
 }
