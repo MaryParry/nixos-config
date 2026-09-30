@@ -116,6 +116,17 @@ window#waybar {
   color: @yellow;
 }
 
+#custom-notification {
+  border: 2pt solid @blue;
+  margin-right: 3pt;
+  padding: 0 3pt;
+}
+
+#custom-notification.paused {
+  border-color: @red;
+  color: @red;
+}
+
 #window {
   border: 2pt solid @pink;
 }

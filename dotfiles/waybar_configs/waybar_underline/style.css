@@ -122,6 +122,17 @@ window#waybar {
   border-bottom-color: @yellow;
 }
 
+
+#custom-notification {
+  border-bottom: 2pt solid @blue;
+  margin-right: 3pt;
+  padding: 0 3pt;
+}
+
+#custom-notification.paused {
+  border-bottom-color: @red;
+  color: @red;
+}
 #window {
   border-bottom: 2pt solid @pink;
 }

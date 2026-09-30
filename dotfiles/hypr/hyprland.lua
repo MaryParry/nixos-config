@@ -250,7 +250,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_raw("movetoworkspacesilent special:minimi
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(home .. "/.config/custom_scripts/waybarThemeSwitcher.sh"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(home .. "/.config/custom_scripts/chooseBackgroundImage.sh"))
-hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd("dunstctl set-paused toggle"))
+hl.bind(mainMod .. " + N",         hl.dsp.exec_cmd(home .. "/.config/waybar/scripts/notifications.sh toggle"))
 
 -- Move focus with mainMod + arrow keys / hjkl
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "l" }))

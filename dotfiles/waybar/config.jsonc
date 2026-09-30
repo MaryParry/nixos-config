@@ -9,6 +9,7 @@
     "custom/launcher",
     "hyprland/workspaces",
     "idle_inhibitor",
+    "custom/notification",
     "hyprland/window",
     "tray",
     "hyprland/submap"
@@ -42,6 +43,16 @@
     "tooltip": true,
     "tooltip-format-activated": "Caffeinated (Awake)",
     "tooltip-format-deactivated": "Idle Enabled (Normal)"
+  },
+  "custom/notification": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/notifications.sh",
+    "on-click": "~/.config/waybar/scripts/notifications.sh toggle",
+    "on-click-right": "dunstctl history-pop",
+    "interval": 3,
+    "signal": 8,
+    "tooltip": true
   },
   "hyprland/workspaces": {
     "disable-scroll": true,
