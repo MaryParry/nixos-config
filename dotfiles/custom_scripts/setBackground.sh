@@ -10,6 +10,7 @@ set_background() {
   pkill -x swaybg 2>/dev/null || true
 
   if [[ -n "$wall_name" && -f "$wall_name" ]]; then
+    ln -sfn "$wall_name" "$HOME/.cache/current_wallpaper.png"
     setsid -f swaybg -i "$wall_name" -m fill >/dev/null 2>&1
   else
     local default_wall="$HOME/.config/walls/wall.png"

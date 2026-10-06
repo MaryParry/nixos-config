@@ -25,4 +25,6 @@ fi
 
 # Launch waybar pointing to the proxy signature
 export HYPRLAND_INSTANCE_SIGNATURE="waybar-proxy"
-setsid -f waybar >/dev/null 2>&1
+nohup waybar >/dev/null 2>&1 &
+disown
+

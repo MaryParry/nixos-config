@@ -62,6 +62,7 @@ window#waybar {
 #battery.critical,
 #battery.warning,
 #network,
+#bluetooth,
 #clock {
   padding: 0 1.5pt;
 }

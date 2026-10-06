@@ -61,6 +61,7 @@ set_wallpaper() {
 
   mkdir -p "$(dirname "$cache_file")"
   echo "$wall_path" > "$cache_file"
+  ln -sfn "$wall_path" "$HOME/.cache/current_wallpaper.png"
 
   pkill -x .swaybg-wrapped 2>/dev/null || true
   pkill -x swaybg 2>/dev/null || true

@@ -1,11 +1,6 @@
 {
   description = "NixOS configuration flake";
 
-  nixConfig = {
-    extra-substituters = [ "https://noctalia.cachix.org" ];
-    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
-  };
-
   inputs = {
   nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -18,10 +13,6 @@
   spicetify-nix = {
     url = "github:Gerg-L/spicetify-nix";
     inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  noctalia = {
-    url = "github:noctalia-dev/noctalia/v5.0.1";
   };
 
   zen-browser = {
@@ -39,12 +30,11 @@
   };
 };
 
-  outputs = { self, nixpkgs, home-manager, spicetify-nix, noctalia, lazyvim, antigravity-nix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, spicetify-nix, lazyvim, antigravity-nix, ... }@inputs:
     let
       system = "x86_64-linux";
       sharedModules = [
         ./modules/common.nix
-        ./modules/noctalia.nix
         spicetify-nix.nixosModules.default
         home-manager.nixosModules.home-manager
         {

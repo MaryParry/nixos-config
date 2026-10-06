@@ -11,7 +11,7 @@ else
     logout="loginctl terminate-user $USER"
 fi
 
-lock="loginctl lock-session"
+lock="hyprlock"
 
 options=(
     "LOCK"

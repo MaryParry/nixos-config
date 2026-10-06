@@ -2,14 +2,21 @@
 
 let
   hyprspacePatched = pkgs.hyprlandPlugins.hyprspace.overrideAttrs (old: {
-    postPatch = (old.postPatch or "") + ''
-      substituteInPlace src/main.cpp \
-        --replace-fail "if (Config::disableGestures) return;" "return;"
-      substituteInPlace src/Input.cpp \
-        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_distance")->getValue()' '300' \
-        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_min_speed_to_force")->getValue()' '30' \
-        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_cancel_ratio")->getValue()' '0.5'
-    '';
+    src = pkgs.fetchFromGitHub {
+      owner = "ImanolBarba";
+      repo = "Hyprspace";
+      rev = "0799be7464fac7ea959b7c6c7809dadd6c21c5aa";
+      hash = "sha256-P27tvgpduDsMjk9mSti4We+a3kzYWYWznZKizvnyS+Q=";
+    };
+  });
+
+  legcordPatched = pkgs.legcord.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [
+      (pkgs.fetchpatch {
+        url = "https://github.com/Legcord/Legcord/commit/133df0f6209e44af15b360a6adda9a9d6fa6e146.patch";
+        hash = "sha256-+Pop9+1Nf3T7DPQ+QbXvZ04T2hQqkQhPbevNE7JjBog=";
+      })
+    ];
   });
 in
 {
@@ -42,14 +49,12 @@ in
     vscode
     jdk21_headless
     git
-    jetbrains.idea
     gh
     docker
     pnpm
     nodejs
     postman
     # ollama
-    jetbrains.pycharm
     gnupg
     pinentry-tty
     gitui
@@ -57,7 +62,7 @@ in
   
     # Messaging
     telegram-desktop
-    discord
+    legcordPatched
     # Wayland / Hyprland Essentials
     hyprpaper
     waybar
@@ -73,6 +78,7 @@ in
     brightnessctl
     playerctl
     hypridle
+    hyprlock
     lm_sensors
     rofi
     wlsunset
@@ -100,7 +106,6 @@ in
     jp2a
     keymapper #i hate copilot i hate copilot 
     moonlight-qt
-    sunshine
     mangohud
     pamixer
     pulseaudio
@@ -133,9 +138,7 @@ in
     ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fish";
     ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/hypr";
     ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/kitty";
-    ".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/noctalia";
     ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/User/settings.json";
-    ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme";
     ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fastfetch";
     ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
     ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/cheatsheet.txt";

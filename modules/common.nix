@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   pkgs-stable = import inputs.nixpkgs-stable {
@@ -100,8 +100,9 @@ in
   # Install firefox.
   programs.firefox.enable = true;
 
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = lib.mkForce false; # started via hyprland.lua
   security.pam.services.swaylock = {};
-  security.pam.services.hyprlock = {};
 
   programs.fish.enable = true;
 

@@ -19,6 +19,7 @@
   ],
   "modules-right": [
     "network",
+    "bluetooth",
     "disk",
     "cpu",
     "custom/cpu_temp",
@@ -178,6 +179,20 @@
     "states": {
       "normal": 25
     }
+  },
+  "bluetooth": {
+    "format": "<span color='#83a598'></span> {status} ",
+    "format-disabled": "",
+    "format-off": "",
+    "format-on": "<span color='#83a598'></span> on ",
+    "format-connected": "<span color='#83a598'>󰂱</span> {device_alias} ",
+    "format-connected-battery": "<span color='#83a598'>󰂱</span> {device_alias} <span color='#a9b665'>{device_battery_percentage}%</span> ",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
+    "on-click": "blueman-manager",
+    "on-click-right": "rfkill toggle bluetooth"
   },
   "clock": {
     "format": "<span color='#8ec07c' >  </span>{:%a %d | %H:%M} ",

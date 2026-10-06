@@ -93,9 +93,8 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("dunst")
     hl.exec_cmd(home .. "/.config/custom_scripts/setBackground.sh")
     hl.exec_cmd(home .. "/.config/custom_scripts/launch_waybar.sh")
-    hl.exec_cmd("bluetoothctl")
+    hl.exec_cmd("blueman-applet")
     hl.exec_cmd("hypridle")
-    hl.exec_cmd("bluetoothctl power on")
     -- Set default audio device to laptop speakers/analog stereo
     hl.exec_cmd("pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo")
     hl.exec_cmd("pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo")
@@ -126,7 +125,7 @@ hl.config({
         },
         resize_on_border = false,
         allow_tearing    = false,
-        layout           = "dwindle",
+        layout           = "master",
     },
 
     decoration = {
@@ -305,13 +304,26 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%-"),  { lock
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Lock on lid close / mod+L
-hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("loginctl lock-session"), { locked = true })
+-- Lock on lid close / Super + Escape
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("hyprlock --grace 0"), { locked = true })
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("hyprlock"))
 
 
 ----------------------
 ---- WINDOW RULES ----
 ----------------------
+
+hl.window_rule({
+    name           = "suppress-maximize-events",
+    match          = { class = ".*" },
+    suppress_event = "maximize",
+})
+
+hl.window_rule({
+    name  = "blueman-manager-float",
+    match = { class = "^(blueman-manager)$" },
+    float = true,
+})
 
 hl.window_rule({
     name  = "windowrule-jb-tag",
@@ -346,11 +358,6 @@ hl.window_rule({
     workspace = "5 silent",
 })
 
-hl.window_rule({
-    name  = "playwright-float",
-    match = { class = "^(firefox-default|firefox|chromium|google-chrome)$", title = "^(Nightly|Mozilla Firefox|.*Playwright.*)$" },
-    float = true,
-})
 
 
 
@@ -364,54 +371,3 @@ hl.plugin.load("/etc/profiles/per-user/saponela/lib/libhyprspace.so")
 -- Toggle workspace overview with Super + Tab
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_raw("overview:toggle"))
 
-
------------------------------
----- NOCTALIA COLOR PARSER ----
------------------------------
-
-local function load_noctalia_colors()
-    local path = os.getenv("HOME") .. "/.config/hypr/noctalia/noctalia-colors.conf"
-    local file = io.open(path, "r")
-    if not file then return end
-    
-    local vars = {}
-    for line in file:lines() do
-        local var, val = line:match("^%$([%w_]+)%s*=%s*rgb%((%x+)%)")
-        if var and val then
-            vars[var] = "rgba(" .. val .. "ff)"
-        end
-    end
-    file:close()
-    
-    if vars.primary then
-        hl.config({
-            general = {
-                col = {
-                    active_border   = vars.primary,
-                    inactive_border = vars.surface or "rgba(595959aa)",
-                },
-            },
-            group = {
-                col = {
-                    border_active           = vars.secondary,
-                    border_inactive         = vars.surface,
-                    border_locked_active   = vars.error,
-                    border_locked_inactive = vars.surface,
-                },
-                groupbar = {
-                    col = {
-                        active          = vars.secondary,
-                        inactive        = vars.surface,
-                        locked_active   = vars.error,
-                        locked_inactive = vars.surface,
-                    }
-                }
-            }
-        })
-    end
-end
-
-load_noctalia_colors()
-
--- For Noctalia Color templates
-require("noctalia").apply_theme()
