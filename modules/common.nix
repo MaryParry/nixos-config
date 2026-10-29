@@ -40,7 +40,9 @@ in
 
   # Display Manager & Desktop Environments
   services.displayManager.gdm.enable = true;
-  services.displayManager.defaultSession = "hyprland";
+
+  # Enable GNOME Desktop
+  services.desktopManager.gnome.enable = true;
 
   # Enable Hyprland
   programs.hyprland.enable = true;
@@ -48,7 +50,7 @@ in
   # Configure keymap in X11 & Wayland
   services.xserver.xkb = {
     layout = "us,ge";
-    options = "grp:alt_shift_toggle,grp:win_space_toggle,caps:swapescape";
+    options = "grp:win_space_toggle,caps:swapescape";
   };
 
   # Enable CUPS to print documents.
@@ -156,6 +158,7 @@ in
           __intentionallyOverridingVersion = true;
         });
       };
+      phinger-cursors-gruvbox-material = prev.callPackage ../pkgs/phinger-cursors-gruvbox-material.nix { };
     })
   ];
 
@@ -173,9 +176,15 @@ in
       ];
     })
     wineWow64Packages.stable
-    bibata-cursors
+    phinger-cursors-gruvbox-material
     vulkan-loader
     vulkan-tools
+
+    # GNOME Essentials (extensions live in home/default.nix -> programs.gnome-shell)
+    gnome-tweaks
+    gnome-extension-manager
+    dconf-editor
+    file-roller
   ];
 
   fonts.packages = with pkgs; [

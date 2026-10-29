@@ -615,6 +615,37 @@
         }
       '';
 
+      "jupynvim.nvim" = ''
+        return {
+          {
+            "sheng-tse/jupynvim",
+            build = function(plugin)
+              local install = loadfile(plugin.dir .. "/lua/jupynvim/install.lua")()
+              install.run(plugin)
+            end,
+            opts = {
+              log_level = "info",
+              image_renderer = "placeholder",
+              -- NixOS: disable VSCode-style auto-install of ipykernel via pip.
+              -- Nix store is immutable and pip installs into Nix paths fail.
+              -- For uv projects: `uv pip install ipykernel` in your .venv.
+              -- For nix-shell: run `python -m ipykernel install --user --name <name>`
+              --                inside the shell to register a discoverable kernel.
+              auto_venv = false,
+            },
+          },
+          {
+            "folke/which-key.nvim",
+            optional = true,
+            opts = {
+              spec = {
+                { "<leader>n", group = "notebook/jupyter", icon = "󰠮 " },
+              },
+            },
+          },
+        }
+      '';
+
     };
 
     extraPackages = with pkgs; [
@@ -628,6 +659,8 @@
       vtsls # Enhanced TypeScript LSP
       prettierd # Fast formatter for various languages
       nodejs
+      imagemagick # Image & animated GIF rendering for jupynvim
+      chafa # Terminal image fallback
     ];
 
     config = {

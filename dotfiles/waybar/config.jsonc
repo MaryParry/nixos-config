@@ -19,7 +19,6 @@
   ],
   "modules-right": [
     "network",
-    "bluetooth",
     "disk",
     "cpu",
     "custom/cpu_temp",
@@ -29,14 +28,14 @@
     "battery"
   ],
   "custom/launcher": {
-    "format": "<span></span>",
+    "format": "<span ></span>",
     "on-click": "rofi -show drun -disable-history -show-icons -theme-str 'window { width: 22% ; location: northwest; margin: 10px 0 0 10px; } listview { lines: 20; }'",
     "on-click-right": "~/.config/custom_scripts/power.sh",
     "escape": true,
     "tooltip": false
   },
   "idle_inhibitor": {
-    "format": "<span color='#d8a657'> {icon} </span>",
+    "format": "<span color='#202020' bgcolor='#d8a657' > {icon} </span>",
     "format-icons": {
       "activated": "󰅶",
       "deactivated": "󰾪"
@@ -50,17 +49,22 @@
     "return-type": "json",
     "exec": "~/.config/waybar/scripts/notifications.sh",
     "on-click": "~/.config/waybar/scripts/notifications.sh toggle",
-    "on-click-right": "~/.config/waybar/scripts/notifications.sh history",
+    "on-click-right": "dunstctl history-pop",
     "interval": 3,
     "signal": 8,
     "tooltip": true
   },
+
+  // Modules configuration
   "hyprland/workspaces": {
     "disable-scroll": true,
     "active-only": false,
     "all-outputs": true,
     "warp-on-scroll": false,
     "format": "{icon}",
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
     "format-icons": {
       "1": "<span>󰈹</span>",
       "2": "<span></span>",
@@ -72,13 +76,10 @@
       "8": "<span>󰴘</span>",
       "9": "<span>󰚀</span>",
       "10": "<span>󰚀</span>"
-    },
-    "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
   },
   "hyprland/window": {
-    "format": "<span color='#d3869b' > 󰣆 </span>{class} ",
+    "format": "<span color='#f6c657' > 󰣆 </span>{class}",
     "separate-outputs": true,
     "tooltip": false
   },
@@ -91,11 +92,11 @@
     "spacing": 8
   },
   "disk": {
-    "format": "<span color='#ea6962'>  </span>{free} ",
+    "format": "<span color='#ea6962' >  </span>{free}",
     "interval": 20
   },
   "cpu": {
-    "format": "<span color='#e78a4e'>  </span>{usage}% ",
+    "format": "<span color='#e78a4e' >  </span>{usage}%",
     "tooltip": false,
     "interval": 1,
     "on-click-right": "~/.config/custom_scripts/launch_tui.sh btop"
@@ -104,11 +105,12 @@
     "exec": "~/.config/waybar/scripts/waybarTemp.sh",
     "return-type": "json",
     "interval": 2,
-    "format": "{} ",
+    "format": "{}",
     "tooltip": false
   },
   "backlight": {
-    "format": "<span color='#f6c657'> 󰞏 </span>{percent}% ",
+    // "device": "acpi_video1",
+    "format": "<span color='#f6c657' > 󰞏 </span>{percent}%",
     "tooltip": false,
     "on-click-right": "~/.config/custom_scripts/wlsunset.sh"
   },
@@ -116,14 +118,14 @@
     "exec": "~/.config/waybar/scripts/memory_usage.sh",
     "interval": 2,
     "return-type": "json",
-    "format": "<span color='#458588'>  </span>{} "
+    "format": "<span color='#458588' >  </span>{}"
   },
   "pulseaudio": {
     "scroll-step": 1,
-    "format": "<span color='#83a598'>  </span>{volume}% ",
-    "format-muted": "<span color='#ea6962'>  </span>{volume}% ",
-    "format-bluetooth": "<span color='#83a598'> 󰂰 </span>{volume}% ",
-    "format-bluetooth-muted": "<span color='#ea6962'> 󰂲 </span>{volume}% ",
+    "format": "<span color='#83a598' >  </span>{volume}%",
+    "format-muted": "<span color='#ea6962' >  </span>{volume}%",
+    "format-bluetooth": "<span color='#83a598' > 󰂰 </span>{volume}%",
+    "format-bluetooth-muted": "<span color='#ea6962' > 󰂲 </span>{volume}%",
     "format-source": "{volume}% ",
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "~/.config/custom_scripts/launch_tui.sh wiremix",
@@ -152,22 +154,22 @@
       "󰂂",
       "󰁹"
     ],
-    "format": "<span color='#689d6a' > {icon} </span>{capacity}% ",
-    "format-critical": "<span color='#cc241d' > {icon} </span>{capacity}%!! ",
-    "format-warning": "<span color='#e78a4e' > {icon} </span>{capacity}% ",
-    "format-full": "<span color='#689d6a' > {icon} </span>{capacity}% ",
-    "format-charging": "<span color='#689d6a' > 󰂅 </span>{capacity}% ",
-    "format-charging-warning": "<span color='#e78a4e' > 󰢝 </span>{capacity}% ",
-    "format-charging-critical": "<span color='#cc241d' > 󰢜 </span>{capacity}% ",
-    "format-plugged": "<span color='#689d6a' > 󰂅 </span>{capacity}% ",
-    "format-alt": "<span color='#689d6a' > 󱧥 </span>{time} ",
+    "format": "<span color='#689d6a' > {icon} </span>{capacity}%",
+    "format-critical": "<span color='#cc241d' > {icon} </span>{capacity}%!!",
+    "format-warning": "<span color='#e78a4e' > {icon} </span>{capacity}%",
+    "format-full": "<span color='#689d6a' > {icon} </span>{capacity}%",
+    "format-charging": "<span color='#689d6a' > 󰂅 </span>{capacity}%",
+    "format-charging-warning": "<span color='#e78a4e' > 󰢝 </span>{capacity}%",
+    "format-charging-critical": "<span color='#cc241d' > 󰢜 </span>{capacity}%",
+    "format-plugged": "<span color='#689d6a' > 󰂅 </span>{capacity}%",
+    "format-alt": "<span color='#689d6a' > 󱧥 </span>{time}",
     "tooltip": false
   },
   "network": {
     "interval": 2,
-    "format": "<span color='#d3869b'> 󱘖 </span>{bandwidthDownBits} ",
-    "format-wifi": "<span color='#d3869b'> {icon} </span>{bandwidthDownBits} ",
-    "format-ethernet": "<span color='#d3869b'> 󰈀 </span>{bandwidthDownBits} ",
+    "format": "<span color='#d3869b'> 󱘖 </span>{bandwidthDownBits}",
+    "format-wifi": "<span color='#d3869b'> {icon} </span>{bandwidthDownBits}",
+    "format-ethernet": "<span color='#d3869b'> 󰈀 </span>{bandwidthDownBits}",
     "format-icons": [
       "󰤫",
       "󰤟",
@@ -180,22 +182,9 @@
       "normal": 25
     }
   },
-  "bluetooth": {
-    "format": "<span color='#83a598'></span> {status} ",
-    "format-disabled": "",
-    "format-off": "",
-    "format-on": "<span color='#83a598'></span> on ",
-    "format-connected": "<span color='#83a598'>󰂱</span> {device_alias} ",
-    "format-connected-battery": "<span color='#83a598'>󰂱</span> {device_alias} <span color='#a9b665'>{device_battery_percentage}%</span> ",
-    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
-    "on-click": "blueman-manager",
-    "on-click-right": "rfkill toggle bluetooth"
-  },
   "clock": {
-    "format": "<span color='#8ec07c' >  </span>{:%a %d | %H:%M} ",
+    // "timezone": "America/New_York",
+    "format": "<span color='#8ec07c' >  </span>{:%a %d | %H:%M}",
     "tooltip": false,
     "interval": 1
   }

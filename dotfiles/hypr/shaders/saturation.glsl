@@ -34,8 +34,8 @@ uniform sampler2D tex;
  *   0.30 = Warm, lively punch (Recommended)
  *   0.50 = High vibrance
  */
-const float SATURATION = 1.20;
-const float VIBRANCE   = 0.20;
+const float SATURATION = 1.05;
+const float VIBRANCE   = 0.15;
 
 // Standard Rec. 709 / sRGB luminance weights
 const vec3 LUMA_COEFF = vec3(0.212656, 0.715158, 0.072186);

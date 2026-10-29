@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agent-browser-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793144012,
+        "narHash": "sha256-wmusKw4EdDCVmPLOSJfAqNB42/Z9YsiEnkZ6NJJXy1Q=",
+        "owner": "vercel-labs",
+        "repo": "agent-browser",
+        "rev": "5801a50d262a4d3e1a2381996a962b22000d8289",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vercel-labs",
+        "repo": "agent-browser",
+        "type": "github"
+      }
+    },
     "antigravity-nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -18,6 +34,22 @@
       "original": {
         "owner": "jacopone",
         "repo": "antigravity-nix",
+        "type": "github"
+      }
+    },
+    "bigboss-claude-code": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782334197,
+        "narHash": "sha256-pUskpjvWFzGTwJSpMiyYo60V0kM8+dT4acK16nI4mII=",
+        "owner": "0xBigBoss",
+        "repo": "claude-code",
+        "rev": "2921eb8a685a2589c4c3e6ecbc8eaa12ffadde73",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xBigBoss",
+        "repo": "claude-code",
         "type": "github"
       }
     },
@@ -165,13 +197,32 @@
         "type": "github"
       }
     },
+    "ponytail-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792288514,
+        "narHash": "sha256-sVnxA4rfxa2SlS2g+2+q3odRq0VJz1z7PEVHW2QRPQI=",
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "rev": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "agent-browser-skill": "agent-browser-skill",
         "antigravity-nix": "antigravity-nix",
+        "bigboss-claude-code": "bigboss-claude-code",
         "home-manager": "home-manager",
         "lazyvim": "lazyvim",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
+        "ponytail-skill": "ponytail-skill",
         "spicetify-nix": "spicetify-nix",
         "zen-browser": "zen-browser"
       }

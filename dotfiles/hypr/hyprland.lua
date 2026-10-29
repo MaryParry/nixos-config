@@ -98,6 +98,7 @@ hl.on("hyprland.start", function()
     -- Set default audio device to laptop speakers/analog stereo
     hl.exec_cmd("pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo")
     hl.exec_cmd("pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo")
+    hl.exec_cmd("hyprctl setcursor phinger-cursors-gruvbox-material 24")
     -- hl.exec_cmd("hyprpm reload")
 end)
 
@@ -106,7 +107,7 @@ end)
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
-hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
+hl.env("XCURSOR_THEME", "phinger-cursors-gruvbox-material")
 hl.env("XCURSOR_SIZE", "24")
 
 
@@ -120,12 +121,12 @@ hl.config({
         gaps_out = 2,
         border_size = 2,
         col = {
-            active_border   = { colors = {"rgba(b0b0b0b0)", "rgba(c3dee0c3)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {"rgba(d79921ee)", "rgba(fe8019ee)"}, angle = 45 },
+            inactive_border = "rgba(3c3836aa)",
         },
         resize_on_border = false,
         allow_tearing    = false,
-        layout           = "master",
+        layout           = "dwindle",
     },
 
     decoration = {
@@ -160,6 +161,8 @@ hl.config({
 
     misc = {
         force_default_wallpaper = 0,
+        enable_anr_dialog = false,
+        anr_missed_pings = 60,
     },
 
     input = {
@@ -356,6 +359,12 @@ hl.window_rule({
     name  = "firefox-workspace",
     match = { class = "^([Ff]irefox.*)$" },
     workspace = "5 silent",
+})
+
+hl.window_rule({
+    name            = "homestead-confine-pointer",
+    match           = { class = "^$", title = ".*Homestead.*" },
+    confine_pointer = true,
 })
 
 

@@ -22,4 +22,4 @@ else
 fi
 
 # Output JSON for Waybar
-printf '{"text": "%s"}' "$mem_str"
+echo "{\"text\": \"$mem_str\"}"

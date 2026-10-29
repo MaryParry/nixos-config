@@ -28,6 +28,20 @@
     url = "github:jacopone/antigravity-nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
+
+  # Claude Code skills (plain repos, pinned in flake.lock)
+  ponytail-skill = {
+    url = "github:DietrichGebert/ponytail";
+    flake = false;
+  };
+  agent-browser-skill = {
+    url = "github:vercel-labs/agent-browser";
+    flake = false;
+  };
+  bigboss-claude-code = {
+    url = "github:0xBigBoss/claude-code";
+    flake = false;
+  };
 };
 
   outputs = { self, nixpkgs, home-manager, spicetify-nix, lazyvim, antigravity-nix, ... }@inputs:
@@ -40,7 +54,7 @@
         {
           environment.systemPackages = [
             antigravity-nix.packages.${system}.default # Base App
-            antigravity-nix.packages.${system}.google-antigravity-ide # IDE
+            #            antigravity-nix.packages.${system}.google-antigravity-ide # IDE
             antigravity-nix.packages.${system}.google-antigravity-cli # CLI
           ];
         }
