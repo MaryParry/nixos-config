@@ -615,6 +615,37 @@
         }
       '';
 
+      "jupynvim.nvim" = ''
+        return {
+          {
+            "sheng-tse/jupynvim",
+            build = function(plugin)
+              local install = loadfile(plugin.dir .. "/lua/jupynvim/install.lua")()
+              install.run(plugin)
+            end,
+            opts = {
+              log_level = "info",
+              image_renderer = "placeholder",
+              -- NixOS: disable VSCode-style auto-install of ipykernel via pip.
+              -- Nix store is immutable and pip installs into Nix paths fail.
+              -- For uv projects: `uv pip install ipykernel` in your .venv.
+              -- For nix-shell: run `python -m ipykernel install --user --name <name>`
+              --                inside the shell to register a discoverable kernel.
+              auto_venv = false,
+            },
+          },
+          {
+            "folke/which-key.nvim",
+            optional = true,
+            opts = {
+              spec = {
+                { "<leader>n", group = "notebook/jupyter", icon = "󰠮 " },
+              },
+            },
+          },
+        }
+      '';
+
     };
 
     extraPackages = with pkgs; [
@@ -628,6 +659,8 @@
       vtsls # Enhanced TypeScript LSP
       prettierd # Fast formatter for various languages
       nodejs
+      imagemagick # Image & animated GIF rendering for jupynvim
+      chafa # Terminal image fallback
     ];
 
     config = {
@@ -752,22 +785,37 @@
              hl(0, "BlinkCmpMenuSelection", { link = "Search" })
              hl(0, "BlinkCmpLabelMatch", { link = "Search" })
 
-             -- Snacks dashboard highlights
-             hl(0, "SnacksDashboardHeader", { fg = "#d8a657" })
-             hl(0, "SnacksDashboardDesc", { fg = "#83a598" })
-             hl(0, "SnacksDashboardFooter", { fg = "#d8a657" })
+             -- Pull a foreground colour from the active theme (first group that has one wins)
+             local function theme_fg(...)
+               for _, name in ipairs({ ... }) do
+                 local g = vim.api.nvim_get_hl(0, { name = name, link = false })
+                 if g and g.fg then
+                   return string.format("#%06x", g.fg)
+                 end
+               end
+             end
 
-             -- Snacks indentline palette
-             hl(0, "SnacksIndent1", { fg = "#ea6962" })
-             hl(0, "SnacksIndent2", { fg = "#d8a657" })
-             hl(0, "SnacksIndent3", { fg = "#458588" })
-             hl(0, "SnacksIndent4", { fg = "#8ec07c" })
-             hl(0, "SnacksIndent5", { fg = "#d3869b" })
-             hl(0, "SnacksIndent6", { fg = "#e78a4e" })
-             hl(0, "SnacksIndent7", { fg = "#83a598" })
+             -- Snacks dashboard highlights
+             hl(0, "SnacksDashboardHeader", { fg = theme_fg("Function", "Title") })
+             hl(0, "SnacksDashboardDesc", { fg = theme_fg("Identifier", "Normal") })
+             hl(0, "SnacksDashboardFooter", { fg = theme_fg("Function", "Title") })
+
+             -- Snacks indentline palette (rainbow derived from the active theme)
+             local indent_sources = {
+               { "DiagnosticError", "Error" },
+               { "DiagnosticWarn", "WarningMsg" },
+               { "Function" },
+               { "String" },
+               { "Keyword", "Statement" },
+               { "Constant", "Number" },
+               { "Type" },
+             }
+             for i, groups in ipairs(indent_sources) do
+               hl(0, "SnacksIndent" .. i, { fg = theme_fg(unpack(groups)) or theme_fg("NonText") })
+             end
 
              -- Snacks picker directory
-             hl(0, "SnacksPickerDir", { fg = "#928374" })
+             hl(0, "SnacksPickerDir", { fg = theme_fg("Comment", "NonText") })
 
              -- Match EndOfBuffer and tree backgrounds with the active Normal background
              local normal = vim.api.nvim_get_hl(0, { name = "Normal" })

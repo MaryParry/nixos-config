@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   pkgs-stable = import inputs.nixpkgs-stable {
@@ -58,9 +58,33 @@ in
     pulse.enable = true;
     # The x11-bell module segfaults when Xwayland exits at logout
     extraConfig.pipewire."99-no-x11-bell"."context.properties"."module.x11.bell" = false;
+    extraConfig.pipewire-pulse."99-block-minecraft-mic" = {
+      "pulse.rules" = [
+        {
+          matches = [
+            { "application.process.binary" = "java"; }
+          ];
+          actions = {
+            quirks = [ "block-record-stream" ];
+          };
+        }
+      ];
+    };
   };
 
   virtualisation.docker.enable = true;
+
+  # Kill the biggest memory hog before the system freezes under memory pressure
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5; # SIGTERM below 5% free RAM (SIGKILL at half that)
+    freeSwapThreshold = 10;
+    enableNotifications = true; # desktop notification when something gets killed
+    extraArgs = [
+      "--prefer" "^(chrome|chromium|firefox|electron|code|java|node)$"
+      "--avoid" "^(gnome-shell|kwin_wayland|plasmashell|Xwayland|gdm|sddm|pipewire|wireplumber|systemd|sshd)$"
+    ];
+  };
 
   # Define a user account.
   users.users.saponela = {
@@ -133,6 +157,13 @@ in
           __intentionallyOverridingVersion = true;
         });
       };
+      phinger-cursors-gruvbox-material = prev.callPackage ../pkgs/phinger-cursors-gruvbox-material.nix { };
+      # torchcodec's mp3 encoder tests fail upstream, which blocks open-webui
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (pyfinal: pyprev: {
+          torchcodec = pyprev.torchcodec.overridePythonAttrs { doCheck = false; };
+        })
+      ];
     })
   ];
 
@@ -150,7 +181,7 @@ in
       ];
     })
     wineWow64Packages.stable
-    bibata-cursors
+    phinger-cursors-gruvbox-material
     vulkan-loader
     vulkan-tools
   ];
@@ -173,6 +204,15 @@ in
     loadModels = [
       "qwen2.5-coder:1.5b"
     ];
+  };
+  # Chat UI at http://localhost:8080. Add the rpi5-2 proxy API key under
+  # Admin Settings > Connections (kept in the app DB, not the nix store).
+  services.open-webui = {
+    enable = true;
+    environment = {
+      OPENAI_API_BASE_URL = "http://rpi5-2:8317/v1";
+      OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+    };
   };
   services.upower.enable = true;
   services.flatpak.enable = true;

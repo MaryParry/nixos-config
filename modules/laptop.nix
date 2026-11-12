@@ -21,8 +21,6 @@
             pagedown = "end";
             home = "pageup";
             end = "pagedown";
-            esc = "capslock";
-            capslock = "esc";
           };
         };
       };

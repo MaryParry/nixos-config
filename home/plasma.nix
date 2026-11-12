@@ -225,5 +225,7 @@ in
   # A whole-directory link: KPackage refuses packages whose individual files
   # point outside the package directory
   xdg.dataFile."kwin/effects/alttabpop".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/kwin-effects/alttabpop";
+    config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/kwin-effects/alttabpop";
+
+  home.file.".config/walls".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/walls";
 }

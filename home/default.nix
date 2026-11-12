@@ -1,5 +1,15 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
+let
+  legcordPatched = pkgs.legcord.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [
+      (pkgs.fetchpatch {
+        url = "https://github.com/Legcord/Legcord/commit/133df0f6209e44af15b360a6adda9a9d6fa6e146.patch";
+        hash = "sha256-+Pop9+1Nf3T7DPQ+QbXvZ04T2hQqkQhPbevNE7JjBog=";
+      })
+    ];
+  });
+in
 {
   home.username = "saponela";
   home.homeDirectory = "/home/saponela";
@@ -24,39 +34,57 @@
     indicator = true;
   };
   systemd.user.services.kdeconnect.Install.WantedBy = [ "default.target" ];
+
+  programs.claude-code = {
+    enable = true;
+    skills = {
+      ponytail = "${inputs.ponytail-skill}/skills/ponytail";
+      agent-browser = "${inputs.agent-browser-skill}/skills/agent-browser";
+      python-best-practices = "${inputs.bigboss-claude-code}/.claude/skills/python-best-practices";
+    };
+  };
+  # agent-browser's downloaded Chrome won't run on NixOS; use the Nix one
+  home.sessionVariables.AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.google-chrome;
   home.packages = with pkgs; [
     # Development
     vscode
     jdk21_headless
     git
-    jetbrains.idea
     gh
     docker
     pnpm
     nodejs
     postman
+    jupyter #machine learning class
+    imagemagick # image & animated gif rendering for jupynvim
+    chafa # terminal image fallback
     # ollama
-    jetbrains.pycharm
     gnupg
     pinentry-tty
     gitui
-    claude-code
-
+    anydesk
+    agent-browser 
+    proton-vpn
 
   
     # Messaging
     telegram-desktop
-    discord
-    # Desktop utilities
+    legcordPatched
     libnotify
     wl-clipboard
     nautilus
     ranger
+    yazi
+    ffmpegthumbnailer
+    unar
+    poppler-utils
+    fd
+    ripgrep
+    fzf
+    zoxide
     brightnessctl
     playerctl
-    lm_sensors
-    pavucontrol
-
+    
     # Terminal & Shell
     kitty
     fish
@@ -75,7 +103,6 @@
     jp2a
     keymapper #i hate copilot i hate copilot 
     moonlight-qt
-    sunshine
     mangohud
     pamixer
     pulseaudio
@@ -84,6 +111,7 @@
     krita
     reco # voice recorder 
     wiremix
+
     # Misc
     flatpak
     libreoffice
@@ -98,23 +126,19 @@
     protonup-qt
     ];
 
-
-
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/btop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/btop";
-    ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/fish";
-    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/kitty";
-    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/vscode/User/settings.json";
-    ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/vscode/extensions/noctalia-theme";
-    ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/fastfetch";
-    ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/tmux/tmux.conf";
-    ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/tmux/cheatsheet.txt";
-    ".config/wireplumber".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wireplumber";
-    ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/custom_scripts";
-    ".config/walls".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/walls";
+    ".config/btop".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/btop";
+    ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fish";
+    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/kitty";
+    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/User/settings.json";
+    ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fastfetch";
+    ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
+    ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/cheatsheet.txt";
+    ".config/wireplumber".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/wireplumber";
+    ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/custom_scripts";
+    ".config/yazi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/yazi";
     ".cache/tmp/.keep".text = "";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
@@ -162,8 +186,8 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      name = lib.mkDefault "Adwaita";
+      package = lib.mkDefault pkgs.adwaita-icon-theme;
     };
   };
 
