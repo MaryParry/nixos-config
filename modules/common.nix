@@ -81,6 +81,18 @@ in
 
   virtualisation.docker.enable = true;
 
+  # Kill the biggest memory hog before the system freezes under memory pressure
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5; # SIGTERM below 5% free RAM (SIGKILL at half that)
+    freeSwapThreshold = 10;
+    enableNotifications = true; # desktop notification when something gets killed
+    extraArgs = [
+      "--prefer" "^(chrome|chromium|firefox|electron|code|java|node)$"
+      "--avoid" "^(gnome-shell|Hyprland|Xwayland|gdm|pipewire|wireplumber|systemd|sshd)$"
+    ];
+  };
+
   # Define a user account.
   users.users.saponela = {
     isNormalUser = true;
@@ -159,6 +171,12 @@ in
         });
       };
       phinger-cursors-gruvbox-material = prev.callPackage ../pkgs/phinger-cursors-gruvbox-material.nix { };
+      # torchcodec's mp3 encoder tests fail upstream, which blocks open-webui
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (pyfinal: pyprev: {
+          torchcodec = pyprev.torchcodec.overridePythonAttrs { doCheck = false; };
+        })
+      ];
     })
   ];
 
@@ -205,6 +223,15 @@ in
     loadModels = [
       "qwen2.5-coder:1.5b"
     ];
+  };
+  # Chat UI at http://localhost:8080. Add the rpi5-2 proxy API key under
+  # Admin Settings > Connections (kept in the app DB, not the nix store).
+  services.open-webui = {
+    enable = true;
+    environment = {
+      OPENAI_API_BASE_URL = "http://rpi5-2:8317/v1";
+      OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+    };
   };
   services.upower.enable = true;
   services.blueman.enable = true;

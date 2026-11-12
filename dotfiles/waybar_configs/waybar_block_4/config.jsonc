@@ -9,6 +9,7 @@
     "custom/launcher",
     "hyprland/workspaces",
     "idle_inhibitor",
+    "custom/lid",
     "custom/notification",
     "hyprland/window",
     "hyprland/submap"
@@ -39,8 +40,18 @@
       "deactivated": "󰾪"
     },
     "tooltip": true,
-    "tooltip-format-activated": "Caffeinated (Awake)",
-    "tooltip-format-deactivated": "Idle Enabled (Normal)"
+    "tooltip-format-activated": "Caffeinated (Awake)\nRight-click: toggle lid-close suspend",
+    "tooltip-format-deactivated": "Idle Enabled (Normal)\nRight-click: toggle lid-close suspend",
+    "on-click-right": "~/.config/custom_scripts/lid_inhibit.sh toggle"
+  },
+  "custom/lid": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/.config/custom_scripts/lid_inhibit.sh",
+    "on-click": "~/.config/custom_scripts/lid_inhibit.sh toggle",
+    "interval": 30,
+    "signal": 9,
+    "tooltip": true
   },
   "custom/notification": {
     "format": "{}",

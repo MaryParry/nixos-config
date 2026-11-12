@@ -16,5 +16,18 @@
         "statusBar.foreground": "#000000",
         "statusBar.debuggingForeground": "#000000",
         "statusBar.noFolderForeground": "#000000"
-    }
+    },
+    "files.autoSave": "afterDelay",
+    "editor.fontFamily": "SF Mono",
+    "keyboard.dispatch": "keyCode",
+    "editor.smoothScrolling": true,
+    "workbench.list.smoothScrolling": true,
+    "terminal.integrated.smoothScrolling": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/etc/profiles/per-user/saponela/bin/nvim",
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "editor.fontVariations": false,
+    "explorer.confirmDragAndDrop": false
 }

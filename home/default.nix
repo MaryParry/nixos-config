@@ -20,6 +20,22 @@ let
     };
   });
 
+  # Dash to Dock has no "gap from screen edge" setting; lift the bottom dock off the edge
+  dashToDockPadded = pkgs.gnomeExtensions.dash-to-dock.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      echo '#dashtodockContainer.bottom #dash { margin-bottom: 10px; }' \
+        >> $out/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com/stylesheet.css
+    '';
+  });
+
+  # Even out top-bar icon spacing; edit dotfiles/gnome/panel.css to tweak
+  justPerfectionPanelSpacing = pkgs.gnomeExtensions.just-perfection.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      cat ${../dotfiles/gnome/panel.css} \
+        >> $out/share/gnome-shell/extensions/just-perfection-desktop@just-perfection/stylesheet.css
+    '';
+  });
+
   legcordPatched = pkgs.legcord.overrideAttrs (old: {
     patches = (old.patches or [ ]) ++ [
       (pkgs.fetchpatch {
@@ -65,6 +81,11 @@ in
   # agent-browser's downloaded Chrome won't run on NixOS; use the Nix one
   home.sessionVariables.AGENT_BROWSER_EXECUTABLE_PATH = lib.getExe pkgs.google-chrome;
   home.packages = with pkgs; [
+    (writeShellScriptBin "gnome-save" ''
+      ${dconf}/bin/dconf dump /org/gnome/shell/extensions/ > /etc/nixos/dotfiles/gnome/extensions.ini
+      ${git}/bin/git -C /etc/nixos add dotfiles/gnome/extensions.ini
+      echo "Saved GNOME extension settings to /etc/nixos/dotfiles/gnome/extensions.ini"
+    '')
     hyprspacePatched
     # Development
     vscode
@@ -83,8 +104,8 @@ in
     pinentry-tty
     gitui
     anydesk
-    agent-browser # CLI used by the agent-browser Claude skill
-
+    agent-browser 
+    proton-vpn
 
   
     # Messaging
@@ -295,21 +316,28 @@ in
     done
   '';
 
-  # Installs and enables GNOME extensions. Add new ones here, not via Extension Manager,
-  # or they'll be disabled again on the next home-manager activation (every boot).
+  # Installs and enables GNOME extensions
   programs.gnome-shell = {
     enable = true;
     extensions = map (p: { package = p; }) (with pkgs.gnomeExtensions; [
       appindicator
-      dash2dock-lite
       blur-my-shell
       clipboard-indicator
       caffeine
-      just-perfection
       vitals
       compiz-alike-magic-lamp-effect
-    ]) ++ [ { package = lockscreenStudioLatest; } ];
+      desktop-icons-ng-ding
+    ]) ++ [ { package = lockscreenStudioLatest; } { package = dashToDockPadded; } { package = justPerfectionPanelSpacing; } ];
   };
+
+  # Extension *settings* are owned by the GUI, not dconf.settings, so they never get reset.
+  # Run `gnome-save` to snapshot them into the repo; a fresh machine restores that snapshot once.
+  home.activation.restoreGnomeExtensionSettings = lib.hm.dag.entryAfter [ "dconfSettings" ] ''
+    if [ -z "$(${pkgs.dconf}/bin/dconf list /org/gnome/shell/extensions/)" ]; then
+      $DRY_RUN_CMD ${pkgs.dbus}/bin/dbus-run-session --dbus-daemon=${pkgs.dbus}/bin/dbus-daemon \
+        ${pkgs.dconf}/bin/dconf load /org/gnome/shell/extensions/ < ${../dotfiles/gnome/extensions.ini}
+    fi
+  '';
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {
@@ -390,74 +418,12 @@ in
         "spotify.desktop"
         "org.telegram.desktop.desktop"
         "legcord.desktop"
+        "com.stremio.Stremio.desktop"
+        "net.lutris.lutris.desktop"
+        "steam.desktop"
+        "obs-studio.desktop"
+        "obsidian.desktop"
       ];
-    };
-
-    "org/gnome/shell/extensions/dash-to-dock" = {
-      dock-position = "BOTTOM";
-      dock-fixed = false;
-      autohide = true;
-      intellihide = true;
-      dash-max-icon-size = 48;
-      custom-theme-shrink = true;
-      show-trash = false;
-      show-mounts = false;
-      click-action = "focus-minimize-or-previews";
-      scroll-action = "cycle-windows";
-      hot-keys = false;
-    };
-
-    "org/gnome/shell/extensions/dash2dock-lite" = {
-      apps-icon = false;
-      autohide-dash = true;
-      autohide-dodge = false;
-      icon-shadow = false;
-      open-app-animation = true;
-    };
-
-    "org/gnome/shell/extensions/lockscreen-studio" = {
-      clock-font-family = "SF Pro Display";
-      enable-blur = false;
-    };
-
-    "org/gnome/shell/extensions/blur-my-shell" = {
-      brightness = lib.gvariant.mkDouble 0.8;
-      sigma = 30;
-    };
-
-    "org/gnome/shell/extensions/blur-my-shell/panel" = {
-      blur = true;
-    };
-
-    "org/gnome/shell/extensions/blur-my-shell/overview" = {
-      blur = true;
-    };
-
-    "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
-      blur = true;
-    };
-
-    "org/gnome/shell/extensions/clipboard-indicator" = {
-      history-size = 50;
-      preview-size = 30;
-      enable-keybindings = true;
-      toggle-menu = [ "<Super>v" ];
-    };
-
-    "org/gnome/shell/extensions/caffeine" = {
-      enable-fullscreen = true;
-      show-indicator = "always";
-      show-notifications = false;
-    };
-
-    "org/gnome/shell/extensions/just-perfection" = {
-      notification-banner-position = 1;
-      workspace-switcher-should-show = false;
-    };
-
-    "org/gnome/shell/extensions/vitals" = {
-      position-in-panel = 3;
-      use-higher-precision = true;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {

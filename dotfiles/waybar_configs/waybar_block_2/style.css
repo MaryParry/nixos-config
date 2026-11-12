@@ -115,13 +115,15 @@ window#waybar {
 }
 
 
-#custom-notification {
+#custom-notification,
+#custom-lid {
   border: 2pt solid @blue;
   margin-right: 3pt;
   padding: 0 3pt;
 }
 
-#custom-notification.paused {
+#custom-notification.paused,
+#custom-lid.active {
   border-color: @red;
   color: @red;
 }
