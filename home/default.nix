@@ -1,17 +1,5 @@
 { config, pkgs, inputs, ... }:
 
-let
-  hyprspacePatched = pkgs.hyprlandPlugins.hyprspace.overrideAttrs (old: {
-    postPatch = (old.postPatch or "") + ''
-      substituteInPlace src/main.cpp \
-        --replace-fail "if (Config::disableGestures) return;" "return;"
-      substituteInPlace src/Input.cpp \
-        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_distance")->getValue()' '300' \
-        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_min_speed_to_force")->getValue()' '30' \
-        --replace-fail 'HyprlandAPI::getConfigValue(pHandle, "gestures:workspace_swipe_cancel_ratio")->getValue()' '0.5'
-    '';
-  });
-in
 {
   home.username = "saponela";
   home.homeDirectory = "/home/saponela";
@@ -37,7 +25,6 @@ in
   };
   systemd.user.services.kdeconnect.Install.WantedBy = [ "default.target" ];
   home.packages = with pkgs; [
-    hyprspacePatched
     # Development
     vscode
     jdk21_headless
@@ -53,35 +40,23 @@ in
     gnupg
     pinentry-tty
     gitui
+    claude-code
+
 
   
     # Messaging
     telegram-desktop
     discord
-    # Wayland / Hyprland Essentials
-    hyprpaper
-    waybar
+    # Desktop utilities
     libnotify
-    networkmanagerapplet
-    polkit_gnome
     wl-clipboard
-    grim
-    slurp
-    swappy
     nautilus
     ranger
     brightnessctl
     playerctl
-    hypridle
     lm_sensors
-    rofi
-    wlsunset
     pavucontrol
-    dunst
-    libnotify
-    swaybg
-    swaylock-effects
-    
+
     # Terminal & Shell
     kitty
     fish
@@ -129,23 +104,17 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/btop".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/btop";
-    ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fish";
-    ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/hypr";
-    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/kitty";
-    ".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/noctalia";
-    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/User/settings.json";
-    ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/vscode/extensions/noctalia-theme";
-    ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/fastfetch";
-    ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/tmux.conf";
-    ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/tmux/cheatsheet.txt";
-    ".config/wireplumber".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/wireplumber";
-    ".config/waybar".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/waybar";
-    ".config/waybar_configs".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/waybar_configs";
-    ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/custom_scripts";
-    ".config/rofi".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/rofi";
-    ".config/walls".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/walls";
-    ".config/dunst".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/dotfiles/dunst";
+    ".config/btop".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/btop";
+    ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/fish";
+    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/kitty";
+    ".config/Code/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/vscode/User/settings.json";
+    ".vscode/extensions/noctalia-theme".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/vscode/extensions/noctalia-theme";
+    ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/fastfetch";
+    ".config/tmux/tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/tmux/tmux.conf";
+    ".config/tmux/cheatsheet.txt".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/tmux/cheatsheet.txt";
+    ".config/wireplumber".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/wireplumber";
+    ".config/custom_scripts".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/custom_scripts";
+    ".config/walls".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/dotfiles/walls";
     ".cache/tmp/.keep".text = "";
     # ".config/spicetify".source = ./dotfiles/spicetify; # Managed by spicetify-nix
   };
@@ -188,13 +157,6 @@ in
       categories = [ "Network" "WebBrowser" ];
       mimeType = [ "text/html" "text/xml" "application/xhtml+xml" "x-scheme-handler/http" "x-scheme-handler/https" ];
     };
-    spotify = {
-      name = "Spotify";
-      genericName = "Music Player";
-      exec = "spotify %U";
-      icon = "/home/saponela/.local/share/icons/custom_spotify.png";
-      categories = [ "Audio" "Music" "Player" "AudioVideo" ];
-    };
   };
 
   gtk = {
@@ -202,20 +164,6 @@ in
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
-    };
-  };
-
-  systemd.user.services.hypr-waybar-proxy = {
-    Unit = {
-      Description = "Waybar Hyprland IPC Proxy for Lua Config";
-    };
-    Service = {
-      ExecStart = "${pkgs.nodejs}/bin/node /etc/nixos/dotfiles/custom_scripts/hypr_waybar_proxy.js";
-      Restart = "always";
-      RestartSec = 1;
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
     };
   };
 

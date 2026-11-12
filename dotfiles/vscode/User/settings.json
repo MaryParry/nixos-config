@@ -8,6 +8,7 @@
         "kilo-code.new.agentManager.nextTerminal"
     ],
     "workbench.iconTheme": "vscode-icons",
+    "window.dialogStyle": "custom",
     "python.analysis.diagnosticMode": "openFilesOnly",
     "pyright.analysis.diagnosticMode": "openFilesOnly",
     "vsicons.dontShowNewVersionMessage": true,

@@ -1,0 +1,12 @@
+{
+    "KPackageStructure": "KWin/Effect",
+    "KPlugin": {
+        "Category": "Focus",
+        "Description": "Quick slide-in on the window a tapped Alt+Tab switches to",
+        "EnabledByDefault": false,
+        "Id": "alttabpop",
+        "License": "GPL",
+        "Name": "Alt+Tab Pop"
+    },
+    "X-Plasma-API": "javascript"
+}

@@ -38,17 +38,10 @@ in
   services.xserver.enable = true;
   services.tailscale.enable = true;
 
-  # Display Manager & Desktop Environments
-  services.displayManager.gdm.enable = true;
-  services.displayManager.defaultSession = "hyprland";
-
-  # Enable Hyprland
-  programs.hyprland.enable = true;
-
   # Configure keymap in X11 & Wayland
   services.xserver.xkb = {
     layout = "us,ge";
-    options = "grp:alt_shift_toggle,grp:win_space_toggle,caps:swapescape";
+    options = "grp:win_space_toggle,caps:swapescape";
   };
 
   # Enable CUPS to print documents.
@@ -63,6 +56,8 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # The x11-bell module segfaults when Xwayland exits at logout
+    extraConfig.pipewire."99-no-x11-bell"."context.properties"."module.x11.bell" = false;
   };
 
   virtualisation.docker.enable = true;
@@ -78,18 +73,13 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.substituters = [
     "https://cache.nixos.org"
-    "https://noctalia.cachix.org"
   ];
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
   ];
 
   # Install firefox.
   programs.firefox.enable = true;
-
-  security.pam.services.swaylock = {};
-  security.pam.services.hyprlock = {};
 
   programs.fish.enable = true;
 
@@ -185,9 +175,7 @@ in
     ];
   };
   services.upower.enable = true;
-  services.blueman.enable = true;
   services.flatpak.enable = true;
-  services.logmein-hamachi.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.enable = false;
